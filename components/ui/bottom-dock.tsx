@@ -80,7 +80,7 @@ export function BottomDock() {
               "group flex min-w-0 flex-1 flex-col items-center gap-1 rounded-2xl px-1 py-1.5 text-[10px] text-zinc-300 hover:bg-white/[0.06] hover:text-white sm:text-xs";
             const inner = (
               <>
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.05] text-cyan transition group-hover:-translate-y-0.5">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.05] text-violet transition group-hover:-translate-y-0.5">
                   <Icon className="h-4 w-4" aria-hidden />
                 </span>
                 <span className="truncate">{label}</span>

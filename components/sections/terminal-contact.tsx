@@ -4,6 +4,10 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { mailHref, site } from "@/data/site";
 import { skillGroups } from "@/data/skills";
 import { type FormEvent, type KeyboardEvent, useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { Copy, Mail, Check } from "lucide-react";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/icons";
+import * as Tooltip from "@radix-ui/react-tooltip";
 
 type Line = {
   id: number;
@@ -33,6 +37,7 @@ export function TerminalContact() {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const nextId = useRef(1);
   const scroller = useRef<HTMLDivElement>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const node = scroller.current;
@@ -138,9 +143,15 @@ export function TerminalContact() {
     setInput(next < 0 || next >= history.length ? "" : history[next]);
   }
 
+  const copyEmail = () => {
+    navigator.clipboard.writeText(site.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section id="contact" className="scroll-mt-28 px-4 pt-20 pb-36 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1200px]">
         <SectionHeading
           index="05"
           kicker="Contact"
@@ -148,7 +159,36 @@ export function TerminalContact() {
           body="Email, WhatsApp, GitHub, and LinkedIn are one command away. The dock under the page does the same with a tap."
         />
 
-        <div className="mt-10 overflow-hidden rounded-[24px] border border-white/10 bg-black/50 shadow-2xl backdrop-blur-xl">
+        <div className="mt-12 flex flex-col items-start gap-4">
+          <div className="flex items-center gap-4">
+            <h2 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl bg-gradient-to-r from-violet to-cyan bg-clip-text text-transparent">
+              Let's build something great.
+            </h2>
+            <div className="relative">
+              <button 
+                onClick={copyEmail}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white transition-colors"
+                aria-label="Copy email"
+              >
+                {copied ? <Check className="h-4 w-4 text-emerald" /> : <Copy className="h-4 w-4" />}
+              </button>
+              <AnimatePresence>
+                {copied && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute -top-10 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-white px-2 py-1 text-xs font-medium text-obsidian shadow-lg"
+                  >
+                    Copied!
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 overflow-hidden rounded-[24px] border border-white/10 bg-black/50 shadow-2xl backdrop-blur-xl">
           <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
             <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -159,7 +199,7 @@ export function TerminalContact() {
             {lines.map((line) =>
               line.kind === "input" ? (
                 <p key={line.id}>
-                  <span className="text-cyan">sardar</span>
+                  <span className="text-violet">sardar</span>
                   <span className="text-zinc-500">@mobile % </span>
                   <span>{line.text}</span>
                 </p>
@@ -167,7 +207,7 @@ export function TerminalContact() {
                 <p key={line.id}>
                   <a
                     href={line.href}
-                    className="text-cyan underline-offset-2 hover:underline"
+                    className="text-violet underline-offset-2 hover:underline"
                     target={line.href.startsWith("http") ? "_blank" : undefined}
                     rel={line.href.startsWith("http") ? "noreferrer" : undefined}
                   >
@@ -182,7 +222,7 @@ export function TerminalContact() {
             )}
           </div>
           <form onSubmit={onSubmit} className="flex items-center gap-2 border-t border-white/10 px-4 py-3">
-            <label htmlFor="shell" className="font-mono text-sm text-cyan">
+            <label htmlFor="shell" className="font-mono text-sm text-violet">
               %
             </label>
             <input
@@ -198,6 +238,53 @@ export function TerminalContact() {
             />
           </form>
         </div>
+
+        <Tooltip.Provider delayDuration={100}>
+          <div className="mt-8 flex items-center gap-4">
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <a href={site.github} target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-violet transition-colors">
+                  <GitHubIcon className="h-5 w-5" />
+                  <span className="sr-only">GitHub</span>
+                </a>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content sideOffset={5} className="z-50 rounded-md bg-white px-2 py-1 text-xs font-medium text-obsidian shadow-md">
+                  GitHub
+                  <Tooltip.Arrow className="fill-white" />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <a href={site.linkedin} target="_blank" rel="noreferrer" className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-violet transition-colors">
+                  <LinkedInIcon className="h-5 w-5" />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content sideOffset={5} className="z-50 rounded-md bg-white px-2 py-1 text-xs font-medium text-obsidian shadow-md">
+                  LinkedIn
+                  <Tooltip.Arrow className="fill-white" />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+            <Tooltip.Root>
+              <Tooltip.Trigger asChild>
+                <a href={mailHref} className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-violet transition-colors">
+                  <Mail className="h-5 w-5" />
+                  <span className="sr-only">Email</span>
+                </a>
+              </Tooltip.Trigger>
+              <Tooltip.Portal>
+                <Tooltip.Content sideOffset={5} className="z-50 rounded-md bg-white px-2 py-1 text-xs font-medium text-obsidian shadow-md">
+                  Email
+                  <Tooltip.Arrow className="fill-white" />
+                </Tooltip.Content>
+              </Tooltip.Portal>
+            </Tooltip.Root>
+          </div>
+        </Tooltip.Provider>
 
         <p className="mt-6 text-sm text-zinc-500">
           {site.location} · Available immediately · {site.email}

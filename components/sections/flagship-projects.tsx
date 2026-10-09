@@ -4,18 +4,27 @@ import { ProductMock } from "@/components/mocks/product-mocks";
 import { DeviceFrame } from "@/components/ui/device-frame";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { ShotStage } from "@/components/ui/shot-stage";
+import { Reveal } from "@/components/ui/reveal";
 import { projects, type Project } from "@/data/projects";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
+type Filter = "All" | "Production" | "Personal";
+
 export function FlagshipProjects() {
-  const featured = projects.filter((project) => project.featured);
-  const rest = projects.filter((project) => !project.featured);
+  const [filter, setFilter] = useState<Filter>("All");
+  
+  const filtered = projects.filter((project) => {
+    if (filter === "All") return true;
+    if (filter === "Production") return project.status === "Production" || project.status === "Live" || !project.status?.includes("Personal");
+    if (filter === "Personal") return project.status?.includes("Personal") || project.status?.includes("Solo");
+    return true;
+  });
 
   return (
     <section id="projects" className="scroll-mt-28 px-4 py-20 sm:px-6">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1200px]">
         <SectionHeading
           index="02"
           kicker="Flagship"
@@ -23,15 +32,32 @@ export function FlagshipProjects() {
           body="Ride-hailing, a solo marketplace, live television, QBox lockers, and a Play Store Islamic guide. Screenshots are the original files, nothing cropped."
         />
 
-        <div className="mt-14 space-y-16">
-          {featured.map((project, index) => (
-            <ProjectArticle key={project.slug} project={project} index={index} featured />
+        <div className="mt-8 flex justify-center gap-2">
+          {(["All", "Production", "Personal"] as Filter[]).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setFilter(tab)}
+              className="relative rounded-full px-4 py-1.5 text-sm font-medium text-zinc-300 hover:text-white outline-none transition-colors"
+            >
+              {filter === tab && (
+                <motion.span
+                  layoutId="activeFilter"
+                  className="absolute inset-0 z-0 rounded-full bg-violet/20 border border-violet/40"
+                />
+              )}
+              <span className="relative z-10">{tab}</span>
+            </button>
           ))}
         </div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
-          {rest.map((project, index) => (
-            <ProjectArticle key={project.slug} project={project} index={index} />
+        <div className="mt-14 grid gap-5 lg:grid-cols-2">
+          {filtered.map((project, index) => (
+            <Reveal
+              key={project.slug}
+              className={cn(index === 0 && "lg:col-span-2")}
+            >
+              <ProjectArticle project={project} index={index} featured={index === 0} />
+            </Reveal>
           ))}
         </div>
       </div>
@@ -48,30 +74,31 @@ function ProjectArticle({
   index: number;
   featured?: boolean;
 }) {
-  const reduced = useReducedMotion();
-
   return (
-    <motion.article
-      initial={reduced ? false : { opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ type: "spring", stiffness: 400, damping: 28, delay: featured ? 0 : index * 0.04 }}
+    <article
       className={cn(
-        "rounded-[28px] border border-white/[0.08] bg-white/[0.03] p-5 shadow-2xl backdrop-blur-xl sm:p-7",
+        "glass-card glow-card group relative overflow-hidden rounded-[24px] border border-white/[0.08] bg-white/[0.03] p-5 shadow-2xl backdrop-blur-xl transition-transform duration-300 hover:-translate-y-2 sm:p-7 h-full",
         featured && "lg:grid lg:grid-cols-2 lg:items-center lg:gap-10",
       )}
+      onMouseMove={(event) => {
+        const bounds = event.currentTarget.getBoundingClientRect();
+        event.currentTarget.style.setProperty("--x", `${event.clientX - bounds.left}px`);
+        event.currentTarget.style.setProperty("--y", `${event.clientY - bounds.top}px`);
+      }}
     >
-      <div className={cn(featured && index % 2 === 1 && "lg:order-2")}>
-            <ProjectMedia project={project} size={featured ? "feature" : "card"} />
+      <div className={cn("overflow-hidden rounded-[16px]", featured && index % 2 === 1 && "lg:order-2")}>
+        <div className="transition-transform duration-500 group-hover:scale-105">
+          <ProjectMedia project={project} size={featured ? "feature" : "card"} />
+        </div>
       </div>
-      <div className="mt-6 lg:mt-0">
-        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-cyan">{project.role}</p>
+      <div className="mt-6 lg:mt-0 relative z-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-violet">{project.role}</p>
         <h3 className="mt-2 font-display text-3xl font-semibold tracking-tight text-white">
           {project.name}
         </h3>
         <p className="mt-3 text-base leading-relaxed text-zinc-300">{project.summary}</p>
         {project.status ? (
-          <p className="mt-3 inline-flex rounded-full border border-emerald/30 bg-emerald/10 px-3 py-1 text-xs text-emerald">
+          <p className="mt-3 inline-flex rounded-full border border-violet/30 bg-violet/10 px-3 py-1 text-xs text-violet">
             {project.status}
           </p>
         ) : null}
@@ -79,7 +106,7 @@ function ProjectArticle({
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-2.5 py-1 text-[11px] text-zinc-300"
+              className="rounded-full border border-white/10 border-l-violet border-l-2 bg-white/[0.04] px-2.5 py-1 font-mono text-[11px] text-zinc-300"
             >
               {tag}
             </span>
@@ -100,7 +127,7 @@ function ProjectArticle({
         <ul className="mt-4 space-y-1.5 text-sm text-zinc-300">
           {project.highlights.map((item) => (
             <li key={item} className="flex gap-2">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan" />
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-violet" />
               <span>{item}</span>
             </li>
           ))}
@@ -113,7 +140,7 @@ function ProjectArticle({
           </p>
         ) : null}
       </div>
-    </motion.article>
+    </article>
   );
 }
 
@@ -153,11 +180,11 @@ function BookingMachine() {
             type="button"
             onClick={() => setActive(index)}
             className={cn(
-              "rounded-full px-3 py-1.5 text-xs",
+              "rounded-full px-3 py-1.5 text-xs transition-colors",
               index === active
-                ? "bg-cyan text-obsidian"
+                ? "bg-violet text-white"
                 : index < active
-                  ? "bg-emerald/15 text-emerald"
+                  ? "bg-violet/15 text-violet"
                   : "bg-white/[0.05] text-zinc-400",
             )}
           >
@@ -201,8 +228,8 @@ function TrackRow({
             type="button"
             onClick={() => onChange(option)}
             className={cn(
-              "rounded-full px-3 py-1.5 text-xs",
-              option === value ? "bg-emerald text-obsidian" : "bg-white/[0.05] text-zinc-300",
+              "rounded-full px-3 py-1.5 text-xs transition-colors",
+              option === value ? "bg-violet text-white" : "bg-white/[0.05] text-zinc-300",
             )}
           >
             {option}

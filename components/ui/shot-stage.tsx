@@ -98,7 +98,7 @@ export function ShotStage({
         >
           <div
             aria-hidden
-            className="pointer-events-none absolute top-[78%] left-1/2 h-16 w-[72%] -translate-x-1/2 rounded-[100%] bg-cyan/35 blur-2xl"
+            className="pointer-events-none absolute top-[78%] left-1/2 h-16 w-[72%] -translate-x-1/2 rounded-[100%] bg-violet/35 blur-2xl"
             style={{ transform: "translateX(-50%) translateZ(-48px) rotateX(68deg)" }}
           />
           <AnimatePresence mode="wait">
@@ -126,12 +126,12 @@ export function ShotStage({
                   transform: "translateZ(28px)",
                   transformStyle: "preserve-3d",
                   boxShadow:
-                    "0 46px 80px -32px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.16), 0 0 72px -24px rgba(0,245,212,0.55)",
+                    "0 46px 80px -32px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.16), 0 0 72px -24px var(--glow-violet)",
                 }}
               >
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-br from-white/20 via-cyan/15 to-ios/25"
+                  className="absolute inset-0 bg-gradient-to-br from-white/20 via-violet/15 to-cyan/25"
                   style={{ transform: "translateZ(-26px) scale(1.035)" }}
                 />
                 <Image
@@ -160,7 +160,7 @@ export function ShotStage({
               className={cn(
                 "rounded-full px-3 py-1 text-[11px] transition-colors",
                 itemIndex === index
-                  ? "bg-cyan text-obsidian"
+                  ? "bg-violet text-white"
                   : "border border-white/10 text-zinc-400 hover:border-white/25 hover:text-white",
               )}
             >

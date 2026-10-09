@@ -40,7 +40,7 @@ export function MagneticBadge({
       whileHover={reduced ? undefined : { y: -3 }}
       whileTap={reduced ? undefined : { scale: 0.98 }}
       className={cn(
-        "rounded-2xl border border-white/[0.08] bg-white/[0.03] px-3 py-3 shadow-2xl backdrop-blur-xl",
+        "glass-card px-3 py-3 shadow-2xl",
         className,
       )}
     >

@@ -50,7 +50,7 @@ export function MagneticCursor() {
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-[70] h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-cyan/80 shadow-[0_0_24px_rgba(0,245,212,0.45)]"
+      className="pointer-events-none fixed top-0 left-0 z-[70] h-8 w-8 -translate-x-1/2 -translate-y-1/2 rounded-full border border-violet/80 shadow-[0_0_24px_var(--glow-violet)]"
       style={{ x: followX, y: followY, scale, opacity: visible ? 1 : 0 }}
     />
   );
