@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import { site } from "@/data/site";
 
 export function Footer() {
   return (
@@ -18,35 +19,35 @@ export function Footer() {
             </svg>
           </span>
           <span className="font-medium text-sm tracking-tight text-white">
-            Vesper
+            {site.name}
           </span>
           <span className="text-zinc-600 text-xs">·</span>
           <span className="text-xs text-zinc-500 font-mono">
-            Living Interface Engine
+            {site.title}
           </span>
         </div>
 
         <div className="flex items-center gap-6 text-xs text-zinc-400">
-          <a href="#home" className="hover:text-white transition-colors">
-            Home
-          </a>
-          <a href="#services" className="hover:text-white transition-colors">
-            Services
-          </a>
-          <a href="#works" className="hover:text-white transition-colors">
-            Works
-          </a>
           <a href="#about" className="hover:text-white transition-colors">
             About
           </a>
-          <Link href="/privacy-policy" className="hover:text-white transition-colors">
-            Privacy
-          </Link>
+          <a href="#projects" className="hover:text-white transition-colors">
+            Projects
+          </a>
+          <a href="#stack" className="hover:text-white transition-colors">
+            Stack
+          </a>
+          <a href="#experience" className="hover:text-white transition-colors">
+            Experience
+          </a>
+          <a href="#contact" className="hover:text-white transition-colors">
+            Contact
+          </a>
         </div>
 
         <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-500">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>WebGL 2.0 Operational · 60 FPS</span>
+          <span>{site.location} · 60 FPS Fluidity</span>
         </div>
       </div>
     </footer>

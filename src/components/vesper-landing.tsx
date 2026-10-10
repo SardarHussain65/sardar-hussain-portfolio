@@ -3,10 +3,11 @@
 import React, { useState } from "react";
 import { Navbar } from "@/components/navigation/navbar";
 import { HeroSection } from "@/components/sections/hero-section";
-import { ServicesSection } from "@/components/sections/services-section";
-import { WorksShowcase } from "@/components/sections/works-showcase";
-import { TechArchitecture } from "@/components/sections/tech-architecture";
-import { CtaSection } from "@/components/sections/cta-section";
+import { AboutSection } from "@/components/sections/about-section";
+import { ProjectsSection } from "@/components/sections/projects-section";
+import { SkillsMatrix } from "@/components/sections/skills-matrix";
+import { ExperienceSection } from "@/components/sections/experience-section";
+import { ContactSection } from "@/components/sections/contact-section";
 import { Footer } from "@/components/navigation/footer";
 import {
   VesperParticleField,
@@ -31,17 +32,18 @@ export function VesperLanding() {
         <div className="absolute bottom-1/4 left-1/3 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none" />
       </div>
 
-      {/* ─── UI LAYOUT & SECTIONS ─── */}
+      {/* ─── SARDAR HUSSAIN PORTFOLIO LAYOUT & SECTIONS ─── */}
       <div className="relative z-10">
         <Navbar />
         <HeroSection
           currentMode={currentMode}
           onModeChange={setCurrentMode}
         />
-        <ServicesSection />
-        <WorksShowcase onSelectMode={setCurrentMode} />
-        <TechArchitecture />
-        <CtaSection />
+        <AboutSection />
+        <ProjectsSection />
+        <SkillsMatrix />
+        <ExperienceSection />
+        <ContactSection />
         <Footer />
       </div>
     </div>

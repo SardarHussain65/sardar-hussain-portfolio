@@ -31,26 +31,25 @@ const vercelProduction = serverEnv.VERCEL_PROJECT_PRODUCTION_URL;
 
 export const siteConfig = {
   /** The brand, exactly as the logo writes it. */
-  name: "Vesper",
+  name: "Sardar Hussain",
   /**
    * The home page's `<title>`: the brand + what it is, ≤ 60 characters
    */
-  title: "Vesper — Living WebGL Interface Engine",
+  title: "Sardar Hussain — Senior Mobile App & React Native Engineer",
   /** 120–160 characters, from the site's own copy (the hero's lead line). */
-  description: "A dark, living interface that answers every move you make. Interactive real-time 3D particle system built with Three.js.",
+  description: "Crafting production-grade React Native & Smart TV experiences. Mapbox routing, HLS video pipelines, Stripe payments, and full-stack platforms.",
   /** 5–8 phrases from the copy. */
   keywords: [
-    "Vesper",
-    "WebGL",
-    "Three.js",
-    "Particle System",
-    "Living Interface",
-    "Interactive 3D",
-    "Next.js 16"
+    "Sardar Hussain",
+    "React Native Engineer",
+    "Mobile App Developer",
+    "Smart TV Developer",
+    "Roku BrightScript",
+    "HLS Video Streaming",
+    "Full Stack Mobile"
   ],
   /**
-   * Public origin, no trailing slash. Drives canonical URLs, OG tags, the
-   * sitemap, robots.txt and JSON-LD.
+   * Public origin, no trailing slash.
    */
   url:
     publicEnv.NEXT_PUBLIC_SITE_URL ??
@@ -60,13 +59,13 @@ export const siteConfig = {
   /** Default Open Graph / Twitter share image (path under `public/`), 1200×630. */
   ogImage: "/open-graph.png",
   /** Describes the share image for screen readers and when it fails to load. */
-  ogImageAlt: "Vesper — Interactive WebGL Particle System",
+  ogImageAlt: "Sardar Hussain — Mobile App Engineer Portfolio",
   /**
    * The site's real X/Twitter handle (`"@acme"`), or `undefined`
    */
   twitterHandle: undefined as string | undefined,
   /** Author / creator / publisher — the brand, not the agency. */
-  author: "Vesper",
+  author: "Sardar Hussain",
   /** Browser theme-color (address bar / PWA) — the brand's ground. */
   themeColor: "#030712",
   /** The manifest and the PWA splash background. */
