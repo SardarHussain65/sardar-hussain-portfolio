@@ -2,35 +2,13 @@
 
 import { nav, site } from "@/data/site";
 import { cn } from "@/lib/utils";
-import { BatteryMedium, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { GlowingButton } from "./glowing-button";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { motion, AnimatePresence } from "motion/react";
 
-function usePktClock() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const format = () =>
-      new Intl.DateTimeFormat("en-GB", {
-        timeZone: "Asia/Karachi",
-        hour: "2-digit",
-        minute: "2-digit",
-        hourCycle: "h23",
-      }).format(new Date());
-
-    const tick = () => setTime(format());
-    tick();
-    const id = window.setInterval(tick, 1000);
-    return () => window.clearInterval(id);
-  }, []);
-
-  return time;
-}
-
 export function DynamicIsland() {
-  const time = usePktClock();
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
@@ -47,78 +25,55 @@ export function DynamicIsland() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { rootMargin: "-30% 0px -70% 0px" }
+      { rootMargin: "-30% 0px -70% 0px" },
     );
-    
+
     document.querySelectorAll("section[id]").forEach((section) => {
       observer.observe(section);
     });
-    
+
     return () => observer.disconnect();
   }, []);
 
   return (
-    <>
-    <div className="pointer-events-none fixed inset-x-0 top-0 z-40 h-28 bg-gradient-to-b from-obsidian via-obsidian/80 to-transparent" />
-    <header className="fixed top-3 left-1/2 z-50 w-[min(980px,calc(100%-1rem))] -translate-x-1/2">
-      <div className="rounded-full border border-white/10 bg-[#12141a]/75 shadow-2xl backdrop-blur-xl">
-        <div className="flex items-center gap-2 px-2 py-1.5 sm:gap-3 sm:px-3">
-          <p className="flex min-w-0 items-center gap-2 rounded-full bg-white/[0.04] py-1 pr-3 pl-2">
-            <span className="relative flex h-2.5 w-2.5 shrink-0">
-              <span className="live-dot absolute inline-flex h-full w-full rounded-full bg-emerald" />
-            </span>
-            <span className="truncate text-[11px] font-medium text-zinc-200 sm:text-xs">
-              <span className="sm:hidden">Open to roles</span>
-              <span className="hidden sm:inline">{site.availability}</span>
-            </span>
-          </p>
+    <header className="fixed top-4 left-1/2 z-50 w-[min(920px,calc(100%-1.25rem))] -translate-x-1/2">
+      <div className="flex items-center gap-3 rounded-full border border-white/10 bg-black/55 px-2 py-1.5 shadow-[0_10px_40px_-20px_rgba(0,0,0,0.8)] backdrop-blur-xl">
+        <a href="#content" className="flex items-center gap-2 rounded-full py-1 pr-2 pl-2">
+          <span className="grid h-7 w-7 place-items-center rounded-full border border-white/15 bg-white/5 text-[11px] text-white">
+            ✶
+          </span>
+          <span className="font-display text-sm font-medium tracking-tight text-white">
+            {site.name.split(" ")[0]}
+          </span>
+        </a>
 
-          <p className="hidden items-center gap-1.5 font-mono text-[11px] text-zinc-400 md:flex">
-            <span className="tabular-nums text-zinc-100">{time || "--:--"}</span>
-            <span>PKT</span>
-            <BatteryMedium className="h-4 w-4 text-emerald" aria-hidden />
-            <span className="sr-only">Battery indicator</span>
-          </p>
+        <nav className="mx-auto hidden items-center gap-1 lg:flex" aria-label="Primary">
+          {nav.map((item) => {
+            const sectionId = item.href.replace("#", "");
+            const isActive = activeSection === sectionId;
+            return (
+              <a
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  "rounded-full px-3 py-1.5 text-sm transition-colors",
+                  isActive ? "text-white" : "text-white/55 hover:text-white",
+                )}
+              >
+                {item.label}
+              </a>
+            );
+          })}
+        </nav>
 
-          <nav className="ml-auto hidden items-center gap-1 lg:flex relative" aria-label="Primary">
-            {nav.map((item) => {
-              const sectionId = item.href.replace("#", "");
-              const isActive = activeSection === sectionId;
-              
-              return (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className={cn(
-                    "relative rounded-full px-3 py-1.5 text-xs transition-colors animated-underline",
-                    isActive ? "text-violet font-medium" : "text-zinc-300 hover:text-white"
-                  )}
-                >
-                  {isActive && (
-                    <motion.span 
-                      layoutId="nav-active"
-                      className="absolute inset-0 bg-violet/10 rounded-full z-[-1]"
-                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                  {item.label}
-                </a>
-              );
-            })}
-          </nav>
-
-          <div className="ml-auto flex items-center gap-2 lg:ml-0">
-            <ThemeToggle />
-            <GlowingButton href="#contact" className="px-3 py-1.5 text-xs sm:text-sm !border-violet/50 hover:!border-violet">
-              Get in Touch
-            </GlowingButton>
-          </div>
-
+        <div className="ml-auto flex items-center gap-1.5">
+          <ThemeToggle />
+          <GlowingButton href="#contact" className="px-4 py-1.5 text-xs">
+            Contact
+          </GlowingButton>
           <button
             type="button"
             className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white lg:hidden"
@@ -133,55 +88,28 @@ export function DynamicIsland() {
       </div>
 
       <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+        {open ? (
+          <motion.nav
             id="mobile-nav"
-            className="mt-2 overflow-hidden rounded-3xl border border-white/10 bg-[#12141a]/90 shadow-2xl backdrop-blur-xl lg:hidden block"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            className="mt-2 flex flex-col rounded-3xl border border-white/10 bg-black/80 p-2 backdrop-blur-xl lg:hidden"
+            aria-label="Mobile"
           >
-            <p className="flex items-center justify-between px-4 pt-3 font-mono text-xs text-zinc-400">
-              <span>
-                {time || "--:--"} PKT
-              </span>
-              <span className="inline-flex items-center gap-1 text-emerald">
-                <BatteryMedium className="h-4 w-4" aria-hidden />
-                Live
-              </span>
-            </p>
-            <motion.nav 
-              initial="hidden"
-              animate="show"
-              variants={{
-                hidden: { opacity: 0 },
-                show: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.06 }
-                }
-              }}
-              className="flex flex-col p-2" 
-              aria-label="Mobile"
-            >
-              {nav.map((item) => (
-                <motion.a
-                  variants={{
-                    hidden: { opacity: 0, x: -10 },
-                    show: { opacity: 1, x: 0 }
-                  }}
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className="rounded-2xl px-3 py-3 text-sm text-zinc-100 hover:bg-white/[0.05]"
-                >
-                  {item.label}
-                </motion.a>
-              ))}
-            </motion.nav>
-          </motion.div>
-        )}
+            {nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className="rounded-2xl px-3 py-3 text-sm text-white/80 hover:bg-white/5 hover:text-white"
+              >
+                {item.label}
+              </a>
+            ))}
+          </motion.nav>
+        ) : null}
       </AnimatePresence>
     </header>
-    </>
   );
 }

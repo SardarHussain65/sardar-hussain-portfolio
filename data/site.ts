@@ -19,11 +19,10 @@ export const site = {
 } as const;
 
 export const nav = [
-  { href: "#about", label: "About" },
-  { href: "#projects", label: "Projects" },
-  { href: "#stack", label: "Stack" },
+  { href: "#projects", label: "Work" },
+  { href: "#architecture", label: "Systems" },
   { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "About" },
 ] as const;
 
 export const mailHref = `mailto:${site.email}?subject=${encodeURIComponent("High-impact mobile work")}`;

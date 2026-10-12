@@ -3,18 +3,18 @@
 /* ───────────────── Design Tokens ───────────────── */
 @theme inline {
   /* Dark palette (default) */
-  --color-bg: #0A0A0F;
-  --color-surface: #12121A;
-  --color-elevated: #1A1A26;
-  --color-violet: #7C5CFF;
-  --color-cyan: #22D3EE;
+  --color-bg: #030712;
+  --color-surface: #070b14;
+  --color-elevated: #101624;
+  --color-violet: #8b5cf6;
+  --color-cyan: #10b981;
   --color-text: #F4F4F8;
   --color-muted: #A1A1B5;
   --color-border: rgba(255, 255, 255, 0.08);
 
   /* Legacy compat */
-  --color-obsidian: #0A0A0F;
-  --color-carbon: #12121A;
+  --color-obsidian: #030712;
+  --color-carbon: #070b14;
 
   /* Fonts */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -24,16 +24,16 @@
 
 /* ───────────────── Theme Variables ───────────────── */
 :root {
-  --bg: #0A0A0F;
-  --surface: #12121A;
-  --elevated: #1A1A26;
-  --violet: #7C5CFF;
-  --cyan: #22D3EE;
+  --bg: #030712;
+  --surface: #070b14;
+  --elevated: #101624;
+  --violet: #8b5cf6;
+  --cyan: #10b981;
   --text-primary: #F4F4F8;
   --text-muted: #A1A1B5;
   --border: rgba(255, 255, 255, 0.08);
-  --glow-violet: rgba(124, 92, 255, 0.35);
-  --glow-cyan: rgba(34, 211, 238, 0.25);
+  --glow-violet: rgba(139, 92, 246, 0.4);
+  --glow-cyan: rgba(16, 185, 129, 0.28);
   color-scheme: dark;
 }
 

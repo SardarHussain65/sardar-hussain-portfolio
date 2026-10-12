@@ -1,5 +1,6 @@
 import { About } from "@/components/sections/about";
 import { ArchitectureMatrix } from "@/components/sections/architecture-matrix";
+import { Capabilities } from "@/components/sections/capabilities";
 import { ExperienceTimeline } from "@/components/sections/experience-timeline";
 import { FlagshipProjects } from "@/components/sections/flagship-projects";
 import { Footer } from "@/components/sections/footer";
@@ -27,11 +28,12 @@ export default function Home() {
       <DynamicIsland />
       <main id="content">
         <Hero />
-        <About />
+        <Capabilities />
         <FlagshipProjects />
         <TechStack />
         <ArchitectureMatrix />
         <ExperienceTimeline />
+        <About />
         <TerminalContact />
       </main>
       <Footer />

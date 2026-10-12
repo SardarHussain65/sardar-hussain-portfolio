@@ -1,165 +1,95 @@
 "use client";
 
-import { heroSlides } from "@/data/hero";
-import { mailHref, site, roles as roleTexts } from "@/data/site";
-import { cn } from "@/lib/utils";
-import { Reveal } from "@/components/ui/reveal";
+import { ParticleField } from "@/components/scene/particle-field";
 import { GlowingButton } from "@/components/ui/glowing-button";
-import { Typewriter } from "@/components/ui/typewriter";
-import { DeviceFrame } from "@/components/ui/device-frame";
-import { MapPin, ChevronDown } from "lucide-react";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { site } from "@/data/site";
+import { motion, useReducedMotion } from "motion/react";
 
-const words = [
-  { text: "Crafting", className: "text-white" },
-  { text: "Production-Grade", className: "bg-gradient-to-r from-violet to-cyan bg-clip-text text-transparent" },
-  { text: "React Native", className: "text-white" },
-  { text: "Experiences.", className: "text-white" },
+const badges = ["React Native", "Mapbox", "HLS video", "Stripe", "PostgreSQL"];
+
+const stats = [
+  { value: "6+", label: "Production apps" },
+  { value: "60", label: "FPS motion standard" },
+  { value: "1", label: "Solo full-stack platform" },
+  { value: "~2", label: "Years shipping" },
 ];
 
 export function Hero() {
   const reduced = useReducedMotion();
-  const [index, setIndex] = useState(0);
-  const slide = heroSlides[index];
 
   return (
-    <section className="relative px-4 pt-28 pb-20 sm:px-6 lg:pt-36">
-      <div className="mx-auto grid max-w-[1200px] items-center gap-14 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="order-2 lg:order-1">
-          <div className="flex items-center gap-4">
-            <motion.div
-              className="[perspective:800px]"
-              initial={reduced ? false : { opacity: 0, rotateY: -18 }}
-              animate={{ opacity: 1, rotateY: 0 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
-              <Image
-                src="/portrait.jpg"
-                alt="Portrait of Sardar Hussain"
-                width={687}
-                height={1024}
-                priority
-                className="h-auto w-28 shadow-[0_28px_50px_-18px_var(--violet),0_0_0_1px_rgba(255,255,255,0.14)]"
-                style={{ transform: "rotateY(-12deg) rotateX(4deg)" }}
-              />
-            </motion.div>
-            <div>
-              <p className="font-display text-lg font-semibold text-white">{site.name}</p>
-              <div className="mt-1 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs text-zinc-300">
-                <MapPin className="h-3 w-3 text-violet" aria-hidden />
-                {site.location}
-              </div>
-            </div>
-          </div>
+    <section className="relative min-h-[100dvh] overflow-hidden bg-[#030712]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_58%,rgba(139,92,246,0.14),transparent_36%),radial-gradient(ellipse_at_50%_72%,rgba(16,185,129,0.1),transparent_40%)]" />
+      <ParticleField />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#030712] to-transparent" />
 
-          <h1 className="mt-8 max-w-xl font-display text-[2.6rem] leading-[1.02] font-semibold tracking-tight sm:text-6xl flex flex-wrap gap-x-4 gap-y-2">
-            {words.map((word, i) => (
-              <motion.span
-                key={i}
-                initial={reduced ? false : { opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08, type: "spring", stiffness: 400, damping: 25 }}
-                className={word.className}
-              >
-                {word.text}
-              </motion.span>
-            ))}
-          </h1>
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-5xl flex-col justify-between px-4 pt-28 pb-28 sm:px-6">
+        <div className="pt-8 text-center sm:pt-14">
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            className="font-mono text-[11px] uppercase tracking-[0.32em] text-white/55"
+          >
+            {site.name} · {site.location}
+          </motion.p>
 
-          <div className="mt-4 font-mono text-lg text-violet">
-            <Typewriter words={[...roleTexts]} pauseDuration={3000} />
-          </div>
+          <motion.h1
+            initial={reduced ? false : { opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 320, damping: 26, delay: 0.05 }}
+            className="mx-auto mt-6 max-w-4xl font-display text-[3.1rem] leading-[0.95] font-medium tracking-tight text-white sm:text-7xl lg:text-8xl"
+          >
+            Presence,
+            <span className="block bg-gradient-to-r from-white via-[#c4b5fd] to-[#6ee7b7] bg-clip-text text-transparent">
+              in motion.
+            </span>
+          </motion.h1>
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
-            Native-feeling apps with Mapbox routing, HLS video pipelines, Stripe payment
-            sheets, and a solo full-stack platform from the phone to Postgres and the admin desk.
-          </p>
+          <motion.p
+            initial={reduced ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 320, damping: 26, delay: 0.12 }}
+            className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg"
+          >
+            Production React Native products for ride-hailing, live television, lockers,
+            and a solo marketplace. The field reads your pointer. The apps answer a real job.
+          </motion.p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
-            <GlowingButton href="#projects" variant="solid">View Projects</GlowingButton>
-            <GlowingButton href={site.resume} variant="ghost">Download CV</GlowingButton>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0 }}
+          <motion.div
+            initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="mt-12 flex items-center gap-2 text-sm text-zinc-500"
+            transition={{ delay: 0.2 }}
+            className="mt-7 flex flex-wrap items-center justify-center gap-2"
           >
-            <motion.div
-              animate={{ y: [0, 5, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            >
-              <ChevronDown className="h-4 w-4" />
-            </motion.div>
-            Scroll to explore
-          </motion.div>
-        </div>
-
-        <div className="order-1 lg:order-2">
-          <motion.div 
-            className="relative flex justify-center [perspective:1000px]"
-            onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              const x = (e.clientX - rect.left) / rect.width - 0.5;
-              const y = (e.clientY - rect.top) / rect.height - 0.5;
-              e.currentTarget.style.setProperty("--rotate-x", `${-y * 10}deg`);
-              e.currentTarget.style.setProperty("--rotate-y", `${x * 10}deg`);
-            }}
-            style={{
-              transformStyle: "preserve-3d",
-              transform: "rotateX(var(--rotate-x, 0deg)) rotateY(var(--rotate-y, 0deg))",
-              transition: "transform 0.1s ease-out"
-            }}
-          >
-            <motion.div
-              animate={{ y: [-10, 10, -10] }}
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-            >
-              <DeviceFrame className="max-w-[260px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={slide.id}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Image
-                      src={slide.frames[0].src}
-                      alt={slide.frames[0].alt}
-                      width={slide.frames[0].width}
-                      height={slide.frames[0].height}
-                      priority
-                      className="h-auto w-full"
-                    />
-                  </motion.div>
-                </AnimatePresence>
-              </DeviceFrame>
-            </motion.div>
-          </motion.div>
-          
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 pb-2">
-            {heroSlides.map((item, itemIndex) => (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setIndex(itemIndex)}
-                className={cn(
-                  "rounded-full px-3 py-1.5 text-xs transition-colors",
-                  itemIndex === index
-                    ? "bg-violet text-white font-medium"
-                    : "bg-white/[0.05] text-zinc-300 hover:bg-white/[0.1]",
-                )}
-                aria-pressed={itemIndex === index}
+            {badges.map((badge) => (
+              <span
+                key={badge}
+                className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-1 text-[11px] tracking-wide text-white/70 backdrop-blur-md"
               >
-                {item.app}
-              </button>
+                {badge}
+              </span>
             ))}
+          </motion.div>
+
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <GlowingButton href="#projects">View the work</GlowingButton>
+            <GlowingButton href="#contact" variant="ghost">
+              Contact
+            </GlowingButton>
           </div>
         </div>
+
+        <dl className="mt-10 grid grid-cols-2 border-t border-white/10 sm:grid-cols-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="border-white/10 px-4 py-5 sm:border-l sm:first:border-l-0">
+              <dt className="font-display text-3xl font-medium tracking-tight text-white sm:text-4xl">
+                {stat.value}
+              </dt>
+              <dd className="mt-1 text-xs text-white/45">{stat.label}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   );

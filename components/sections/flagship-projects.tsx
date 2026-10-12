@@ -28,8 +28,8 @@ export function FlagshipProjects() {
         <SectionHeading
           index="02"
           kicker="Flagship"
-          title="Apps with a job to do."
-          body="Ride-hailing, a solo marketplace, live television, QBox lockers, and a Play Store Islamic guide. Screenshots are the original files, nothing cropped."
+          title="Selected work."
+          body="Ride-hailing, a solo marketplace, live television, QBox lockers, and a Play Store guide. Each frame is the original screenshot."
         />
 
         <div className="mt-8 flex justify-center gap-2">
