@@ -98,31 +98,43 @@ export function VesperParticleField({
       posOrb[i3 + 1] = minorR * Math.sin(phiOrb) * 1.1;
       posOrb[i3 + 2] = (majorR + minorR * Math.cos(phiOrb)) * Math.sin(thetaOrb) - 0.5;
 
-      // ─── 2. DUAL COSMIC SPIRAL GALAXIES (Flanking Left & Right) ───
-      // Scaled up size and centered at ±2.65 so both spirals are fully apparent on screen
+      // ─── 2. DUAL COSMIC SPIRAL GALAXIES (Exact Mirror Twins, Equal Size) ───
+      // Symmetrically placed at ±2.65 with identical vertical & depth alignment
       const flank = i % 2 === 0 ? -1 : 1;
       const centerX = flank * 2.65;
-      const centerY = flank * 0.08;
+      const centerY = 0.0;
       const isCore = (i % Math.floor(PARTICLE_COUNT / 2)) < Math.floor(PARTICLE_COUNT * 0.09);
 
+      let lx = 0;
+      let ly = 0;
+      let lz = 0;
+
       if (isCore) {
-        // High density luminous galactic core (scaled up size)
+        // High density luminous galactic core (identical size for both)
         const rCore = Math.pow(u, 1.7) * 0.88;
         const thetaCore = v * Math.PI * 2;
         const phiCore = Math.acos(2 * w - 1);
-        posGalaxy[i3] = centerX + rCore * Math.sin(phiCore) * Math.cos(thetaCore);
-        posGalaxy[i3 + 1] = centerY + (rCore * Math.cos(phiCore)) * 0.45;
-        posGalaxy[i3 + 2] = rCore * Math.sin(phiCore) * Math.sin(thetaCore);
+        lx = rCore * Math.sin(phiCore) * Math.cos(thetaCore);
+        ly = (rCore * Math.cos(phiCore)) * 0.45;
+        lz = rCore * Math.sin(phiCore) * Math.sin(thetaCore);
       } else {
-        // Dual tight, defined logarithmic spiral ribbons (scaled up radius to 3.35)
+        // Dual tight, defined logarithmic spiral ribbons (identical radius and thickness for both)
         const armIndex = i % 4 < 2 ? 0 : 1;
         const rGalaxy = 0.55 + Math.pow(u, 0.85) * 3.35;
-        const armAngle = armIndex * Math.PI + flank * (rGalaxy * 1.38) + (v - 0.5) * 0.70;
+        const armAngle = armIndex * Math.PI + (rGalaxy * 1.38) + (v - 0.5) * 0.70;
         const diskThickness = (0.28 / (rGalaxy * 0.55 + 0.35)) * (w - 0.5);
-        posGalaxy[i3] = centerX + rGalaxy * Math.cos(armAngle);
-        posGalaxy[i3 + 1] = centerY + diskThickness * (0.8 + 0.3 * Math.sin(rGalaxy * 2.8));
-        posGalaxy[i3 + 2] = rGalaxy * Math.sin(armAngle);
+        lx = rGalaxy * Math.cos(armAngle);
+        ly = diskThickness * (0.8 + 0.3 * Math.sin(rGalaxy * 2.8));
+        lz = rGalaxy * Math.sin(armAngle);
       }
+
+      // Perfect mirror symmetry:
+      // X is mirrored by flank (+1 or -1)
+      // Y is identically centerY + ly
+      // Z is identically lz (guarantees 100% identical camera distance and scale!)
+      posGalaxy[i3] = centerX + flank * lx;
+      posGalaxy[i3 + 1] = centerY + ly;
+      posGalaxy[i3 + 2] = lz;
 
       // ─── 3. NEURAL BRAIN MESH (Separated Hemispheres) ───
       const signX = i % 2 === 0 ? 1 : -1;
@@ -221,7 +233,7 @@ export function VesperParticleField({
 
         // Dual Galaxy local rotation: each galaxy rotates on its own local flank center
         float flank = sign(aTargetGalaxy.x);
-        vec3 galaxyCenter = vec3(flank * 2.65, flank * 0.08, 0.0);
+        vec3 galaxyCenter = vec3(flank * 2.65, 0.0, 0.0);
 
         float localRotAngle = uTime * 0.16 * flank;
         float cosL = cos(localRotAngle);
