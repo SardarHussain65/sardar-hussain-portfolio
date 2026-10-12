@@ -21,6 +21,7 @@ export type Project = {
   accent: "cyan" | "ios" | "emerald";
   status?: string;
   interactive?: "booking" | "tracks";
+  deviceType?: "mobile" | "tv";
 };
 
 export const projects: Project[] = [
@@ -98,27 +99,38 @@ export const projects: Project[] = [
   {
     slug: "duplex",
     name: "Duplex TV",
-    role: "Repla Technologies · IPTV & Media",
-    summary: "High-performance HLS video player engine for Smart TVs (Roku, LG webOS) and mobile.",
+    role: "Repla Technologies · Smart TV Engineer",
+    summary: "Cross-platform Smart TV streaming engine engineered for Android TV, Samsung Tizen, LG webOS, and Roku.",
     problem:
-      "Live television streams and VoD movies required instant channel switching without audio desync, frame drops, or memory bloat on low-memory TV hardware.",
+      "Television operating systems run on constrained low-memory chipsets with disparate environments (Roku BrightScript, LG webOS, Samsung Tizen, Android TV). Delivering high-framerate HLS video, live EPG navigation, and multi-track audio without frame drops required platform-specific architecture.",
     solution:
-      "Architected specialized video pipeline utilizing expo-video on mobile and native BrightScript / webOS players on TV. Built high-performance EPG electronic program guide, multi-track audio switching, and MMKV cache layer.",
-    tags: ["React Native", "Roku BrightScript", "LG webOS", "HLS", "expo-video", "MMKV"],
+      "Architected specialized Smart TV clients across all ecosystems: native Roku BrightScript channel with SceneGraph, high-performance webOS & Tizen apps with virtualized D-pad focus management, and Android TV engine. Features sub-second HLS stream buffering, multi-language audio/subtitle switcher, and persistent MMKV caching.",
+    tags: [
+      "Smart TV",
+      "Android TV",
+      "Samsung Tizen",
+      "LG webOS",
+      "Roku BrightScript",
+      "HLS Video",
+      "IPTV Engine",
+      "Spatial Navigation",
+    ],
     highlights: [
-      "Cross-platform support: Mobile, Roku BrightScript & LG webOS",
-      "Adaptive HLS bitrates with sub-second stream buffer acquisition",
-      "High-speed EPG channel grid with virtualized memory management",
-      "Multi-language subtitle and audio stream selector",
+      "Engineered for all major TV platforms: Android TV, Samsung Tizen, LG webOS & Roku",
+      "Native Roku BrightScript SceneGraph channel with high-speed remote response",
+      "Sub-second HLS video playback pipeline with adaptive bitrate scaling",
+      "Virtualized 10-foot UI with remote control D-pad spatial focus navigation",
     ],
     images: [
-      { src: "/portfolio/Duplex.png", alt: "Duplex Channels Grid", width: 158, height: 163, label: "Live EPG" },
-      { src: "/portfolio/Duplex2.png", alt: "Duplex Featured Banner", width: 76, height: 105, label: "Featured VoD" },
-      { src: "/portfolio/Duplex3.png", alt: "Duplex Movie Detail", width: 154, height: 180, label: "Player Detail" },
+      { src: "/portfolio/Duplex_Live_TV.png", alt: "Duplex Smart TV Live Guide & EPG", width: 908, height: 634, label: "Live TV Guide" },
+      { src: "/portfolio/Duplex_Movies_TV.png", alt: "Duplex Smart TV Movies & Series Hub", width: 782, height: 800, label: "Movies & VoD" },
+      { src: "/portfolio/Duplex.png", alt: "Duplex Live Channel Bar", width: 158, height: 163, label: "Channel EPG Bar" },
+      { src: "/portfolio/Duplex3.png", alt: "Duplex Video Player Detail", width: 154, height: 180, label: "Player Detail" },
     ],
     featured: true,
     accent: "ios",
-    status: "Production · TV & Mobile",
+    status: "Production · All Smart TV Platforms",
+    deviceType: "tv",
     interactive: "tracks",
   },
   {

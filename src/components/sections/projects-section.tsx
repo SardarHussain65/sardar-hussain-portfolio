@@ -10,6 +10,7 @@ import {
   ExternalLink,
   ChevronRight,
   Smartphone,
+  Tv,
   Layers,
   X,
   Eye,
@@ -29,7 +30,7 @@ export function ProjectsSection() {
     qbox: 0,
   });
 
-  const tags = ["all", "React Native", "Mapbox", "Stripe", "PostgreSQL", "HLS"];
+  const tags = ["all", "Smart TV", "React Native", "Mapbox", "Stripe", "PostgreSQL", "HLS"];
 
   const filteredProjects =
     selectedTag === "all"
@@ -236,9 +237,65 @@ export function ProjectsSection() {
                       {project.summary}
                     </p>
 
-                    {/* Phone Frame Showcase / Centered Realistic Presentation */}
+                    {/* Frame Showcase: Cinema Smart TV 16:9 Frame vs Smartphone Mockup */}
                     <div className="my-6 relative flex flex-col items-center justify-center pt-2">
-                      {currentImage ? (
+                      {project.deviceType === "tv" ? (
+                        /* Dedicated 16:9 Cinema Smart TV Mockup Frame */
+                        <div className="w-full flex flex-col items-center group-hover:scale-[1.03] transition-transform duration-500">
+                          {/* TV Display Bezel */}
+                          <div className="relative w-full aspect-[16/10] rounded-xl p-2 sm:p-2.5 border-[2px] border-zinc-700/80 bg-[#070b14] shadow-[0_20px_50px_rgba(0,0,0,0.95)] flex flex-col overflow-hidden">
+                            {/* Top Smart TV Status Bar */}
+                            <div className="flex items-center justify-between px-2 pb-1.5 text-[9px] font-mono text-zinc-400 border-b border-white/5">
+                              <span className="flex items-center gap-1.5 text-cyan-400 font-semibold tracking-wide">
+                                <Tv className="w-3 h-3 text-cyan-400" />
+                                <span>SMART TV APP</span>
+                              </span>
+                              <span className="flex items-center gap-1 text-[8px] text-zinc-400 font-mono">
+                                <span className="text-purple-300">ROKU</span> · <span className="text-sky-300">TIZEN</span> · <span className="text-pink-300">webOS</span> · <span className="text-emerald-300">ANDROID TV</span>
+                              </span>
+                            </div>
+
+                            {/* 16:9 TV Screen Display */}
+                            <div className="relative flex-1 w-full rounded-md overflow-hidden bg-black mt-1">
+                              {currentImage ? (
+                                <Image
+                                  src={currentImage.src}
+                                  alt={currentImage.alt}
+                                  fill
+                                  className="object-cover object-top"
+                                />
+                              ) : (
+                                <div className="w-full h-full flex items-center justify-center">
+                                  <Tv className="w-8 h-8 text-cyan-400" />
+                                </div>
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
+                            </div>
+
+                            {/* Bottom TV Bezel & Power LED */}
+                            <div className="pt-1.5 flex items-center justify-center">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/90 shadow-[0_0_8px_rgba(16,185,129,1)]" />
+                            </div>
+                          </div>
+
+                          {/* TV Stand Base */}
+                          <div className="w-12 h-2.5 bg-gradient-to-b from-zinc-700 to-zinc-900 mx-auto" />
+                          <div className="w-32 h-1 rounded-full bg-zinc-600/70 shadow-[0_4px_10px_rgba(0,0,0,0.8)] mx-auto" />
+
+                          {/* TV Ecosystem Chips */}
+                          <div className="mt-3 flex flex-wrap items-center justify-center gap-1">
+                            {["Roku SceneGraph", "Samsung Tizen", "LG webOS", "Android TV"].map((plat) => (
+                              <span
+                                key={plat}
+                                className="text-[9px] font-mono px-2 py-0.5 rounded border border-cyan-500/20 bg-cyan-950/40 text-cyan-300"
+                              >
+                                {plat}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      ) : currentImage ? (
+                        /* Smartphone Titanium Mockup */
                         <div className="relative w-[200px] sm:w-[220px] h-[380px] sm:h-[420px] rounded-[2.2rem] p-2.5 border-[2.5px] border-white/15 bg-[#0a0f1d] shadow-[0_20px_50px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col justify-between group-hover:scale-105 transition-transform duration-500">
                           {/* Top Notch Pill */}
                           <div className="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-3 bg-black rounded-full z-20" />
@@ -256,7 +313,7 @@ export function ProjectsSection() {
                       ) : (
                         <div className="w-full h-56 rounded-2xl border border-white/5 bg-gradient-to-b from-white/[0.04] to-transparent flex flex-col items-center justify-center p-6 text-center">
                           <Smartphone className="w-8 h-8 text-zinc-600 mb-2" />
-                          <span className="text-xs font-mono text-zinc-400">Production Media Player</span>
+                          <span className="text-xs font-mono text-zinc-400">Production Application</span>
                         </div>
                       )}
 
@@ -270,7 +327,9 @@ export function ProjectsSection() {
                               onClick={(e) => handleSelectScreen(project.slug, sIdx, e)}
                               className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono transition-all ${
                                 currentScreenIdx === sIdx
-                                  ? "bg-emerald-400 text-zinc-950 font-bold"
+                                  ? project.deviceType === "tv"
+                                    ? "bg-cyan-400 text-zinc-950 font-bold shadow-[0_0_12px_rgba(34,211,238,0.5)]"
+                                    : "bg-emerald-400 text-zinc-950 font-bold"
                                   : "bg-white/[0.04] text-zinc-400 hover:text-white border border-white/5"
                               }`}
                             >
@@ -380,19 +439,38 @@ export function ProjectsSection() {
               </div>
             </div>
 
-            {/* Screenshots Gallery */}
+            {/* Screenshots Gallery - Smart TV Cinema vs Mobile Application */}
             {activeModalProject.images && activeModalProject.images.length > 0 && (
               <div className="mb-8">
-                <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 mb-4">
-                  Application Screens & Flow
-                </h4>
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400">
+                    {activeModalProject.deviceType === "tv"
+                      ? "Smart TV 10-Foot Spatial UI & Live Playback Screens"
+                      : "Application Screens & Flow"}
+                  </h4>
+                  {activeModalProject.deviceType === "tv" && (
+                    <span className="text-[11px] font-mono text-cyan-400 flex items-center gap-1.5">
+                      <Tv className="w-3.5 h-3.5" />
+                      Roku · Samsung Tizen · LG webOS · Android TV
+                    </span>
+                  )}
+                </div>
+
                 <div className="flex gap-4 overflow-x-auto pb-4 pt-2">
                   {activeModalProject.images.map((img, i) => (
                     <div
                       key={i}
-                      className="shrink-0 w-44 sm:w-52 h-80 sm:h-96 rounded-2xl p-2 border border-white/10 bg-[#0d1322] shadow-lg flex flex-col justify-between"
+                      className={
+                        activeModalProject.deviceType === "tv"
+                          ? "shrink-0 w-80 sm:w-96 rounded-2xl p-2.5 border border-zinc-700/80 bg-[#070b14] shadow-xl flex flex-col justify-between"
+                          : "shrink-0 w-44 sm:w-52 h-80 sm:h-96 rounded-2xl p-2 border border-white/10 bg-[#0d1322] shadow-lg flex flex-col justify-between"
+                      }
                     >
-                      <div className="relative w-full h-full rounded-xl overflow-hidden bg-black">
+                      <div
+                        className={`relative w-full rounded-xl overflow-hidden bg-black ${
+                          activeModalProject.deviceType === "tv" ? "aspect-video" : "h-full"
+                        }`}
+                      >
                         <Image
                           src={img.src}
                           alt={img.alt}
@@ -400,9 +478,16 @@ export function ProjectsSection() {
                           className="object-cover object-top"
                         />
                       </div>
-                      <span className="text-[10px] font-mono text-center text-zinc-400 mt-2 block">
-                        {img.label}
-                      </span>
+                      <div className="mt-2 flex items-center justify-between px-1">
+                        <span className="text-[10px] font-mono text-zinc-300">
+                          {img.label}
+                        </span>
+                        {activeModalProject.deviceType === "tv" && (
+                          <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-cyan-950/60 text-cyan-400 border border-cyan-500/20">
+                            10-ft UI
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>
