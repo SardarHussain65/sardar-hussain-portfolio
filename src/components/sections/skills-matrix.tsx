@@ -1,88 +1,149 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { skillGroups, SkillGroup } from "@/data/skills";
 import { TechIcon } from "@/components/icons/tech-icons";
 import {
   Cpu,
-  RotateCw,
   CheckCircle2,
   Sparkles,
-  Layers,
-  ArrowRight,
   ShieldCheck,
-  Terminal,
+  Activity,
+  Layers,
+  ArrowUpRight,
 } from "lucide-react";
 
 export function SkillsMatrix() {
-  // Track which cards are flipped (front vs back)
-  const [flippedCards, setFlippedCards] = useState<Record<string, boolean>>({});
+  const containerRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const toggleFlip = (id: string, e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    setFlippedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
+  // Smooth depth scaling on scroll (pure rAF style updates to avoid React re-render jank)
+  useEffect(() => {
+    let ticking = false;
 
-  const getAccentColors = (accent: SkillGroup["accent"]) => {
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const cards = cardRefs.current;
+          const numCards = cards.length;
+
+          cards.forEach((card, i) => {
+            if (!card) return;
+            const rect = card.getBoundingClientRect();
+            const stickyTop = 80 + i * 32;
+
+            // Check if subsequent card is scrolling over this one
+            const nextCard = cards[i + 1];
+            if (nextCard) {
+              const nextRect = nextCard.getBoundingClientRect();
+              const nextStickyTop = 80 + (i + 1) * 32;
+
+              // Distance from when next card touches this card's bottom to when it reaches sticky top
+              const distance = nextRect.top - nextStickyTop;
+              const maxDist = window.innerHeight * 0.6;
+
+              if (distance < maxDist && distance > 0) {
+                // Smoothly scale down as next card approaches
+                const progress = 1 - distance / maxDist;
+                const scale = 1 - progress * 0.05;
+                const brightness = 1 - progress * 0.15;
+                card.style.transform = `scale(${scale})`;
+                card.style.filter = `brightness(${brightness})`;
+              } else if (distance <= 0) {
+                // Next card has covered this card
+                const depthIndex = numCards - 1 - i;
+                const finalScale = Math.max(0.88, 1 - depthIndex * 0.03);
+                card.style.transform = `scale(${finalScale})`;
+                card.style.filter = `brightness(${Math.max(0.7, 1 - depthIndex * 0.08)})`;
+              } else {
+                card.style.transform = "scale(1)";
+                card.style.filter = "brightness(1)";
+              }
+            } else {
+              card.style.transform = "scale(1)";
+              card.style.filter = "brightness(1)";
+            }
+          });
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const getAccentTheme = (accent: SkillGroup["accent"]) => {
     switch (accent) {
       case "emerald":
         return {
-          glow: "hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.18)]",
+          glow: "border-emerald-500/30 hover:border-emerald-400/60 shadow-[0_20px_50px_rgba(16,185,129,0.12)]",
+          gradient: "from-emerald-500/10 via-transparent to-transparent",
           badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-          pill: "hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-emerald-200",
-          highlight: "text-emerald-400",
+          pill: "border-emerald-500/20 bg-emerald-950/20 text-emerald-100 hover:border-emerald-400/50 hover:bg-emerald-500/10",
+          accentText: "text-emerald-400",
         };
       case "cyan":
         return {
-          glow: "hover:border-cyan-500/40 hover:shadow-[0_0_40px_rgba(6,182,212,0.18)]",
+          glow: "border-cyan-500/30 hover:border-cyan-400/60 shadow-[0_20px_50px_rgba(6,182,212,0.12)]",
+          gradient: "from-cyan-500/10 via-transparent to-transparent",
           badge: "bg-cyan-500/10 text-cyan-300 border-cyan-500/30",
-          pill: "hover:border-cyan-400/50 hover:bg-cyan-500/10 hover:text-cyan-200",
-          highlight: "text-cyan-400",
+          pill: "border-cyan-500/20 bg-cyan-950/20 text-cyan-100 hover:border-cyan-400/50 hover:bg-cyan-500/10",
+          accentText: "text-cyan-400",
         };
       case "violet":
         return {
-          glow: "hover:border-violet-500/40 hover:shadow-[0_0_40px_rgba(139,92,246,0.18)]",
+          glow: "border-violet-500/30 hover:border-violet-400/60 shadow-[0_20px_50px_rgba(139,92,246,0.12)]",
+          gradient: "from-violet-500/10 via-transparent to-transparent",
           badge: "bg-violet-500/10 text-violet-300 border-violet-500/30",
-          pill: "hover:border-violet-400/50 hover:bg-violet-500/10 hover:text-violet-200",
-          highlight: "text-violet-400",
+          pill: "border-violet-500/20 bg-violet-950/20 text-violet-100 hover:border-violet-400/50 hover:bg-violet-500/10",
+          accentText: "text-violet-400",
         };
       case "blue":
         return {
-          glow: "hover:border-blue-500/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.18)]",
+          glow: "border-blue-500/30 hover:border-blue-400/60 shadow-[0_20px_50px_rgba(59,130,246,0.12)]",
+          gradient: "from-blue-500/10 via-transparent to-transparent",
           badge: "bg-blue-500/10 text-blue-300 border-blue-500/30",
-          pill: "hover:border-blue-400/50 hover:bg-blue-500/10 hover:text-blue-200",
-          highlight: "text-blue-400",
+          pill: "border-blue-500/20 bg-blue-950/20 text-blue-100 hover:border-blue-400/50 hover:bg-blue-500/10",
+          accentText: "text-blue-400",
         };
       case "teal":
         return {
-          glow: "hover:border-teal-500/40 hover:shadow-[0_0_40px_rgba(20,184,166,0.18)]",
+          glow: "border-teal-500/30 hover:border-teal-400/60 shadow-[0_20px_50px_rgba(20,184,166,0.12)]",
+          gradient: "from-teal-500/10 via-transparent to-transparent",
           badge: "bg-teal-500/10 text-teal-300 border-teal-500/30",
-          pill: "hover:border-teal-400/50 hover:bg-teal-500/10 hover:text-teal-200",
-          highlight: "text-teal-400",
+          pill: "border-teal-500/20 bg-teal-950/20 text-teal-100 hover:border-teal-400/50 hover:bg-teal-500/10",
+          accentText: "text-teal-400",
         };
       case "purple":
         return {
-          glow: "hover:border-purple-500/40 hover:shadow-[0_0_40px_rgba(168,85,247,0.18)]",
+          glow: "border-purple-500/30 hover:border-purple-400/60 shadow-[0_20px_50px_rgba(168,85,247,0.12)]",
+          gradient: "from-purple-500/10 via-transparent to-transparent",
           badge: "bg-purple-500/10 text-purple-300 border-purple-500/30",
-          pill: "hover:border-purple-400/50 hover:bg-purple-500/10 hover:text-purple-200",
-          highlight: "text-purple-400",
+          pill: "border-purple-500/20 bg-purple-950/20 text-purple-100 hover:border-purple-400/50 hover:bg-purple-500/10",
+          accentText: "text-purple-400",
         };
       case "amber":
         return {
-          glow: "hover:border-amber-500/40 hover:shadow-[0_0_40px_rgba(245,158,11,0.18)]",
+          glow: "border-amber-500/30 hover:border-amber-400/60 shadow-[0_20px_50px_rgba(245,158,11,0.12)]",
+          gradient: "from-amber-500/10 via-transparent to-transparent",
           badge: "bg-amber-500/10 text-amber-300 border-amber-500/30",
-          pill: "hover:border-amber-400/50 hover:bg-amber-500/10 hover:text-amber-200",
-          highlight: "text-amber-400",
+          pill: "border-amber-500/20 bg-amber-950/20 text-amber-100 hover:border-amber-400/50 hover:bg-amber-500/10",
+          accentText: "text-amber-400",
         };
       default:
         return {
-          glow: "hover:border-emerald-500/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.18)]",
+          glow: "border-emerald-500/30 hover:border-emerald-400/60 shadow-[0_20px_50px_rgba(16,185,129,0.12)]",
+          gradient: "from-emerald-500/10 via-transparent to-transparent",
           badge: "bg-emerald-500/10 text-emerald-300 border-emerald-500/30",
-          pill: "hover:border-emerald-400/50 hover:bg-emerald-500/10 hover:text-emerald-200",
-          highlight: "text-emerald-400",
+          pill: "border-emerald-500/20 bg-emerald-950/20 text-emerald-100 hover:border-emerald-400/50 hover:bg-emerald-500/10",
+          accentText: "text-emerald-400",
         };
     }
   };
@@ -90,7 +151,7 @@ export function SkillsMatrix() {
   return (
     <section id="stack" className="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-white/10">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-purple-500/5 text-xs font-mono text-purple-300 mb-3 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
             <Cpu className="w-3.5 h-3.5 text-purple-400" />
@@ -109,151 +170,146 @@ export function SkillsMatrix() {
             strict memory boundaries, and 60fps gesture continuity.
           </p>
           <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5 bg-emerald-950/40 px-2.5 py-0.5 rounded border border-emerald-500/20">
-            <Sparkles className="w-3 h-3 text-emerald-400" />
-            Click any card to flip architecture blueprints
+            <Layers className="w-3 h-3 text-emerald-400" />
+            Scroll to stack architecture tiers
           </span>
         </div>
       </div>
 
-      {/* Grid of Interactive 3D Flip Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-        {skillGroups.map((group) => {
-          const isFlipped = !!flippedCards[group.id];
-          const styles = getAccentColors(group.accent);
+      {/* ─── STICKY-STACKING CARDS CONTAINER ─── */}
+      <div
+        ref={containerRef}
+        className="cards-container relative mt-16 pb-36 space-y-16 sm:space-y-20"
+      >
+        {skillGroups.map((group, index) => {
+          const theme = getAccentTheme(group.accent);
+          const stickyTop = 80 + index * 32;
 
           return (
             <div
               key={group.id}
-              className="relative h-[430px] [perspective:1200px] cursor-pointer group select-none"
-              onClick={() => toggleFlip(group.id)}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              style={{
+                top: `${stickyTop}px`,
+                zIndex: index + 10,
+              }}
+              className={`card sticky w-full rounded-3xl border bg-[#070b16]/95 backdrop-blur-2xl p-6 sm:p-10 transition-all duration-300 origin-top shadow-[0_20px_50px_rgba(0,0,0,0.95)] ${theme.glow}`}
             >
-              {/* Inner 3D Card Flipper */}
+              {/* Subtle Ambient Background Gradient */}
               <div
-                className={`w-full h-full relative transition-transform duration-700 [transform-style:preserve-3d] rounded-2xl ${
-                  isFlipped ? "[transform:rotateY(180deg)]" : ""
-                }`}
-              >
-                {/* ─── FRONT FACE: Tech Stack with SVGs ─── */}
-                <div
-                  className={`absolute inset-0 w-full h-full p-6 sm:p-7 rounded-2xl border border-white/10 bg-[#070b16]/85 backdrop-blur-xl flex flex-col justify-between overflow-hidden [backface-visibility:hidden] transition-all duration-300 ${styles.glow}`}
-                >
-                  {/* Subtle corner aura */}
-                  <div className="absolute top-0 right-0 w-36 h-36 bg-white/[0.02] rounded-full blur-2xl pointer-events-none" />
+                className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${theme.gradient} pointer-events-none`}
+              />
 
-                  {/* Top Bar */}
-                  <div>
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2">
-                        <span className={`text-[10px] font-mono font-semibold px-2.5 py-0.5 rounded-full border ${styles.badge}`}>
-                          {group.categoryNumber}
-                        </span>
-                        <h3 className="text-xl font-light text-white group-hover:text-emerald-300 transition-colors">
-                          {group.label}
-                        </h3>
-                      </div>
-
-                      {/* Flip Hint Button */}
-                      <button
-                        type="button"
-                        onClick={(e) => toggleFlip(group.id, e)}
-                        className="p-1.5 rounded-lg border border-white/10 bg-white/[0.03] text-zinc-400 hover:text-white hover:border-white/20 transition-all hover:rotate-180 duration-500"
-                        title="Flip to inspect architecture"
-                      >
-                        <RotateCw className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
-                    <p className="text-xs font-mono text-zinc-400 mb-5 line-clamp-1">
-                      {group.tagline}
-                    </p>
-
-                    {/* Interactive Tech Pills with Real SVG Logos */}
-                    <div className="flex flex-wrap gap-2 pt-1">
-                      {group.items.map((skill) => (
-                        <div
-                          key={skill}
-                          className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-white/10 bg-white/[0.03] text-zinc-200 text-xs font-mono transition-all duration-200 shadow-sm ${styles.pill}`}
-                        >
-                          <TechIcon name={skill} className="w-3.5 h-3.5 shrink-0" />
-                          <span className="font-light">{skill}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card Bottom: Verified Stack & Flip Action */}
-                  <div className="mt-4 pt-4 border-t border-white/10 flex items-center justify-between text-[11px] font-mono">
-                    <div className="flex items-center gap-1.5 text-zinc-400">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Production Verified</span>
-                    </div>
-
-                    <button
-                      type="button"
-                      onClick={(e) => toggleFlip(group.id, e)}
-                      className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 font-semibold group-hover:translate-x-0.5 transition-all"
-                    >
-                      <span>Inspect Specs</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </button>
-                  </div>
+              {/* Card Top Tier / Header */}
+              <div className="relative flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${theme.badge}`}
+                  >
+                    {group.categoryNumber} / 0{skillGroups.length}
+                  </span>
+                  <h3 className="text-2xl sm:text-3xl font-light text-white tracking-wide">
+                    {group.label}
+                  </h3>
                 </div>
 
-                {/* ─── BACK FACE: Architecture Blueprint ─── */}
-                <div
-                  className={`absolute inset-0 w-full h-full p-6 sm:p-7 rounded-2xl border border-emerald-500/30 bg-[#090e1d]/95 backdrop-blur-2xl flex flex-col justify-between overflow-hidden [backface-visibility:hidden] [transform:rotateY(180deg)] shadow-[0_0_50px_rgba(16,185,129,0.12)]`}
-                >
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-zinc-300 border border-white/10 flex items-center gap-1.5">
+                    <Activity className={`w-3.5 h-3.5 ${theme.accentText}`} />
+                    {group.architecture.metric}
+                  </span>
+                </div>
+              </div>
+
+              {/* Sub-header tagline */}
+              <p className="relative text-xs sm:text-sm font-mono text-zinc-400 mt-4 mb-8">
+                {"// " + group.tagline}
+              </p>
+
+              {/* Two-Column Card Body */}
+              <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Left Column: Architectural Blueprint & Capabilities (7 cols) */}
+                <div className="lg:col-span-7 space-y-6">
                   <div>
-                    {/* Header with Benchmark Metric */}
-                    <div className="flex items-center justify-between mb-3">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/30">
-                        {group.architecture.metric}
-                      </span>
-
-                      <button
-                        type="button"
-                        onClick={(e) => toggleFlip(group.id, e)}
-                        className="p-1.5 rounded-lg border border-white/10 bg-white/[0.04] text-zinc-400 hover:text-white transition-all hover:-rotate-180 duration-500"
-                        title="Flip back"
-                      >
-                        <RotateCw className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-
-                    <h4 className="text-base font-light text-white mb-2">
-                      {group.architecture.headline}
+                    <h4 className="text-base sm:text-lg font-normal text-white mb-2 flex items-center gap-2">
+                      <span>{group.architecture.headline}</span>
                     </h4>
-
-                    <p className="text-xs text-zinc-400 font-light leading-relaxed mb-4">
+                    <p className="text-xs sm:text-sm text-zinc-300 font-light leading-relaxed">
                       {group.architecture.summary}
                     </p>
+                  </div>
 
-                    {/* Key Engineering Deliverables */}
-                    <div className="space-y-1.5">
-                      {group.architecture.highlights.slice(0, 3).map((item, idx) => (
-                        <div key={idx} className="flex items-start gap-2 text-[11px] text-zinc-300 font-light">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                          <span className="line-clamp-1">{item}</span>
+                  {/* Key Capabilities Checklist */}
+                  <div className="space-y-2 pt-2">
+                    <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      Key Technical Deliverables:
+                    </span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {group.architecture.highlights.map((point, pIdx) => (
+                        <div
+                          key={pIdx}
+                          className="flex items-start gap-2 text-xs text-zinc-300 font-light p-2 rounded-xl bg-white/[0.02] border border-white/5"
+                        >
+                          <CheckCircle2
+                            className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${theme.accentText}`}
+                          />
+                          <span className="line-clamp-2 leading-tight">{point}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* Shipped In Production Apps */}
-                  <div className="mt-4 pt-3 border-t border-white/10">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-1.5">
-                      Live in Production Platforms
+                  {/* Production Apps Badges */}
+                  <div className="pt-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-500 block mb-2">
+                      Live in Production Systems:
                     </span>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {group.architecture.shippedWith.map((app) => (
                         <span
                           key={app}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.03] text-zinc-300 border border-white/5"
+                          className="text-xs font-mono px-3 py-1 rounded-lg bg-white/[0.03] text-zinc-200 border border-white/10 flex items-center gap-1.5"
                         >
-                          {app}
+                          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>{app}</span>
                         </span>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* Right Column: Interactive Tech Pills with Real SVGs (5 cols) */}
+                <div className="lg:col-span-5 p-6 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md">
+                  <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/5">
+                    <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      Verified Stack Arsenal
+                    </span>
+                    <span className="text-[10px] font-mono text-zinc-500">
+                      {group.items.length} Modules
+                    </span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2.5">
+                    {group.items.map((skill) => (
+                      <div
+                        key={skill}
+                        className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-mono transition-all duration-200 shadow-sm ${theme.pill}`}
+                      >
+                        <TechIcon name={skill} className="w-4 h-4 shrink-0" />
+                        <span className="font-light">{skill}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Tier status indicator */}
+                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                    <span>Architecture Tier {group.categoryNumber}</span>
+                    <span className="text-emerald-400 flex items-center gap-1">
+                      Production Ready <ArrowUpRight className="w-3 h-3" />
+                    </span>
                   </div>
                 </div>
               </div>
