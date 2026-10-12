@@ -46,7 +46,7 @@ export function VesperParticleField({
       0.1,
       100
     );
-    camera.position.set(0, 1.2, 5.8);
+    camera.position.set(0, 0.2, 5.8);
     camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
@@ -70,9 +70,11 @@ export function VesperParticleField({
     const randomness = new Float32Array(PARTICLE_COUNT * 3);
 
     const mintColor = new THREE.Color("#10b981");
-    const violetColor = new THREE.Color("#8b5cf6");
+    const emeraldColor = new THREE.Color("#34d399");
     const cyanColor = new THREE.Color("#06b6d4");
-    const coreColor = new THREE.Color("#f5f3ff");
+    const violetColor = new THREE.Color("#8b5cf6");
+    const orchidColor = new THREE.Color("#a855f7");
+    const diamondWhite = new THREE.Color("#ffffff");
 
     for (let i = 0; i < PARTICLE_COUNT; i++) {
       const i3 = i * 3;
@@ -85,70 +87,85 @@ export function VesperParticleField({
       randomness[i3 + 1] = v;
       randomness[i3 + 2] = w;
 
-      // ─── 1. ORB / TORUS WAVE (Organic pulsating torus) ───
+      // ─── 1. ORB / TORUS WAVE (Framing elliptical orbital rings) ───
+      const sideOrb = i % 2 === 0 ? -1 : 1;
       const thetaOrb = u * Math.PI * 2;
       const phiOrb = v * Math.PI * 2;
-      const majorR = 1.9;
-      const wave = 0.45 * Math.sin(5 * thetaOrb) * Math.cos(3 * phiOrb);
+      const majorR = 2.4;
+      const wave = 0.35 * Math.sin(4 * thetaOrb) * Math.cos(3 * phiOrb);
       const minorR = 0.85 + wave + (w - 0.5) * 0.25;
-      posOrb[i3] = (majorR + minorR * Math.cos(phiOrb)) * Math.cos(thetaOrb);
+      posOrb[i3] = sideOrb * 1.8 + (majorR + minorR * Math.cos(phiOrb)) * Math.cos(thetaOrb);
       posOrb[i3 + 1] = minorR * Math.sin(phiOrb) * 1.1;
-      posOrb[i3 + 2] = (majorR + minorR * Math.cos(phiOrb)) * Math.sin(thetaOrb);
+      posOrb[i3 + 2] = (majorR + minorR * Math.cos(phiOrb)) * Math.sin(thetaOrb) - 0.5;
 
-      // ─── 2. SPIRAL GALAXY (Logarithmic double-arm galaxy) ───
-      const isCore = i < PARTICLE_COUNT * 0.18;
+      // ─── 2. DUAL COSMIC SPIRAL GALAXIES (Flanking Left & Right) ───
+      // Left Galaxy centered at -3.1, Right Galaxy centered at +3.1
+      const flank = i % 2 === 0 ? -1 : 1;
+      const centerX = flank * 3.15;
+      const centerY = flank * 0.15;
+      const isCore = (i % Math.floor(PARTICLE_COUNT / 2)) < Math.floor(PARTICLE_COUNT * 0.08);
+
       if (isCore) {
-        // High density central core
-        const rCore = Math.pow(u, 1.8) * 0.85;
+        // High density luminous galactic core for each spiral
+        const rCore = Math.pow(u, 1.7) * 0.65;
         const thetaCore = v * Math.PI * 2;
         const phiCore = Math.acos(2 * w - 1);
-        posGalaxy[i3] = rCore * Math.sin(phiCore) * Math.cos(thetaCore);
-        posGalaxy[i3 + 1] = (rCore * Math.cos(phiCore)) * 0.45;
+        posGalaxy[i3] = centerX + rCore * Math.sin(phiCore) * Math.cos(thetaCore);
+        posGalaxy[i3 + 1] = centerY + (rCore * Math.cos(phiCore)) * 0.38;
         posGalaxy[i3 + 2] = rCore * Math.sin(phiCore) * Math.sin(thetaCore);
       } else {
-        // Spiral arms
-        const armIndex = i % 2;
-        const rGalaxy = 0.6 + Math.pow(u, 0.9) * 3.6;
-        const armAngle = armIndex * Math.PI + rGalaxy * 1.45 + (v - 0.5) * 0.65;
-        const diskThickness = (0.28 / (rGalaxy * 0.7 + 0.4)) * (w - 0.5);
-        posGalaxy[i3] = rGalaxy * Math.cos(armAngle);
-        posGalaxy[i3 + 1] = diskThickness * (0.8 + 0.3 * Math.sin(rGalaxy * 3));
+        // Dual graceful logarithmic spiral arms curving outwards along the screen flanks
+        const armIndex = i % 4 < 2 ? 0 : 1;
+        const rGalaxy = 0.5 + Math.pow(u, 0.85) * 2.5;
+        const armAngle = armIndex * Math.PI + flank * (rGalaxy * 1.4) + (v - 0.5) * 0.65;
+        const diskThickness = (0.22 / (rGalaxy * 0.6 + 0.35)) * (w - 0.5);
+        posGalaxy[i3] = centerX + rGalaxy * Math.cos(armAngle);
+        posGalaxy[i3 + 1] = centerY + diskThickness * (0.8 + 0.3 * Math.sin(rGalaxy * 2.8));
         posGalaxy[i3 + 2] = rGalaxy * Math.sin(armAngle);
       }
 
-      // ─── 3. NEURAL BRAIN MESH (Two hemispheres with folded cortex) ───
-      const signX = (i % 2 === 0 ? 1 : -1);
-      const lat = (u - 0.5) * Math.PI; // -pi/2 to pi/2
+      // ─── 3. NEURAL BRAIN MESH (Separated Hemispheres) ───
+      const signX = i % 2 === 0 ? 1 : -1;
+      const lat = (u - 0.5) * Math.PI;
       const lon = v * Math.PI * 2;
-      const baseRx = 1.05 + 0.2 * Math.sin(6 * lat) * Math.cos(6 * lon);
-      const baseRy = 1.35 + 0.25 * Math.cos(5 * lat);
-      const baseRz = 1.55 + 0.22 * Math.sin(7 * lon);
-
-      // Cerebrum curvature
-      const bx = (0.4 + baseRx * Math.cos(lat) * Math.cos(lon)) * signX;
-      const by = baseRy * Math.sin(lat) + 0.15;
+      const baseRx = 0.95 + 0.18 * Math.sin(6 * lat) * Math.cos(6 * lon);
+      const baseRy = 1.25 + 0.22 * Math.cos(5 * lat);
+      const baseRz = 1.45 + 0.2 * Math.sin(7 * lon);
+      const bx = (1.9 + baseRx * Math.cos(lat) * Math.cos(lon)) * signX;
+      const by = baseRy * Math.sin(lat) + 0.1;
       const bz = baseRz * Math.cos(lat) * Math.sin(lon);
-      const noise = (w - 0.5) * 0.18;
-      posBrain[i3] = (bx + noise) * 1.1;
-      posBrain[i3 + 1] = (by + noise) * 1.1;
-      posBrain[i3 + 2] = (bz + noise) * 1.1;
+      const noise = (w - 0.5) * 0.15;
+      posBrain[i3] = bx + noise;
+      posBrain[i3 + 1] = by + noise;
+      posBrain[i3 + 2] = bz + noise;
 
-      // ─── PARTICLE COLOR GRADIENT (Mint to Violet with Core Spark) ───
-      const colorMix = (u + v) * 0.5;
+      // ─── PARTICLE COLOR GRADIENT (Left: Mint & Cyan / Right: Violet & Orchid) ───
       const pColor = new THREE.Color();
-      if (isCore && u < 0.08) {
-        pColor.copy(coreColor);
-      } else if (colorMix < 0.45) {
-        pColor.lerpColors(mintColor, cyanColor, colorMix / 0.45);
+      if (flank < 0) {
+        // Left Galaxy: Brilliant Emerald, Mint, Electric Cyan, White Core
+        if (isCore && u < 0.2) {
+          pColor.copy(diamondWhite);
+        } else if (v < 0.5) {
+          pColor.lerpColors(mintColor, emeraldColor, v / 0.5);
+        } else {
+          pColor.lerpColors(emeraldColor, cyanColor, (v - 0.5) / 0.5);
+        }
       } else {
-        pColor.lerpColors(cyanColor, violetColor, (colorMix - 0.45) / 0.55);
+        // Right Galaxy: Electric Violet, Orchid, Cyan Accents, White Core
+        if (isCore && u < 0.2) {
+          pColor.copy(diamondWhite);
+        } else if (v < 0.5) {
+          pColor.lerpColors(violetColor, orchidColor, v / 0.5);
+        } else {
+          pColor.lerpColors(orchidColor, cyanColor, (v - 0.5) / 0.5);
+        }
       }
       colors[i3] = pColor.r;
       colors[i3 + 1] = pColor.g;
       colors[i3 + 2] = pColor.b;
 
       // Variable particle size
-      sizes[i] = 1.2 + Math.pow(w, 2.2) * 2.8;
+      sizes[i] = 1.1 + Math.pow(w, 2.2) * 2.6;
     }
 
     geometry.setAttribute("position", new THREE.BufferAttribute(posGalaxy, 3));
@@ -188,49 +205,66 @@ export function VesperParticleField({
         }
 
         // Subtle organic breathing & wave pulsation
-        float pulse = sin(uTime * 1.8 + aRandom.x * 6.28) * 0.06;
+        float pulse = sin(uTime * 1.6 + aRandom.x * 6.28) * 0.05;
         morphedPos += normalize(morphedPos + vec3(0.001)) * pulse;
 
         // Interactive cursor repulsion / turbulence
-        vec3 mouseWorld = vec3(uMouse.x * 3.2, uMouse.y * 2.2, 1.2);
+        vec3 mouseWorld = vec3(uMouse.x * 3.5, uMouse.y * 2.2, 1.2);
         vec3 toMouse = morphedPos - mouseWorld;
         float dist = length(toMouse);
         if (dist < 2.2) {
           float force = (1.0 - dist / 2.2);
           morphedPos += normalize(toMouse) * force * 0.75;
-          // Add kinetic curl
           morphedPos.x += sin(morphedPos.y * 3.0 + uTime * 2.0) * force * 0.3;
           morphedPos.y += cos(morphedPos.x * 3.0 + uTime * 2.0) * force * 0.3;
         }
 
-        // Slow global axial rotation based on mode
-        float rotAngle = uTime * 0.12;
-        float cosA = cos(rotAngle);
-        float sinA = sin(rotAngle);
-        vec3 rotatedPos = vec3(
-          morphedPos.x * cosA - morphedPos.z * sinA,
-          morphedPos.y,
-          morphedPos.x * sinA + morphedPos.z * cosA
+        // Dual Galaxy local rotation: each galaxy rotates on its own local flank center
+        float flank = sign(aTargetGalaxy.x);
+        vec3 galaxyCenter = vec3(flank * 3.15, flank * 0.15, 0.0);
+
+        float localRotAngle = uTime * 0.16 * flank;
+        float cosL = cos(localRotAngle);
+        float sinL = sin(localRotAngle);
+        vec3 localOffset = morphedPos - galaxyCenter;
+        vec3 rotatedGalaxy = vec3(
+          localOffset.x * cosL - localOffset.z * sinL,
+          localOffset.y,
+          localOffset.x * sinL + localOffset.z * cosL
+        ) + galaxyCenter;
+
+        // Perspective tilt for the twin galaxies
+        float tilt = 0.42 * flank;
+        float cosT = cos(tilt);
+        float sinT = sin(tilt);
+        rotatedGalaxy = vec3(
+          rotatedGalaxy.x,
+          rotatedGalaxy.y * cosT - rotatedGalaxy.z * sinT,
+          rotatedGalaxy.y * sinT + rotatedGalaxy.z * cosT
         );
 
-        // Tilt galaxy disk slightly towards viewer for cinematic perspective
-        if (uMorph < 1.5) {
-          float tilt = 0.55 * (1.0 - abs(uMorph - 1.0));
-          float cosT = cos(tilt);
-          float sinT = sin(tilt);
-          rotatedPos = vec3(
-            rotatedPos.x,
-            rotatedPos.y * cosT - rotatedPos.z * sinT,
-            rotatedPos.y * sinT + rotatedPos.z * cosT
-          );
-        }
+        // Global drift for Orb / Brain modes
+        float globalRotAngle = uTime * 0.08;
+        float cosG = cos(globalRotAngle);
+        float sinG = sin(globalRotAngle);
+        vec3 rotatedGlobal = vec3(
+          morphedPos.x * cosG - morphedPos.z * sinG,
+          morphedPos.y,
+          morphedPos.x * sinG + morphedPos.z * cosG
+        );
 
-        vec4 mvPosition = modelViewMatrix * vec4(rotatedPos, 1.0);
+        float isGalaxyMode = clamp(1.0 - abs(uMorph - 1.0), 0.0, 1.0);
+        vec3 finalPos = mix(rotatedGlobal, rotatedGalaxy, isGalaxyMode);
+
+        vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
         gl_Position = projectionMatrix * mvPosition;
 
         // Attenuated point size with depth
         gl_PointSize = (aSize * uPixelRatio * 38.0) / -mvPosition.z;
-        vAlpha = clamp(1.2 / (-mvPosition.z * 0.4 + 0.6), 0.25, 1.0);
+
+        // Center Clearance Corridor: Fades out any particles in the center text reading zone
+        float centerCorridor = smoothstep(0.4, 2.1, abs(finalPos.x));
+        vAlpha = clamp(1.2 / (-mvPosition.z * 0.4 + 0.6), 0.18, 0.95) * (0.10 + 0.90 * centerCorridor);
       }
     `;
 

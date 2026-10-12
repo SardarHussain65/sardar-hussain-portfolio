@@ -41,21 +41,21 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
 
         {/* Cinematic Headline */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white max-w-5xl leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white max-w-5xl leading-[1.05] drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
           Crafting Production-Grade
-          <span className="block font-normal text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400">
+          <span className="block font-normal text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 drop-shadow-[0_0_35px_rgba(16,185,129,0.35)]">
             React Native Experiences.
           </span>
         </h1>
 
         {/* Role Typewriter / Tagline */}
-        <div className="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-purple-500/20 bg-purple-500/5 font-mono text-xs text-purple-300">
-          <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+        <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-[#070b14]/85 backdrop-blur-md font-mono text-xs text-purple-200 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
           <span>Mobile App Engineer · TV Systems · Full-Stack Builder</span>
         </div>
 
         {/* Subtext */}
-        <p className="mt-5 max-w-2xl text-sm sm:text-base md:text-lg text-zinc-400 font-light leading-relaxed">
+        <p className="mt-5 max-w-2xl text-sm sm:text-base md:text-lg text-zinc-200 font-light leading-relaxed drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)]">
           {site.bio}
         </p>
 
@@ -63,17 +63,17 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-zinc-950 font-medium text-xs sm:text-sm hover:bg-zinc-100 transition-all duration-[var(--duration-fast)] shadow-[0_0_24px_rgba(255,255,255,0.2)] active:scale-95"
+            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-emerald-400 text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-emerald-300 transition-all duration-[var(--duration-fast)] shadow-[0_0_28px_rgba(16,185,129,0.4)] active:scale-95"
           >
             <span>View Flagship Projects</span>
-            <span className="text-emerald-600 font-bold">✳</span>
+            <span className="text-zinc-950 font-bold">✳</span>
           </a>
 
           <a
             href={site.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-white/[0.05] text-white text-xs sm:text-sm font-medium hover:bg-white/[0.1] hover:border-emerald-400/40 transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/20 bg-[#070b14]/80 backdrop-blur-md text-white text-xs sm:text-sm font-medium hover:bg-white/15 hover:border-emerald-400/50 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.7)] active:scale-95"
           >
             <FileDown className="w-4 h-4 text-emerald-400" />
             <span>Download CV</span>
@@ -83,7 +83,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 bg-white/[0.03] text-zinc-300 text-xs sm:text-sm font-medium hover:bg-white/[0.08] hover:text-white transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-[#070b14]/80 backdrop-blur-md text-zinc-200 text-xs sm:text-sm font-medium hover:bg-white/15 hover:text-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.7)] active:scale-95"
           >
             <MessageCircle className="w-4 h-4 text-emerald-400" />
             <span>WhatsApp</span>
@@ -91,7 +91,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
 
         {/* Interactive 3D State Switcher */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full border border-white/10 bg-[#030712]/60 backdrop-blur-xl">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full border border-white/15 bg-[#070b14]/90 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
           <button
             type="button"
             onClick={() => onModeChange("orb")}
@@ -115,7 +115,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
             }`}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-            02 · Spiral Galaxy
+            02 · Twin Cosmic Spirals
           </button>
 
           <button
@@ -133,8 +133,8 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
       </div>
 
-      {/* Center Spacer for 3D Particle Visual Presence */}
-      <div className="my-16 sm:my-28 pointer-events-none" />
+      {/* Center Spacer */}
+      <div className="my-8 sm:my-14 pointer-events-none" />
 
       {/* Bottom Area: Footnote Description + HUD Metrics Bar */}
       <div className="w-full space-y-8">
