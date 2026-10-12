@@ -34,7 +34,7 @@ export function VesperParticleField({
 
     // Detect mobile for particle density adjustment
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 55000 : 95000;
+    const PARTICLE_COUNT = isMobile ? 48000 : 85000;
 
     // Three.js Scene, Camera, Renderer
     const scene = new THREE.Scene();
@@ -98,36 +98,30 @@ export function VesperParticleField({
       posOrb[i3 + 1] = minorR * Math.sin(phiOrb) * 1.1;
       posOrb[i3 + 2] = (majorR + minorR * Math.cos(phiOrb)) * Math.sin(thetaOrb) - 0.5;
 
-      // ─── 2. DUAL VOLUMETRIC THICK COSMIC SPIRAL GALAXIES (Flanking Left & Right) ───
-      // Left Galaxy centered at -2.85, Right Galaxy centered at +2.85
+      // ─── 2. DUAL COSMIC SPIRAL GALAXIES (Flanking Left & Right) ───
+      // Scaled up size and centered at ±2.65 so both spirals are fully apparent on screen
       const flank = i % 2 === 0 ? -1 : 1;
-      const centerX = flank * 2.85;
-      const centerY = flank * 0.1;
-      const isCore = (i % Math.floor(PARTICLE_COUNT / 2)) < Math.floor(PARTICLE_COUNT * 0.14);
+      const centerX = flank * 2.65;
+      const centerY = flank * 0.08;
+      const isCore = (i % Math.floor(PARTICLE_COUNT / 2)) < Math.floor(PARTICLE_COUNT * 0.09);
 
       if (isCore) {
-        // High density spherical & ellipsoidal glowing star cluster core
-        const rCore = Math.pow(u, 1.4) * 1.15;
+        // High density luminous galactic core (scaled up size)
+        const rCore = Math.pow(u, 1.7) * 0.88;
         const thetaCore = v * Math.PI * 2;
         const phiCore = Math.acos(2 * w - 1);
         posGalaxy[i3] = centerX + rCore * Math.sin(phiCore) * Math.cos(thetaCore);
-        posGalaxy[i3 + 1] = centerY + (rCore * Math.cos(phiCore)) * 0.95;
+        posGalaxy[i3 + 1] = centerY + (rCore * Math.cos(phiCore)) * 0.45;
         posGalaxy[i3 + 2] = rCore * Math.sin(phiCore) * Math.sin(thetaCore);
       } else {
-        // Multi-arm thick 3D volumetric spiral arms covering expansive screen area
-        const armIndex = i % 3;
-        const rGalaxy = 0.45 + Math.pow(u, 0.8) * 3.4; // expansive radius covering full flank
-        const armAngle = armIndex * (Math.PI * 2 / 3) + flank * (rGalaxy * 1.35) + (v - 0.5) * 0.45;
-
-        // Volumetric 3D tube cross-section: expands with radius to form thick billowing clouds
-        const tubeThickness = (0.55 + 0.35 * Math.sin(rGalaxy * 1.15)) * Math.pow(w, 0.65);
-        const tubeAngle = (v * 9.37 + u * 17.21) * Math.PI * 2;
-        const tubeDY = tubeThickness * Math.sin(tubeAngle) * 2.1; // Tall vertical thickness!
-        const tubeRadial = tubeThickness * Math.cos(tubeAngle) * 0.95;
-
-        posGalaxy[i3] = centerX + (rGalaxy + tubeRadial) * Math.cos(armAngle);
-        posGalaxy[i3 + 1] = centerY + tubeDY;
-        posGalaxy[i3 + 2] = (rGalaxy + tubeRadial) * Math.sin(armAngle);
+        // Dual tight, defined logarithmic spiral ribbons (scaled up radius to 3.35)
+        const armIndex = i % 4 < 2 ? 0 : 1;
+        const rGalaxy = 0.55 + Math.pow(u, 0.85) * 3.35;
+        const armAngle = armIndex * Math.PI + flank * (rGalaxy * 1.38) + (v - 0.5) * 0.70;
+        const diskThickness = (0.28 / (rGalaxy * 0.55 + 0.35)) * (w - 0.5);
+        posGalaxy[i3] = centerX + rGalaxy * Math.cos(armAngle);
+        posGalaxy[i3 + 1] = centerY + diskThickness * (0.8 + 0.3 * Math.sin(rGalaxy * 2.8));
+        posGalaxy[i3 + 2] = rGalaxy * Math.sin(armAngle);
       }
 
       // ─── 3. NEURAL BRAIN MESH (Separated Hemispheres) ───
@@ -170,8 +164,8 @@ export function VesperParticleField({
       colors[i3 + 1] = pColor.g;
       colors[i3 + 2] = pColor.b;
 
-      // Variable particle size: thicker, softer celestial stardust
-      sizes[i] = 1.4 + Math.pow(w, 1.9) * 3.6;
+      // Variable particle size
+      sizes[i] = 1.25 + Math.pow(w, 2.1) * 2.8;
     }
 
     geometry.setAttribute("position", new THREE.BufferAttribute(posGalaxy, 3));
@@ -227,9 +221,9 @@ export function VesperParticleField({
 
         // Dual Galaxy local rotation: each galaxy rotates on its own local flank center
         float flank = sign(aTargetGalaxy.x);
-        vec3 galaxyCenter = vec3(flank * 2.85, flank * 0.1, 0.0);
+        vec3 galaxyCenter = vec3(flank * 2.65, flank * 0.08, 0.0);
 
-        float localRotAngle = uTime * 0.15 * flank;
+        float localRotAngle = uTime * 0.16 * flank;
         float cosL = cos(localRotAngle);
         float sinL = sin(localRotAngle);
         vec3 localOffset = morphedPos - galaxyCenter;
@@ -239,8 +233,8 @@ export function VesperParticleField({
           localOffset.x * sinL + localOffset.z * cosL
         ) + galaxyCenter;
 
-        // Perspective tilt for the twin galaxies: tilted 42° so the full thick spiral face is visible
-        float tilt = 0.72 * flank;
+        // Perspective tilt: tilt both galaxies forward towards the camera so both spiral faces swirl clearly
+        float tilt = 0.48;
         float cosT = cos(tilt);
         float sinT = sin(tilt);
         rotatedGalaxy = vec3(
@@ -265,12 +259,12 @@ export function VesperParticleField({
         vec4 mvPosition = modelViewMatrix * vec4(finalPos, 1.0);
         gl_Position = projectionMatrix * mvPosition;
 
-        // Attenuated point size with depth: larger, thicker luminous points
-        gl_PointSize = (aSize * uPixelRatio * 48.0) / -mvPosition.z;
+        // Attenuated point size with depth
+        gl_PointSize = (aSize * uPixelRatio * 40.0) / -mvPosition.z;
 
         // Center Clearance Corridor: Fades out any particles in the center text reading zone
-        float centerCorridor = smoothstep(0.4, 2.1, abs(finalPos.x));
-        vAlpha = clamp(1.2 / (-mvPosition.z * 0.4 + 0.6), 0.22, 0.98) * (0.12 + 0.88 * centerCorridor);
+        float centerCorridor = smoothstep(0.35, 1.9, abs(finalPos.x));
+        vAlpha = clamp(1.2 / (-mvPosition.z * 0.4 + 0.6), 0.20, 0.95) * (0.10 + 0.90 * centerCorridor);
       }
     `;
 
