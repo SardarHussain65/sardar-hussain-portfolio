@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
 import { createFrameClock, perFrame } from "@/lib/scene/per-frame";
+import { watchContext, releaseContext } from "@/lib/scene/webgl-context";
 
 export type ParticleMode = "orb" | "galaxy" | "brain";
 
@@ -20,6 +21,7 @@ export function VesperParticleField({
   const mountRef = useRef<HTMLDivElement>(null);
   const targetModeFactor = useRef(1.0); // 0 = orb, 1 = galaxy, 2 = brain
   const currentModeFactor = useRef(1.0);
+  const [webglSupported, setWebglSupported] = useState(true);
 
   // Sync prop changes to target mode factor
   useEffect(() => {
@@ -49,16 +51,58 @@ export function VesperParticleField({
     camera.position.set(0, 0.2, 5.8);
     camera.lookAt(0, 0, 0);
 
-    const renderer = new THREE.WebGLRenderer({
-      powerPreference: "high-performance",
-      antialias: false,
-      alpha: true,
-      depth: false,
-    });
+    // Pre-check WebGL capability before creating renderer to avoid Three.js console error spam
+    const checkWebGL = () => {
+      try {
+        const testCanvas = document.createElement("canvas");
+        return Boolean(
+          window.WebGLRenderingContext &&
+            (testCanvas.getContext("webgl2") ||
+              testCanvas.getContext("webgl") ||
+              testCanvas.getContext("experimental-webgl"))
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    if (!checkWebGL()) {
+      setWebglSupported(false);
+      return;
+    }
+
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({
+        powerPreference: "high-performance",
+        antialias: false,
+        alpha: true,
+        depth: false,
+      });
+    } catch {
+      try {
+        renderer = new THREE.WebGLRenderer({
+          powerPreference: "default",
+          antialias: false,
+          alpha: true,
+          depth: false,
+        });
+      } catch {
+        setWebglSupported(false);
+        return;
+      }
+    }
+
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
+
+    const stopWatchContext = watchContext(renderer.domElement, (event) => {
+      if (event === "lost") {
+        console.warn("WebGL context lost on particle field");
+      }
+    });
 
     // Geometry & Position Buffers
     const geometry = new THREE.BufferGeometry();
@@ -384,14 +428,29 @@ export function VesperParticleField({
       window.removeEventListener("touchmove", handlePointerMove);
       window.removeEventListener("resize", handleResize);
 
+      stopWatchContext();
       geometry.dispose();
       material.dispose();
       renderer.dispose();
+      releaseContext(renderer.getContext());
       if (renderer.domElement.parentElement) {
         renderer.domElement.parentElement.removeChild(renderer.domElement);
       }
     };
   }, []);
+
+  if (!webglSupported) {
+    return (
+      <div
+        className={`relative h-full w-full pointer-events-none select-none overflow-hidden ${className}`}
+        aria-hidden="true"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/20 via-[#030712] to-violet-950/20 pointer-events-none" />
+        <div className="absolute top-1/4 left-10 w-96 h-96 rounded-full bg-emerald-500/10 blur-[130px] pointer-events-none" />
+        <div className="absolute top-1/3 right-10 w-96 h-96 rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none" />
+      </div>
+    );
+  }
 
   return (
     <div

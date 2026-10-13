@@ -170,6 +170,7 @@ export function ProjectsSection() {
                         src={projects[0].images[activeScreenIndex["apnaustad"] || 0].src}
                         alt={projects[0].images[activeScreenIndex["apnaustad"] || 0].alt}
                         fill
+                        sizes="(max-width: 640px) 240px, 270px"
                         className="object-cover object-top transition-all duration-300"
                       />
                     </div>
@@ -262,6 +263,7 @@ export function ProjectsSection() {
                                   src={currentImage.src}
                                   alt={currentImage.alt}
                                   fill
+                                  sizes="(max-width: 640px) 100vw, 400px"
                                   className="object-cover object-top"
                                 />
                               ) : (
@@ -306,6 +308,7 @@ export function ProjectsSection() {
                               src={currentImage.src}
                               alt={currentImage.alt}
                               fill
+                              sizes="(max-width: 640px) 200px, 220px"
                               className="object-cover object-top"
                             />
                           </div>
@@ -475,6 +478,7 @@ export function ProjectsSection() {
                           src={img.src}
                           alt={img.alt}
                           fill
+                          sizes="(max-width: 640px) 320px, 384px"
                           className="object-cover object-top"
                         />
                       </div>

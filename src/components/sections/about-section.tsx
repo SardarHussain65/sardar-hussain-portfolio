@@ -21,6 +21,7 @@ export function AboutSection() {
                 src="/portrait.jpg"
                 alt="Sardar Hussain"
                 fill
+                sizes="(max-width: 640px) 176px, 224px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060a15] via-transparent to-transparent opacity-80" />

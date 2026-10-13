@@ -25,6 +25,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
               src="/portrait.jpg"
               alt="Sardar Hussain"
               fill
+              sizes="32px"
               className="object-cover"
               priority
             />
