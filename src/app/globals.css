@@ -118,11 +118,3 @@ body {
 @layer components {
 }
 
-/* The consent banner is server-rendered (it paints with the page — it is the
-   phone's LCP element). Hidden before paint for a visitor who already chose
-   (`Cookie/consent-flag.ts`) and on the robot form, which has no visitor to
-   ask. Outside any layer and selector list on purpose. */
-html[data-consent] [data-cookie-banner],
-html:has(meta[name="x-robot-view"]) [data-cookie-banner] {
-  display: none;
-}
