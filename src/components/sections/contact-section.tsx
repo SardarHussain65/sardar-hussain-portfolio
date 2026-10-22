@@ -29,7 +29,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="relative py-28 px-4 sm:px-8 max-w-6xl mx-auto z-10">
-      <div className="relative p-8 sm:p-14 rounded-3xl border border-white/10 bg-[#040813]/90 backdrop-blur-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.8)]">
+      <div className="night-panel relative p-8 sm:p-14 rounded-3xl border border-white/10 bg-[#040813]/90 backdrop-blur-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.8)]">
         {/* Glow Spheres */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-r from-emerald-500/15 via-violet-500/15 to-teal-500/15 rounded-full blur-[90px] pointer-events-none" />
 
@@ -107,7 +107,7 @@ export function ContactSection() {
           </div>
 
           {/* Right Column: Interactive Inquiry Form */}
-          <div className="lg:col-span-7 p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#02050c]/80 backdrop-blur-md">
+          <div className="night-panel lg:col-span-7 p-6 sm:p-8 rounded-2xl border border-white/10 bg-[#02050c]/80 backdrop-blur-md">
             <h3 className="text-lg font-light text-white mb-2">Send a Message</h3>
             <p className="text-xs text-zinc-400 mb-6 font-light">
               Drop a note regarding your project scope, platform needs, or timeline.

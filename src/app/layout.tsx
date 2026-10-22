@@ -9,6 +9,7 @@ import { getSiteStructuredData } from "@/utils/seo/structured-data";
 
 import { AdaptiveGrid } from "@/components/common/grid";
 import { originSyncScript } from "@/components/common/origin-sync";
+import { THEME_BOOT_SCRIPT } from "@/components/theme/theme-script";
 import { ReducedMotion } from "@/components/common/reduced-motion";
 import { ScrollLayout } from "@/layouts/scroll-layout";
 import { siteConfig } from "@/lib/site";
@@ -43,6 +44,8 @@ export default function RootLayout({
   return (
     <html lang={siteConfig.locale.split("_")[0]} suppressHydrationWarning>
       <body className={`${onest.variable}`}>
+        {/* Before paint: restore a saved light or dark choice. Default is dark. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOT_SCRIPT }} />
         {/* Canonical + share URLs follow the origin serving the page. */}
         <script
           dangerouslySetInnerHTML={{ __html: originSyncScript(siteConfig.url) }}

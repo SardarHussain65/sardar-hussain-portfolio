@@ -8,6 +8,7 @@ import { ProjectsSection } from "@/components/sections/projects-section";
 import { SkillsMatrix } from "@/components/sections/skills-matrix";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { ContactSection } from "@/components/sections/contact-section";
+import { EngagementSection } from "@/components/sections/engagement-section";
 import { Footer } from "@/components/navigation/footer";
 import { SceneViewport } from "@/components/common/scene-viewport";
 import {
@@ -19,9 +20,9 @@ export function VesperLanding() {
   const [currentMode, setCurrentMode] = useState<ParticleMode>("galaxy");
 
   return (
-    <div className="relative w-full min-h-screen bg-[#030712] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="relative w-full min-h-screen bg-background text-foreground selection:bg-emerald-500/30 selection:text-emerald-200">
       {/* Living field. SceneViewport ignores the iOS toolbar so the buffer is not rebuilt on every scroll. */}
-      <SceneViewport className="z-0 overflow-hidden pointer-events-none">
+      <SceneViewport className="z-0 overflow-hidden pointer-events-none bg-field">
         <VesperParticleField currentMode={currentMode} className="h-full w-full" />
         <div
           aria-hidden
@@ -44,12 +45,15 @@ export function VesperLanding() {
           currentMode={currentMode}
           onModeChange={setCurrentMode}
         />
-        <AboutSection />
-        <ProjectsSection />
-        <SkillsMatrix />
-        <ExperienceSection />
-        <ContactSection />
-        <Footer />
+        <div className="relative bg-transparent light:bg-background">
+          <AboutSection />
+          <ProjectsSection />
+          <SkillsMatrix />
+          <ExperienceSection />
+          <EngagementSection />
+          <ContactSection />
+          <Footer />
+        </div>
       </div>
     </div>
   );

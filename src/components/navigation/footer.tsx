@@ -1,53 +1,127 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { site } from "@/data/site";
+import { nav, site } from "@/data/site";
+import { ArrowUpRight } from "lucide-react";
+
+const socials = [
+  { href: site.github, label: "GitHub" },
+  { href: site.linkedin, label: "LinkedIn" },
+  { href: site.whatsapp, label: "WhatsApp" },
+] as const;
 
 export function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer className="relative border-t border-white/10 bg-[#02050c] py-14 px-4 sm:px-8 z-10">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="flex items-center gap-3">
-          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white/[0.06] border border-white/10 text-emerald-400">
-            <svg
-              className="w-3.5 h-3.5 fill-current"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" />
-            </svg>
-          </span>
-          <span className="font-medium text-sm tracking-tight text-white">
-            {site.name}
-          </span>
-          <span className="text-zinc-600 text-xs">·</span>
-          <span className="text-xs text-zinc-500 font-mono">
-            {site.title}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-6 text-xs text-zinc-400">
-          <a href="#about" className="hover:text-white transition-colors">
-            About
-          </a>
-          <a href="#projects" className="hover:text-white transition-colors">
-            Projects
-          </a>
-          <a href="#stack" className="hover:text-white transition-colors">
-            Stack
-          </a>
-          <a href="#experience" className="hover:text-white transition-colors">
-            Experience
-          </a>
-          <a href="#contact" className="hover:text-white transition-colors">
-            Contact
+    <footer className="relative z-10 border-t border-border-subtle bg-background px-4 py-16 text-foreground sm:px-8 sm:py-20">
+      <div className="mx-auto max-w-7xl">
+        <div className="flex flex-col gap-10 border-b border-border-subtle pb-12 md:flex-row md:items-end md:justify-between">
+          <div className="max-w-xl">
+            <p className="font-mono text-xs uppercase tracking-widest text-mint">
+              {site.availability}
+            </p>
+            <p className="mt-4 text-3xl font-light tracking-tight sm:text-5xl">
+              Build the next app
+              <span className="block text-mint">with a steady hand.</span>
+            </p>
+          </div>
+          <a
+            href="#contact"
+            className="inline-flex w-fit items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity duration-[var(--duration-fast)] ease-entrance hover:opacity-80"
+          >
+            Start a conversation
+            <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>
 
-        <div className="flex items-center gap-2 text-[11px] font-mono text-zinc-500">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>{site.location} · 60 FPS Fluidity</span>
+        <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="text-sm font-medium">{site.name}</p>
+            <p className="mt-2 max-w-xs text-sm font-light leading-relaxed text-text-muted">
+              {site.title} at {site.company}. {site.location}.
+            </p>
+          </div>
+
+          <nav aria-label="Footer">
+            <p className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+              On this page
+            </p>
+            <ul className="mt-4 space-y-2">
+              {nav.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className="text-sm text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+              Direct
+            </p>
+            <ul className="mt-4 space-y-2 text-sm">
+              <li>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                >
+                  {site.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                >
+                  {site.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={site.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                >
+                  Download CV
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
+              Elsewhere
+            </p>
+            <ul className="mt-4 space-y-2 text-sm">
+              {socials.map((item) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 border-t border-border-subtle pt-6 text-xs text-text-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © {year} {site.name}. All rights reserved.
+          </p>
+          <p className="font-mono">{site.appsShipped} production apps · 60 FPS target</p>
         </div>
       </div>
     </footer>

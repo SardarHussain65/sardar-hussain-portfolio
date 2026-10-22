@@ -132,25 +132,25 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10">
       {/* Section Header */}
-      <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-white/10">
+      <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-border-subtle">
         <div
           aria-hidden
           className="pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
         />
         <div className="relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-[#030712]/80 text-xs font-mono text-teal-200 mb-3 [text-shadow:0_1px_2px_rgba(3,7,18,0.95)]">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-mono text-mint mb-3">
             <Briefcase className="w-3.5 h-3.5 text-teal-300" />
             <span>CAREER TRAJECTORY & IMPACT</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white [text-shadow:0_2px_12px_rgba(3,7,18,0.95)]">
+          <h2 className="text-3xl font-light tracking-tight text-foreground [text-shadow:0_2px_12px_rgba(3,7,18,0.55)] sm:text-5xl">
             Work Experience &
-            <span className="block font-normal text-white">
+            <span className="block font-normal text-foreground">
               Shipped Engagements
             </span>
           </h2>
         </div>
         <div className="relative flex flex-col items-start md:items-end gap-2 text-left md:text-right">
-          <p className="text-sm text-zinc-100 max-w-md font-light leading-relaxed [text-shadow:0_1px_2px_rgba(3,7,18,0.95),0_0_16px_rgba(3,7,18,0.9)]">
+          <p className="text-sm text-text-muted max-w-md font-light leading-relaxed">
             From solo greenfield product architecture to core mobile engineering at
             Repla Technologies.
           </p>
@@ -180,7 +180,7 @@ export function ExperienceSection() {
                 top: `${stickyTop}px`,
                 zIndex: index + 10,
               }}
-              className={`card sticky w-full rounded-3xl border bg-[#070b16]/95 backdrop-blur-2xl p-6 sm:p-10 transition-all duration-300 origin-top shadow-[0_20px_50px_rgba(0,0,0,0.95)] ${theme.glow}`}
+              className={`night-panel card sticky w-full rounded-3xl border bg-[#070b16]/95 backdrop-blur-2xl p-6 sm:p-10 transition-all duration-300 origin-top shadow-[0_20px_50px_rgba(0,0,0,0.95)] ${theme.glow}`}
             >
               {/* Subtle Ambient Background Gradient */}
               <div
@@ -320,7 +320,7 @@ export function ExperienceSection() {
       </div>
 
       {/* Academic Credentials Card Footer */}
-      <div className="mt-12 p-6 sm:p-8 rounded-3xl border border-white/10 bg-[#070b16]/90 backdrop-blur-xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div className="night-panel mt-12 p-6 sm:p-8 rounded-3xl border border-white/10 bg-[#070b16]/90 backdrop-blur-xl flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl border border-amber-500/20 bg-amber-500/10 text-amber-400 shrink-0">
             <GraduationCap className="w-6 h-6" />

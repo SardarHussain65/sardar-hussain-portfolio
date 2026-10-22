@@ -44,6 +44,10 @@
   --border-subtle: var(--raw-color-border-subtle);
   --text-muted: var(--raw-color-text-muted);
 
+  /* The particle field. Stays dark in both themes — additive particles only
+     read on this colour. See ADR-0030. */
+  --field: var(--raw-color-obsidian);
+
   --duration-fast: var(--raw-duration-fast);
   --duration-normal: var(--raw-duration-normal);
 }
@@ -60,6 +64,7 @@
   --color-mint: var(--accent-mint);
   --color-border-subtle: var(--border-subtle);
   --color-text-muted: var(--text-muted);
+  --color-field: var(--field);
   --font-sans: var(--font-onest);
 
   /* Leading floor for clipped TextEngine reveals */
@@ -67,6 +72,22 @@
 
   --ease-entrance: cubic-bezier(0.2, 0, 0, 1);
 }
+
+/* Light theme. The hero and the navbar stay on the dark field; everything
+   under the hero sits on these tokens. See ADR-0030. */
+[data-theme="light"] {
+  --background: #f3f6fb;
+  --foreground: #0b1220;
+  --surface: #ffffff;
+  --surface-card: rgba(255, 255, 255, 0.94);
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --text-muted: #3e4c63;
+  --accent-mint: #047857;
+  --accent-violet: #6d28d9;
+  color-scheme: light;
+}
+
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 body {
   background: var(--background);
@@ -113,6 +134,72 @@ body {
 }
 
 @layer utilities {
+  /* Dark glass cards become paper in light mode. The hero never uses this class. */
+  [data-theme="light"] .night-panel {
+    background-color: var(--surface);
+    color: var(--foreground);
+    border-color: var(--border-subtle);
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+  }
+
+  [data-theme="light"] .night-panel .text-white,
+  [data-theme="light"] .night-panel .text-zinc-100,
+  [data-theme="light"] .night-panel .text-zinc-200,
+  [data-theme="light"] .night-panel .text-zinc-300 {
+    color: var(--foreground);
+  }
+
+  [data-theme="light"] .night-panel .text-zinc-400,
+  [data-theme="light"] .night-panel .text-zinc-500,
+  [data-theme="light"] .night-panel .text-zinc-600 {
+    color: var(--text-muted);
+  }
+
+  [data-theme="light"] .night-panel .text-emerald-100,
+  [data-theme="light"] .night-panel .text-emerald-200,
+  [data-theme="light"] .night-panel .text-emerald-300,
+  [data-theme="light"] .night-panel .text-emerald-400,
+  [data-theme="light"] .night-panel .text-teal-200,
+  [data-theme="light"] .night-panel .text-teal-300 {
+    color: var(--accent-mint);
+  }
+
+  [data-theme="light"] .night-panel .border-white\/5,
+  [data-theme="light"] .night-panel .border-white\/8,
+  [data-theme="light"] .night-panel .border-white\/10,
+  [data-theme="light"] .night-panel .border-white\/15,
+  [data-theme="light"] .night-panel .border-white\/20 {
+    border-color: var(--border-subtle);
+  }
+
+  [data-theme="light"] .night-panel .bg-white\/5,
+  [data-theme="light"] .night-panel .bg-white\/\[0\.02\],
+  [data-theme="light"] .night-panel .bg-white\/\[0\.03\],
+  [data-theme="light"] .night-panel .bg-white\/\[0\.04\],
+  [data-theme="light"] .night-panel .bg-black\/40 {
+    background-color: rgba(15, 23, 42, 0.04);
+  }
+
+  [data-theme="light"] .night-panel .bg-white {
+    background-color: var(--foreground);
+  }
+
+  [data-theme="light"] .night-panel .text-zinc-950 {
+    color: var(--background);
+  }
+
+  [data-theme="light"] .night-panel .hover\:text-white:hover {
+    color: var(--foreground);
+  }
+
+  [data-theme="light"] .night-panel .placeholder\:text-zinc-600::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* Captions that sit on a photo keep light type. */
+  [data-theme="light"] .night-panel [data-keep-dark] .text-white {
+    color: #fff;
+  }
 }
 
 @layer components {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { site } from "@/data/site";
 
 export function Navbar() {
@@ -21,8 +22,8 @@ export function Navbar() {
       <nav
         className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-4 py-2.5 sm:px-6 rounded-full border transition-all duration-[var(--duration-normal)] ease-[var(--ease-entrance)] ${
           scrolled
-            ? "border-white/10 bg-[#030712]/80 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)]"
-            : "border-white/8 bg-[#030712]/40 backdrop-blur-md shadow-lg"
+            ? "border-white/15 bg-[#030712]/90 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)] light:bg-[#030712]"
+            : "border-white/10 bg-[#030712]/55 backdrop-blur-md shadow-lg light:bg-[#030712]/95"
         }`}
         aria-label="Main Navigation"
       >
@@ -83,6 +84,7 @@ export function Navbar() {
 
         {/* Right CTA */}
         <div className="flex items-center gap-2.5">
+          <ThemeToggle />
           <a
             href={site.whatsapp}
             target="_blank"

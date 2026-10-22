@@ -1,6 +1,6 @@
 ---
 tags: [frontend, design-system, stable]
-updated: 2026-07-17
+updated: 2026-10-22
 ---
 
 # Design System — Tailwind v4
@@ -135,6 +135,20 @@ every case (motion is spring-based, so there are no keyframes to co-locate).
 
 ## Current theme state
 
+The portfolio has two themes, switched with `data-theme` on `<html>`
+(ADR-0030). Dark is the default and the designed field. Light overrides the
+Tier 2 colour tokens in `globals.css`. A boot script in the root layout
+restores the saved choice before paint (`src/components/theme/theme-script.ts`).
+The control is `ThemeToggle` in the navbar.
+
+The hero and the navbar stay on the dark particle field in both themes. The
+scene box is `bg-field` (`--field` stays `#030712`) because the canvas is
+transparent and the particles are additive. The sheet under the hero uses
+`light:bg-background`. Cards that were painted with
+hardcoded night colours carry `night-panel`, which becomes paper when the
+theme is light. Photo captions inside those cards keep light type with
+`data-keep-dark`.
+
 The starter ships a **minimal** theme on purpose — the convention is the
 deliverable, not a palette. It defines:
 
@@ -148,7 +162,7 @@ deliverable, not a palette. It defines:
 
 There is deliberately **no brand palette**. Add one per project as
 `--raw-color-brand-*` primitives plus the semantic roles that name their purpose.
-The `@layer base/components/utilities` blocks are empty — fill them per project.
+The utilities layer holds the light-mode `night-panel` remaps. Base and components stay empty.
 
 ## Motion: springs first, CSS for trivial state
 

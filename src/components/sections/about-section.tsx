@@ -8,7 +8,7 @@ import { Sparkles, Terminal, Code2, Layers, CheckCircle } from "lucide-react";
 export function AboutSection() {
   return (
     <section id="about" className="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10">
-      <div className="p-8 sm:p-14 rounded-3xl border border-white/10 bg-[#060a15]/80 backdrop-blur-xl relative overflow-hidden">
+      <div className="night-panel p-8 sm:p-14 rounded-3xl border border-white/10 bg-[#060a15]/80 backdrop-blur-xl relative overflow-hidden">
         {/* Atmosphere glow */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[120px] pointer-events-none" />
@@ -25,7 +25,7 @@ export function AboutSection() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#060a15] via-transparent to-transparent opacity-80" />
-              <div className="absolute bottom-3 left-3 right-3 text-left">
+              <div className="absolute bottom-3 left-3 right-3 text-left" data-keep-dark>
                 <p className="text-xs font-semibold text-white">{site.name}</p>
                 <p className="text-[11px] font-mono text-emerald-400">{site.title}</p>
               </div>

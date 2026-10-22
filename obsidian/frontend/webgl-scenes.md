@@ -183,6 +183,11 @@ is on screen. `useMotionOff()` skips the scene and shows the color wash. A
 failed WebGL build does not: the canvas stays mounted and `keepSceneAlive`
 may rebuild it. The old `blur-[150px]` orbs are radial gradients.
 
+The canvas clears to transparent and blends additively, so the scene box is
+painted `--field` (`#030712`) in both themes. In light mode the page behind
+that box is paper; without the field colour the spirals wash out and the
+hero type, which is light, disappears.
+
 ## Related
 
 [[animation-system]] · [[robot-form]] · [[mobile-menus]] · [[utils]]

@@ -18,6 +18,20 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ## 2026-10-22
 
+**Sharper ApnaUstad screens and portrait.** The case study was showing 720px empty-state captures. Those frames are now the 1080×2424 product shots: client home, worker earnings, role choice, and onboarding. The portrait uses the 1074×1600 original.
+
+**Light-mode hero sits on the field colour.** The canvas is transparent and
+the particles are additive, so a paper page behind them washed the spirals
+out and hid the light hero type. The scene box is now `--field` in both
+themes.
+
+**Footer, light mode, and how the work is hired.** The footer is a full close:
+availability, a contact link, page links, email, WhatsApp, CV, GitHub, and
+LinkedIn. A sun/moon control on the navbar switches `data-theme`; the choice
+is restored before paint and the hero stays on the dark field. A new section
+states the platforms (phone, Smart TV, the system behind the app) and three
+ways to hire the work. Reasoning: [[decisions-log]] ADR-0030.
+
 **Projects section is a stage, not a card grid.** The flagship bento — device
 bezels, a glow on hover, a scale nudge — is gone. One build sits on the stage
 and the others wait in a numbered index. Choosing a row springs the stage to

@@ -17,6 +17,31 @@ Template: [[templates/adr-note]].
 
 ---
 
+## ADR-0030 — Light mode keeps the hero on the dark field
+
+**Status:** Accepted · 2026-10-22
+
+**Context.** The page is a dark particle field with type laid over it. A
+visitor asked for a light mode. Flipping every `text-white` would make the
+hero unreadable, and hiding the field would throw away the page.
+
+**Decision.** `data-theme` on `<html>` switches Tier 2 colour tokens. Dark is
+the default. The choice lives in `localStorage` and a boot script applies it
+before paint. The hero and the navbar stay on the field. Content under the
+hero sits on an opaque `background` sheet in light mode. Hardcoded night cards
+use `night-panel` so they become paper without a rewrite of every utility.
+
+**Why.** The field is the first screen. Light mode is for reading the work
+under it, not for washing out the spirals.
+
+**Consequences.** New sections under the hero should use the semantic tokens
+(`bg-background`, `text-foreground`, `text-text-muted`, `border-border-subtle`).
+A card that still uses night utilities needs `night-panel`. Do not put
+`night-panel` on the hero. The scene box uses `--field`, which does not
+change with the theme, because the canvas is transparent.
+
+---
+
 ## ADR-0029 — The particle field fits a phone and stays cheap enough to leave on
 
 **Status:** Accepted · 2026-10-22
