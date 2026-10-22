@@ -11,6 +11,10 @@ interface HeroSectionProps {
   onModeChange: (mode: ParticleMode) => void;
 }
 
+/** Dark halo so small type stays readable when the particle field passes behind it. */
+const overField =
+  "[text-shadow:0_1px_2px_rgba(0,0,0,0.95),0_0_12px_rgba(0,0,0,0.85)]";
+
 export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
   return (
     <section
@@ -137,61 +141,70 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
       {/* Center Spacer */}
       <div className="my-8 sm:my-14 pointer-events-none" />
 
-      {/* Bottom Area: Footnote Description + HUD Metrics Bar */}
-      <div className="w-full space-y-8">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-          <div className="max-w-md">
-            <p className="text-xs uppercase font-mono tracking-wider text-emerald-400 mb-2">
-              [ REAL-TIME 3D CANVAS ] · [ KINETIC INTERACTION ]
-            </p>
-            <p className="text-xs text-zinc-500 leading-relaxed font-light">
-              Interactive WebGL particle field reacting dynamically to pointer velocity,
-              scroll acceleration, and touch physics in real time.
-            </p>
+      {/* Bottom Area: Footnote Description + HUD Metrics Bar.
+          The canvas shield only darkens the headline, so this band gets its
+          own scrim. Labels stay light with a dark halo so the spirals cannot
+          wash them out. */}
+      <div className="relative w-full">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-4 -top-16 -bottom-12 bg-gradient-to-t from-[#030712]/70 via-[#030712]/40 to-transparent sm:-inset-x-8"
+        />
+        <div className="relative w-full space-y-8">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+            <div className="max-w-md">
+              <p className={`text-xs uppercase font-mono tracking-wider text-emerald-300 mb-2 ${overField}`}>
+                [ REAL-TIME 3D CANVAS ] · [ KINETIC INTERACTION ]
+              </p>
+              <p className={`text-xs text-zinc-100 leading-relaxed font-light ${overField}`}>
+                Interactive WebGL particle field reacting dynamically to pointer velocity,
+                scroll acceleration, and touch physics in real time.
+              </p>
+            </div>
+
+            <div className={`flex items-center gap-2 text-xs font-mono text-zinc-100 ${overField}`}>
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Open to High-Impact Contracts & Roles</span>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-mono text-zinc-500">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Open to High-Impact Contracts & Roles</span>
-          </div>
-        </div>
+          {/* HUD Metrics Bar */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/20">
+            <div className="border-l border-white/25 pl-4 py-1">
+              <p className="text-2xl sm:text-3xl font-light text-white tracking-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                ~2+ yrs
+              </p>
+              <p className={`text-[11px] font-mono text-zinc-200 uppercase tracking-wider mt-0.5 ${overField}`}>
+                Production Experience
+              </p>
+            </div>
 
-        {/* HUD Metrics Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/10">
-          <div className="border-l border-white/10 pl-4 py-1">
-            <p className="text-2xl sm:text-3xl font-light text-white tracking-tight">
-              ~2+ yrs
-            </p>
-            <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
-              Production Experience
-            </p>
-          </div>
+            <div className="border-l border-white/25 pl-4 py-1">
+              <p className="text-2xl sm:text-3xl font-light text-white tracking-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                6+
+              </p>
+              <p className={`text-[11px] font-mono text-zinc-200 uppercase tracking-wider mt-0.5 ${overField}`}>
+                Shipped Production Apps
+              </p>
+            </div>
 
-          <div className="border-l border-white/10 pl-4 py-1">
-            <p className="text-2xl sm:text-3xl font-light text-white tracking-tight">
-              6+
-            </p>
-            <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
-              Shipped Production Apps
-            </p>
-          </div>
+            <div className="border-l border-white/25 pl-4 py-1">
+              <p className="text-2xl sm:text-3xl font-light text-white tracking-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                60 FPS
+              </p>
+              <p className={`text-[11px] font-mono text-zinc-200 uppercase tracking-wider mt-0.5 ${overField}`}>
+                Gesture Fluidity
+              </p>
+            </div>
 
-          <div className="border-l border-white/10 pl-4 py-1">
-            <p className="text-2xl sm:text-3xl font-light text-white tracking-tight">
-              60 FPS
-            </p>
-            <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
-              Gesture Fluidity
-            </p>
-          </div>
-
-          <div className="border-l border-white/10 pl-4 py-1">
-            <p className="text-2xl sm:text-3xl font-light text-white tracking-tight">
-              1 Solo
-            </p>
-            <p className="text-[11px] font-mono text-zinc-500 uppercase tracking-wider mt-0.5">
-              Full-Stack Platform
-            </p>
+            <div className="border-l border-white/25 pl-4 py-1">
+              <p className="text-2xl sm:text-3xl font-light text-white tracking-tight [text-shadow:0_2px_10px_rgba(0,0,0,0.95)]">
+                1 Solo
+              </p>
+              <p className={`text-[11px] font-mono text-zinc-200 uppercase tracking-wider mt-0.5 ${overField}`}>
+                Full-Stack Platform
+              </p>
+            </div>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ---
 tags: [meta, decision]
-updated: 2026-10-07
+updated: 2026-10-22
 ---
 
 # Decisions Log (ADRs)
@@ -14,6 +14,72 @@ decisions on top, continuing the numbering. Amending an inherited decision is
 fine; write a new ADR that says so rather than editing the old one.
 
 Template: [[templates/adr-note]].
+
+---
+
+## ADR-0029 — The particle field fits a phone and stays cheap enough to leave on
+
+**Status:** Accepted · 2026-10-22
+
+**Context.** `VesperParticleField` drew 85,000 points on a desktop and 48,000
+below 768px, at a pixel ratio up to 2, on a `fixed inset-0` canvas that resized
+with the iOS toolbar. Three 650px layers used `blur-[150px]`. On a phone the
+twin spirals are centred at x = ±2.65 with a radius near 3.9. At field of view
+55 and camera z ≈ 5.8 a portrait frustum is only about ±1.4 units wide, and the
+shader fades the centre corridor, so the only region a phone could see was
+empty. The same loop kept running for the whole scroll.
+
+**Decision.**
+
+- On a narrow aspect, fold both galaxies onto one disk and scale that formation
+  (`uFit`) so it sits inside the frustum. Widen the portrait field of view and
+  lower the camera. Leave the twin layout alone when the aspect is at least 0.95.
+  Drop the centre fade only on that narrow layout, and keep a small scrim over
+  the headline.
+- Allocate 20,000 points. Draw 6,500 on a phone or a coarse pointer without
+  hover, and 4,000 / 8,000 when `saveData` is set or `deviceMemory` is 2 or
+  less. Change the count with `setDrawRange`, not a new buffer.
+- Cap pixel ratio at 1.5 on a desktop and 1.25 on a phone. Gate desktop draws
+  at ~60fps (`createDrawGate`). Do not cap phones.
+- Mount the field in `SceneViewport`. Ignore a height-only resize on a coarse
+  pointer. Draw the current frame immediately after a real resize.
+- Listen for the pointer only on a fine pointer. A phone gets a slow idle sway.
+- Pause the loop when the tab is hidden. The canvas stays on screen while the
+  page scrolls, so the loop keeps drawing — a stopped visible canvas is dropped
+  by iOS after a toolbar resize.
+- Do not start the scene when `useMotionOff()` is true.
+- Replace the blur orbs with radial gradients.
+
+**Why.** The missing phone galaxy was the camera, not a failed WebGL context.
+The weight was fill rate: point count times pixel ratio, plus full-screen CSS
+blurs, plus a buffer rebuild on every toolbar resize.
+
+**Consequences.** The phone shows one spiral instead of two flanking disks.
+Desktop still shows the pair, with fewer points. Do not put the counts or the
+pixel-ratio caps back up without a production measurement. This decision does
+not claim a Lighthouse or scroll-test score — those were not run for it. See
+[[webgl-scenes]] and the 2026-10-22 changelog entry.
+
+---
+
+## ADR-0028 — This site does not show the cookie banner
+
+**Status:** Accepted · 2026-10-22
+
+**Context.** The starter mounts `<LazyCookie />` in the root layout and
+server-renders the consent banner because, on a phone, that paragraph is often
+the LCP element. On this portfolio a first visit opened under that dialog and
+covered the hero. The site does not set analytics or marketing cookies.
+
+**Decision.** Do not render `<LazyCookie />` or inline `CONSENT_FLAG_SCRIPT` in
+`src/app/layout.tsx`. Leave `src/components/common/Cookie/` in the repo.
+
+**Why.** The dialog was covering the page the owner opens on a phone, and there
+is no third-party cookie to ask about.
+
+**Consequences.** First visits show the page with no consent dialog. Do not
+remount the banner unless the site starts setting non-essential cookies. See
+[[components/common]] and the 2026-10-22 changelog entry.
 
 ---
 

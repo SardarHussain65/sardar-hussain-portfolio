@@ -1,6 +1,6 @@
 ---
 tags: [architecture, stable]
-updated: 2026-05-21
+updated: 2026-10-22
 ---
 
 # Data Flow
@@ -16,11 +16,12 @@ The root layout (`src/app/layout.tsx`) wraps everything in this exact order.
 ```
 <html> <body>
   <ScrollLayout>        ← Lenis smooth scroll + scroll state store
-    <LazyCookie />      ← cookie consent banner + preferences modal
     {children}          ← the routed page
   </ScrollLayout>
 </body> </html>
 ```
+
+The cookie consent banner (`LazyCookie`) is not mounted on this site.
 
 ## Scroll state — Zustand store
 

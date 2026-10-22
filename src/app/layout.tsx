@@ -7,8 +7,6 @@ import {
 } from "@/utils/seo/generate-page-metadata";
 import { getSiteStructuredData } from "@/utils/seo/structured-data";
 
-import { LazyCookie } from "@/components/common/Cookie";
-import { CONSENT_FLAG_SCRIPT } from "@/components/common/Cookie/consent-flag";
 import { AdaptiveGrid } from "@/components/common/grid";
 import { originSyncScript } from "@/components/common/origin-sync";
 import { ReducedMotion } from "@/components/common/reduced-motion";
@@ -43,12 +41,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // `data-consent` is set on <html> by CONSENT_FLAG_SCRIPT before hydration.
     <html lang={siteConfig.locale.split("_")[0]} suppressHydrationWarning>
       <body className={`${onest.variable}`}>
-        {/* Before anything is parsed: marks a returning visitor's choice so the
-            server-rendered consent banner is hidden before its first paint. */}
-        <script dangerouslySetInnerHTML={{ __html: CONSENT_FLAG_SCRIPT }} />
         {/* Canonical + share URLs follow the origin serving the page. */}
         <script
           dangerouslySetInnerHTML={{ __html: originSyncScript(siteConfig.url) }}
@@ -62,7 +56,6 @@ export default function RootLayout({
         <ScrollLayout>
           <AdaptiveGrid />
           <ReducedMotion />
-          <LazyCookie />
           {children}
         </ScrollLayout>
       </body>

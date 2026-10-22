@@ -1,6 +1,6 @@
 ---
 tags: [frontend, stable]
-updated: 2026-10-06
+updated: 2026-10-22
 ---
 
 # Catalog — Common Components
@@ -25,7 +25,12 @@ category **preferences modal**. No third-party library (the old
 | `cookieStore.ts` | Zustand store + `localStorage` persistence |
 | `index.ts` | Barrel exports — `Cookie`, `LazyCookie`, `useCookieStore`, `CookieConsent` |
 
-**Mounting** — the root layout renders `<LazyCookie />` inside `ScrollLayout`:
+**Mounting** — this portfolio does **not** render the banner (ADR-0028). `src/app/layout.tsx`
+does not include `<LazyCookie />` or the consent-flag script, so first visits
+show the page with no cookie dialog. The component is still in the repo; to
+bring it back, render `<LazyCookie />` inside `ScrollLayout` and inline
+`CONSENT_FLAG_SCRIPT` as the first child of `<body>`:
+
 ```tsx
 import { LazyCookie } from "@/components/common/Cookie";
 ```

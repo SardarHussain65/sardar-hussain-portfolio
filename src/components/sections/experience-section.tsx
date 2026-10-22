@@ -132,21 +132,25 @@ export function ExperienceSection() {
   return (
     <section id="experience" className="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10">
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-white/10">
-        <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/20 bg-teal-500/5 text-xs font-mono text-teal-300 mb-3 shadow-[0_0_15px_rgba(20,184,166,0.15)]">
-            <Briefcase className="w-3.5 h-3.5 text-teal-400" />
+      <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-white/10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
+        />
+        <div className="relative">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-500/30 bg-[#030712]/80 text-xs font-mono text-teal-200 mb-3 [text-shadow:0_1px_2px_rgba(3,7,18,0.95)]">
+            <Briefcase className="w-3.5 h-3.5 text-teal-300" />
             <span>CAREER TRAJECTORY & IMPACT</span>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white">
+          <h2 className="text-3xl sm:text-5xl font-light tracking-tight text-white [text-shadow:0_2px_12px_rgba(3,7,18,0.95)]">
             Work Experience &
-            <span className="block font-normal text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-violet-400">
+            <span className="block font-normal text-white">
               Shipped Engagements
             </span>
           </h2>
         </div>
-        <div className="flex flex-col items-start md:items-end gap-2 text-left md:text-right">
-          <p className="text-sm text-zinc-300 max-w-md font-light leading-relaxed">
+        <div className="relative flex flex-col items-start md:items-end gap-2 text-left md:text-right">
+          <p className="text-sm text-zinc-100 max-w-md font-light leading-relaxed [text-shadow:0_1px_2px_rgba(3,7,18,0.95),0_0_16px_rgba(3,7,18,0.9)]">
             From solo greenfield product architecture to core mobile engineering at
             Repla Technologies.
           </p>

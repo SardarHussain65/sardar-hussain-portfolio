@@ -24,7 +24,7 @@ const capabilities = [
     index: "03",
     title: "Adaptive Density Scaling",
     subtitle: "Device-Aware Budgets",
-    desc: "From 120Hz ProMotion displays down to mobile GPUs, particle counts dynamically scale from 75k to 42k to maintain an unwavering 60fps budget.",
+    desc: "The field draws about twenty thousand points on a desktop and about a third of that on a phone, so the spiral stays in frame without the desktop fill cost.",
     stat: "120Hz ProMotion Ready",
     tag: "Adaptive DPR",
   },

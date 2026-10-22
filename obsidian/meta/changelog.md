@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-07
+updated: 2026-10-22
 ---
 
 # Changelog
@@ -15,6 +15,49 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-22
+
+**Projects section is a stage, not a card grid.** The flagship bento — device
+bezels, a glow on hover, a scale nudge — is gone. One build sits on the stage
+and the others wait in a numbered index. Choosing a row springs the stage to
+that project. The screens rest in a fan and open further under the pointer.
+The case study is a dialog. The section heading is an `h2`; the page `h1`
+stays in the hero.
+
+**Skills section is a chapter index.** The stack used to be a deck of
+overlapping glass cards, shuffled with a CSS ease and three sets of arrows.
+`SkillsMatrix` now keeps one tier open. Choosing a chapter springs the
+writing up into a single panel. Reduced motion and the robot form snap
+that spring (`useMotionOff`).
+
+**A failed scene start no longer deletes the galaxy.** One failed WebGL
+build was swapping the particle field for the soft color wash and leaving it
+that way for the rest of the visit. The canvas stays mounted and can rebuild.
+
+**Section titles stay readable on the spirals.** The skills, projects, and
+experience headings used a transparent mint-to-violet gradient, the same hues
+as the field, so the second line vanished when a spiral passed behind it.
+Those titles are solid light type on a dark band, with a dark halo.
+
+**The background galaxy fits a phone, and the field is lighter.** Portrait
+screens were looking at the empty gap between two spirals centred at
+x = ±2.65. Narrow viewports now fold those spirals into one disk and scale it
+into the camera. The point buffer is 20,000 on a desktop and draws 6,500 on a
+phone (less again when the device asks to save data), the pixel ratio is capped
+at 1.5 / 1.25, and the 150px blur orbs are radial gradients. The canvas sits in
+`SceneViewport`. Reasoning: [[decisions-log]] ADR-0029.
+
+**Cookie banner unmounted.** The root layout no longer renders `<LazyCookie />`
+or the consent-flag script. First visits on a phone were opening under the
+starter's cookie dialog; this site does not ask for that choice. The
+`src/components/common/Cookie/` component is still in the repo. Reasoning:
+[[decisions-log]] ADR-0028.
+
+**Hero stats readable over the particle field.** The caption, availability
+line, and metric labels under the hero sat in `text-zinc-500` on the bright
+spirals. That band now has its own dark scrim, and the type is light with a
+dark halo.
 
 ## 2026-10-07
 

@@ -1,6 +1,6 @@
 ---
 tags: [frontend, webgl, mobile, stable]
-updated: 2026-10-06
+updated: 2026-10-22
 ---
 
 # WebGL scenes on real phones
@@ -163,6 +163,25 @@ eased, re-centred slowly to how the phone is held; `stopTilt()` on unmount.
 - Verify headless with synthetic
   `window.dispatchEvent(new DeviceOrientationEvent("deviceorientation", { beta, gamma }))`
   under mobile emulation; the real iOS permission sheet needs a device.
+
+## This portfolio's field
+
+`src/components/scene/vesper-particle-field.tsx`, mounted from
+`VesperLanding` inside `<SceneViewport>`. ADR-0029.
+
+The desktop picture is two spirals centred at x = ±2.65. A portrait frustum at
+the desktop camera cannot see them — they sit outside the horizontal field of
+view, and the shader fades the centre — so a narrow aspect folds both disks
+onto the origin and scales them with `uFit`.
+
+The buffer is 20,000 points. A phone or coarse pointer draws 6,500
+(`geometry.setDrawRange`); `saveData` or `deviceMemory <= 2` draws less. Pixel
+ratio is capped at 1.5 desktop / 1.25 phone. Desktop draws are gated at ~60fps.
+Phones are not frame-capped. The pointer is listened to only on a fine pointer.
+The loop pauses when the document is hidden and keeps drawing while the canvas
+is on screen. `useMotionOff()` skips the scene and shows the color wash. A
+failed WebGL build does not: the canvas stays mounted and `keepSceneAlive`
+may rebuild it. The old `blur-[150px]` orbs are radial gradients.
 
 ## Related
 

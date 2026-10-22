@@ -13,9 +13,9 @@ const showcases = [
     id: "galaxy",
     title: "Galactic Disk Vortex",
     type: "Spiral Particle Geometry",
-    description: "Over 75,000 logarithmic vector coordinates generating high-density core radiation and reactive peripheral arm dispersion.",
+    description: "Mirrored logarithmic spirals. On a phone they fold into one disk so the galaxy stays inside the portrait frame.",
     mode: "galaxy" as ParticleMode,
-    stats: "75k Points · 60 FPS",
+    stats: "20k desktop · lighter on a phone",
     accent: "from-teal-500/20 to-emerald-500/5",
   },
   {
