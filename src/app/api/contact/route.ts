@@ -22,8 +22,9 @@ export const POST = handle(async (req) => {
 
   // 1. Deliver directly to email via Resend if configured
   if (RESEND_API_KEY) {
-    const toEmail = CONTACT_NOTIFICATION_EMAIL || "sardar22balti@gmail.com";
-    const fromSender = RESEND_FROM_EMAIL || "Portfolio Contact <onboarding@resend.dev>";
+    const toEmail = CONTACT_NOTIFICATION_EMAIL || site.email || "sardar.dev.pk@gmail.com";
+    const fromSender =
+      RESEND_FROM_EMAIL || "Portfolio Contact <contact@sardarhussain.me>";
 
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
