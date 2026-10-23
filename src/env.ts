@@ -32,6 +32,12 @@ const optionalString = () =>
   z.preprocess((v) => (v === "" ? undefined : v), z.string().optional());
 
 const serverSchema = z.object({
+  /** Resend API key for sending emails directly to your inbox. */
+  RESEND_API_KEY: optionalString(),
+  /** Destination email to receive contact notifications (defaults to sardar22balti@gmail.com or site.email). */
+  CONTACT_NOTIFICATION_EMAIL: optionalString(),
+  /** Verified sender email on Resend (e.g. contact@sardarhussain.me). Defaults to onboarding@resend.dev */
+  RESEND_FROM_EMAIL: optionalString(),
   /** Optional upstream the contact endpoint forwards leads to (CRM / webhook). */
   CONTACT_ENDPOINT: optionalUrl(),
   /**
@@ -57,6 +63,9 @@ let cachedServerEnv: z.infer<typeof serverSchema> | undefined;
  */
 export function getServerEnv() {
   cachedServerEnv ??= serverSchema.parse({
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    CONTACT_NOTIFICATION_EMAIL: process.env.CONTACT_NOTIFICATION_EMAIL,
+    RESEND_FROM_EMAIL: process.env.RESEND_FROM_EMAIL,
     CONTACT_ENDPOINT: process.env.CONTACT_ENDPOINT,
     VERCEL_PROJECT_PRODUCTION_URL: process.env.VERCEL_PROJECT_PRODUCTION_URL,
     VERCEL_ENV: process.env.VERCEL_ENV,

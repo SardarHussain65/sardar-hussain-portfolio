@@ -18,6 +18,11 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ## 2026-10-23
 
+**Reading type was disappearing.** Secondary copy was slate-400 at weight 300,
+so it washed out on the particle field and on the night cards. Muted text is
+now a light slate at night and a darker ink by day, body copy is weight 500,
+and accent words use a brighter text accent than the fill colour.
+
 **Hero caption removed.** The line under the hero that described the WebGL
 canvas, and the “Open to High-Impact Contracts & Roles” note beside it, are
 gone. The stat row stays.

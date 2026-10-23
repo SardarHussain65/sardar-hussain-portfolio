@@ -106,7 +106,7 @@ function MenuPanel({ onClose }: { onClose: () => void }) {
             ref={index === 0 ? firstLink : undefined}
             href={item.href}
             onClick={onClose}
-            className="border-b border-border-subtle py-4 text-2xl font-light"
+            className="border-b border-border-subtle py-4 text-2xl font-medium"
           >
             {item.label}
           </a>

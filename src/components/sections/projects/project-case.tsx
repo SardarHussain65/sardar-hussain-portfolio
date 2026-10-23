@@ -101,23 +101,23 @@ export function ProjectCase({ project, onClose }: ProjectCaseProps) {
               <X className="h-4 w-4" aria-hidden />
             </button>
 
-            <p className="font-mono text-xs uppercase tracking-widest text-mint">{item.role}</p>
-            <h3 id="project-case-title" className="mt-3 pr-12 text-3xl font-light tracking-tight text-foreground sm:text-5xl">
+            <p className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">{item.role}</p>
+            <h3 id="project-case-title" className="mt-3 pr-12 text-3xl font-medium tracking-tight text-foreground sm:text-5xl">
               {item.name}
             </h3>
             {item.status ? <p className="mt-3 font-mono text-xs text-text-muted">{item.status}</p> : null}
-            <p className="mt-5 max-w-2xl text-sm font-light leading-relaxed text-text-muted sm:text-base">
+            <p className="mt-5 max-w-2xl text-sm font-medium leading-relaxed text-foreground sm:text-base">
               {item.summary}
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <section className="rounded-xl border border-border-subtle p-5">
-                <h4 className="font-mono text-xs uppercase tracking-widest text-violet">The constraint</h4>
-                <p className="mt-3 text-sm font-light leading-relaxed text-text-muted">{item.problem}</p>
+                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-violet-text">The constraint</h4>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-foreground">{item.problem}</p>
               </section>
               <section className="rounded-xl border border-border-subtle p-5">
-                <h4 className="font-mono text-xs uppercase tracking-widest text-mint">What shipped</h4>
-                <p className="mt-3 text-sm font-light leading-relaxed text-text-muted">{item.solution}</p>
+                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">What shipped</h4>
+                <p className="mt-3 text-sm font-medium leading-relaxed text-foreground">{item.solution}</p>
               </section>
             </div>
 
@@ -151,7 +151,7 @@ export function ProjectCase({ project, onClose }: ProjectCaseProps) {
               <h4 className="font-mono text-xs uppercase tracking-widest text-text-muted">On the record</h4>
               <ul className="mt-4 space-y-2">
                 {item.highlights.map((itemText) => (
-                  <li key={itemText} className="flex gap-3 text-sm text-text-muted">
+                  <li key={itemText} className="flex gap-3 text-sm font-medium text-foreground">
                     <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-mint" />
                     <span>{itemText}</span>
                   </li>

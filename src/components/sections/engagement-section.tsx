@@ -8,13 +8,13 @@ export function EngagementSection() {
       className="relative z-10 mx-auto max-w-7xl px-4 py-28 sm:px-8"
     >
       <div className="max-w-2xl">
-        <p className="font-mono text-xs uppercase tracking-widest text-mint">How the work lands</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-mint-text">How the work lands</p>
         <h2
           id="work-with-me-heading"
-          className="mt-3 text-3xl font-light tracking-tight text-foreground sm:text-5xl"
+          className="mt-3 text-3xl font-medium tracking-tight text-foreground sm:text-5xl"
         >
           Platforms, and the way
-          <span className="block text-mint">a build gets hired.</span>
+          <span className="block text-mint-text">a build gets hired.</span>
         </h2>
       </div>
 
@@ -30,7 +30,7 @@ export function EngagementSection() {
                 className="rounded-2xl border border-border-subtle bg-surface/90 p-5"
               >
                 <p className="text-base font-medium text-foreground">{item.name}</p>
-                <p className="mt-2 text-sm font-light leading-relaxed text-text-muted">
+                <p className="mt-2 text-sm font-medium leading-relaxed text-foreground">
                   {item.detail}
                 </p>
               </li>
@@ -48,10 +48,10 @@ export function EngagementSection() {
                 key={item.name}
                 className="flex gap-4 rounded-2xl border border-border-subtle bg-surface/90 p-5"
               >
-                <span className="font-mono text-xs text-mint">0{index + 1}</span>
+                <span className="font-mono text-xs text-mint-text">0{index + 1}</span>
                 <div>
                   <p className="text-base font-medium text-foreground">{item.name}</p>
-                  <p className="mt-2 text-sm font-light leading-relaxed text-text-muted">
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-foreground">
                     {item.detail}
                   </p>
                 </div>

@@ -205,6 +205,11 @@ If you are reaching past this list, you want `<Hover>` — see
 Font: **Onest** (`next/font/google`), bound to `--font-onest` → `--font-sans`.
 Loaded in `src/app/layout.tsx` and exposed on `<body>` as `--font-onest`.
 
+Body copy inherits weight 500. Secondary copy uses `--text-muted` (`text-text-muted`):
+a light slate at night (`#d8e2ef`) and a dark ink by day (`#243044`). Accent
+words that are type, not fills, use `--accent-mint-text` / `--accent-violet-text`
+(`text-mint-text`, `text-violet-text`) so they stay readable on the particle field.
+
 ## Styling rules
 
 - Use utilities in JSX `className`; keep class strings short and readable.

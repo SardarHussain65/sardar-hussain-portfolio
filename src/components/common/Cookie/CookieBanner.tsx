@@ -47,7 +47,7 @@ export const CookieBanner = () => {
         <h2 className="text-base font-medium leading-snug sm:text-lg">
           This website uses cookies
         </h2>
-        <p className="text-sm leading-relaxed text-foreground/70">
+        <p className="text-sm font-medium leading-relaxed text-foreground">
           We use cookies to keep the site working, learn how it&apos;s used, and
           improve what we ship next. Accept everything, reject the non-essential,
           or pick category by category. See our{" "}

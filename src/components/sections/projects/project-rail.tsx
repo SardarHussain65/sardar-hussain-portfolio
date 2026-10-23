@@ -43,7 +43,7 @@ function RailRow({ entry, onSelect, delay }: { entry: RailEntry; onSelect: (slug
         <span className="font-mono text-xs text-text-muted">{String(index).padStart(2, "0")}</span>
         <span className="min-w-0">
           <span className="flex items-center gap-2">
-            <span className="truncate text-lg font-light text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance group-hover:text-mint sm:text-2xl">
+            <span className="truncate text-lg font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance group-hover:text-mint sm:text-2xl">
               {project.name}
             </span>
             <ArrowUpRight
@@ -51,7 +51,7 @@ function RailRow({ entry, onSelect, delay }: { entry: RailEntry; onSelect: (slug
               className="h-4 w-4 shrink-0 text-text-muted transition-colors duration-[var(--duration-fast)] ease-entrance group-hover:text-mint"
             />
           </span>
-          <span className="mt-1 block truncate text-sm text-text-muted">{project.summary}</span>
+          <span className="mt-1 block truncate text-sm font-medium text-foreground">{project.summary}</span>
         </span>
         {shot ? (
           <Hover

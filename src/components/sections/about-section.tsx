@@ -27,11 +27,11 @@ export function AboutSection() {
               <div className="absolute inset-0 bg-gradient-to-t from-[#060a15] via-transparent to-transparent opacity-80" />
               <div className="absolute bottom-3 left-3 right-3 text-left" data-keep-dark>
                 <p className="text-xs font-semibold text-white">{site.name}</p>
-                <p className="text-[11px] font-mono text-emerald-400">{site.title}</p>
+                <p className="text-[11px] font-mono text-mint-text">{site.title}</p>
               </div>
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-zinc-400">
+            <div className="mt-6 flex flex-wrap gap-2 text-xs font-mono text-foreground">
               <span className="px-3 py-1 rounded-full border border-white/10 bg-white/[0.03]">
                 Virtual University (CS)
               </span>
@@ -43,22 +43,22 @@ export function AboutSection() {
 
           {/* Right Column: Bio & Core Philosophy */}
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-xs font-mono text-emerald-400 mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-xs font-mono text-mint-text mb-4">
               <Sparkles className="w-3.5 h-3.5" />
               <span>THE DEVELOPER</span>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight leading-snug">
+            <h2 className="text-3xl sm:text-4xl font-medium text-white tracking-tight leading-snug">
               Building apps that feel native, responsive, and relentless.
             </h2>
 
-            <p className="mt-5 text-sm sm:text-base text-zinc-400 font-light leading-relaxed">
+            <p className="mt-5 text-sm sm:text-base text-foreground font-medium leading-relaxed">
               I am a Mobile App Engineer specializing in high-performance React Native
               applications, Smart TV media platforms (Roku BrightScript & LG webOS), and
               end-to-end full-stack architectures.
             </p>
 
-            <p className="mt-4 text-sm text-zinc-400 font-light leading-relaxed">
+            <p className="mt-4 text-sm text-foreground font-medium leading-relaxed">
               From sub-second live GPS vehicle polylines on Mapbox to low-latency HLS
               streaming pipelines and Stripe payment sheets, my code focuses on
               deterministic frame rates, zero memory leaks, and seamless native integration.
@@ -66,23 +66,23 @@ export function AboutSection() {
 
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-                <p className="text-xs font-mono text-emerald-400">60 FPS Native Performance</p>
-                <p className="text-xs text-zinc-400 mt-1">Reanimated 3 & gesture-handler architectures tuned for buttery 60fps.</p>
+                <p className="text-xs font-mono text-mint-text">60 FPS Native Performance</p>
+                <p className="text-xs text-foreground mt-1">Reanimated 3 & gesture-handler architectures tuned for buttery 60fps.</p>
               </div>
 
               <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                 <p className="text-xs font-mono text-purple-400">Low-Latency Media</p>
-                <p className="text-xs text-zinc-400 mt-1">HLS live and VoD video pipelines with hardware acceleration & MMKV cache.</p>
+                <p className="text-xs text-foreground mt-1">HLS live and VoD video pipelines with hardware acceleration & MMKV cache.</p>
               </div>
 
               <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
                 <p className="text-xs font-mono text-teal-400">Full-Stack Autonomy</p>
-                <p className="text-xs text-zinc-400 mt-1">Solo platform builds with Node.js, PostgreSQL, Socket.IO, and React admin desks.</p>
+                <p className="text-xs text-foreground mt-1">Solo platform builds with Node.js, PostgreSQL, Socket.IO, and React admin desks.</p>
               </div>
 
               <div className="p-4 rounded-xl border border-white/5 bg-white/[0.02]">
-                <p className="text-xs font-mono text-zinc-300">Smart TV Mastery</p>
-                <p className="text-xs text-zinc-400 mt-1">Production Roku BrightScript channels & LG webOS IPTV applications.</p>
+                <p className="text-xs font-mono text-foreground">Smart TV Mastery</p>
+                <p className="text-xs text-foreground mt-1">Production Roku BrightScript channels & LG webOS IPTV applications.</p>
               </div>
             </div>
           </div>

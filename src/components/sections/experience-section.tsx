@@ -145,11 +145,11 @@ export function ExperienceSection() {
           className="field-wash pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
         />
         <div className="relative">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-mono text-mint mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-medium font-mono text-mint-text mb-3">
             <Briefcase className="w-3.5 h-3.5 text-teal-300" />
             <span>CAREER TRAJECTORY & IMPACT</span>
           </div>
-          <h2 className="text-3xl font-light tracking-tight text-foreground [text-shadow:0_2px_12px_rgba(3,7,18,0.55)] sm:text-5xl">
+          <h2 className="text-3xl font-medium tracking-tight text-foreground [text-shadow:0_2px_12px_rgba(3,7,18,0.55)] sm:text-5xl">
             Work Experience &
             <span className="block font-normal text-foreground">
               Shipped Engagements
@@ -157,7 +157,7 @@ export function ExperienceSection() {
           </h2>
         </div>
         <div className="relative flex flex-col items-start md:items-end gap-2 text-left md:text-right">
-          <p className="text-sm text-text-muted max-w-md font-light leading-relaxed">
+          <p className="max-w-md text-sm font-medium leading-relaxed text-foreground">
             From solo greenfield product architecture to core mobile engineering at
             Repla Technologies.
           </p>
@@ -203,10 +203,10 @@ export function ExperienceSection() {
                     0{index + 1} / 0{roles.length}
                   </span>
                   <div className="flex flex-wrap items-baseline gap-2">
-                    <h3 className="text-2xl sm:text-3xl font-light text-white tracking-wide">
+                    <h3 className="text-2xl sm:text-3xl font-medium text-white tracking-wide">
                       {role.title}
                     </h3>
-                    <span className="text-zinc-500 font-mono text-base">@</span>
+                    <span className="text-text-muted font-mono text-base">@</span>
                     <span className={`text-xl sm:text-2xl font-normal ${theme.accentText}`}>
                       {role.org}
                     </span>
@@ -215,12 +215,12 @@ export function ExperienceSection() {
 
                 {/* Right Header Badges */}
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-zinc-300 border border-white/10 flex items-center gap-1.5">
+                  <span className="text-xs font-mono px-3 py-1 rounded-full bg-white/[0.04] text-foreground border border-white/10 flex items-center gap-1.5">
                     <Rocket className={`w-3.5 h-3.5 ${theme.accentText}`} />
                     {role.impactMetric}
                   </span>
 
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-zinc-300">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.04] text-xs font-mono text-foreground">
                     {role.current && (
                       <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                     )}
@@ -231,9 +231,9 @@ export function ExperienceSection() {
               </div>
 
               {/* Sub-header tagline */}
-              <div className="relative flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-mono text-zinc-400 mt-4 mb-8">
+              <div className="relative flex flex-wrap items-center justify-between gap-2 text-xs sm:text-sm font-mono text-foreground mt-4 mb-8">
                 <span>{"// " + role.badge}</span>
-                <span className="flex items-center gap-1 text-zinc-500">
+                <span className="flex items-center gap-1 text-text-muted">
                   <MapPin className="w-3.5 h-3.5" />
                   {role.place}
                 </span>
@@ -247,7 +247,7 @@ export function ExperienceSection() {
                     <h4 className="text-base sm:text-lg font-normal text-white mb-2">
                       Key Engineering Responsibilities & Impact
                     </h4>
-                    <p className="text-xs sm:text-sm text-zinc-400 font-light">
+                    <p className="text-xs sm:text-sm text-foreground font-medium">
                       Delivered high-reliability mobile architecture, cross-platform UI, and systems integration.
                     </p>
                   </div>
@@ -257,7 +257,7 @@ export function ExperienceSection() {
                     {role.points.map((pt, pIdx) => (
                       <div
                         key={pIdx}
-                        className="flex items-start gap-3 text-xs sm:text-sm text-zinc-300 font-light p-3 rounded-xl bg-white/[0.02] border border-white/5"
+                        className="flex items-start gap-3 text-xs sm:text-sm text-foreground font-medium p-3 rounded-xl bg-white/[0.02] border border-white/5"
                       >
                         <CheckCircle2
                           className={`w-4 h-4 shrink-0 mt-0.5 ${theme.accentText}`}
@@ -270,14 +270,14 @@ export function ExperienceSection() {
                   {/* Production Apps Badges (if present) */}
                   {role.shippedProjects && role.shippedProjects.length > 0 && (
                     <div className="pt-2">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-foreground block mb-2">
                         Shipped Commercial Platforms:
                       </span>
                       <div className="flex flex-wrap gap-2">
                         {role.shippedProjects.map((proj) => (
                           <span
                             key={proj}
-                            className="text-xs font-mono px-3 py-1 rounded-lg bg-white/[0.03] text-zinc-200 border border-white/10 flex items-center gap-1.5"
+                            className="text-xs font-mono px-3 py-1 rounded-lg bg-white/[0.03] text-foreground border border-white/10 flex items-center gap-1.5"
                           >
                             <ShieldCheck className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
                             <span>{proj}</span>
@@ -291,11 +291,11 @@ export function ExperienceSection() {
                 {/* Right Column: Stack Arsenal with SVGs (5 cols) */}
                 <div className="lg:col-span-5 p-6 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md">
                   <div className="flex items-center justify-between mb-4 pb-2 border-b border-white/5">
-                    <span className="text-xs font-mono uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
+                    <span className="text-xs font-mono uppercase tracking-wider text-foreground flex items-center gap-1.5">
                       <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                       Production Tech Stack
                     </span>
-                    <span className="text-[10px] font-mono text-zinc-500">
+                    <span className="text-[10px] font-mono text-text-muted">
                       {role.techStack.length} Technologies
                     </span>
                   </div>
@@ -307,13 +307,13 @@ export function ExperienceSection() {
                         className={`inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-mono transition-all duration-200 shadow-sm ${theme.pill}`}
                       >
                         <TechIcon name={tech} className="w-4 h-4 shrink-0" />
-                        <span className="font-light">{tech}</span>
+                        <span className="font-medium">{tech}</span>
                       </div>
                     ))}
                   </div>
 
                   {/* Verification Indicator */}
-                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-zinc-500">
+                  <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-text-muted">
                     <span>Role Milestone 0{index + 1}</span>
                     <span className="text-emerald-400 flex items-center gap-1">
                       Verified Engagement <ArrowUpRight className="w-3 h-3" />
@@ -336,7 +336,7 @@ export function ExperienceSection() {
             <h4 className="text-base font-medium text-white">
               Academic Foundation & Diplomas
             </h4>
-            <p className="text-xs font-mono text-zinc-400 mt-0.5">
+            <p className="text-xs font-mono text-foreground mt-0.5">
               UPS College & CODSOFT Certified Foundations
             </p>
           </div>
@@ -346,7 +346,7 @@ export function ExperienceSection() {
           {credentials.map((cred, cIdx) => (
             <span
               key={cIdx}
-              className="text-xs font-mono px-3.5 py-1.5 rounded-xl bg-white/[0.03] text-zinc-300 border border-white/10 flex items-center gap-2 hover:border-amber-400/40 transition-colors"
+              className="text-xs font-mono px-3.5 py-1.5 rounded-xl bg-white/[0.03] text-foreground border border-white/10 flex items-center gap-2 hover:border-amber-400/40 transition-colors"
             >
               <Award className="w-3.5 h-3.5 text-amber-400 shrink-0" />
               <span>{cred}</span>

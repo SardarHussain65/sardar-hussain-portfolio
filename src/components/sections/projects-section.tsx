@@ -84,13 +84,13 @@ export function ProjectsSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
         <div className="flex flex-col gap-8 border-b border-border-subtle pb-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-mint">Selected work</p>
-            <h2 id="projects-heading" className="mt-3 text-4xl font-light tracking-tight text-foreground sm:text-6xl">
+            <p className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">Selected work</p>
+            <h2 id="projects-heading" className="mt-3 text-4xl font-medium tracking-tight text-foreground sm:text-6xl">
               Shipped work,
-              <span className="block text-mint">on stage</span>
+              <span className="block text-mint-text">on stage</span>
             </h2>
           </div>
-          <p className="max-w-sm text-sm font-light leading-relaxed text-text-muted">
+          <p className="max-w-sm text-sm font-medium leading-relaxed text-foreground">
             Production systems, one at a time. Pick a row and that build takes the stage.
           </p>
         </div>
@@ -105,7 +105,7 @@ export function ProjectsSection() {
                 aria-pressed={selected}
                 onClick={() => chooseFilter(item)}
                 className={`border-b pb-1 font-mono text-xs uppercase tracking-wider transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint ${
-                  selected ? "border-mint text-foreground" : "border-transparent text-text-muted hover:text-foreground"
+                  selected ? "border-mint text-foreground" : "border-transparent font-medium text-foreground hover:text-mint-text"
                 }`}
               >
                 {item}

@@ -34,7 +34,7 @@ export function VesperLanding() {
         />
         <div
           aria-hidden
-          className="hero-shield pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_46%_32%_at_50%_18%,rgba(3,7,18,0.84)_0%,rgba(3,7,18,0.22)_50%,transparent_72%)]"
+          className="hero-shield pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_62%_48%_at_50%_28%,rgba(3,7,18,0.92)_0%,rgba(3,7,18,0.55)_48%,transparent_76%)]"
         />
       </SceneViewport>
 

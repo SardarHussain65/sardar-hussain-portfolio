@@ -34,7 +34,7 @@ export function ThemeToggle() {
       onClick={toggle}
       aria-pressed={isLight}
       aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
-      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-zinc-200 transition-colors duration-[var(--duration-fast)] ease-entrance hover:border-emerald-400/40 hover:text-white"
+      className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-white/[0.05] text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:border-emerald-400/40 hover:text-white"
     >
       {isLight ? <Moon className="h-3.5 w-3.5" /> : <Sun className="h-3.5 w-3.5" />}
     </button>

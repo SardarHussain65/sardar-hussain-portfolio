@@ -16,7 +16,7 @@ interface ProjectStageProps {
 export function ProjectStage({ project, index, onOpen }: ProjectStageProps) {
   const frame = useRef<HTMLElement>(null);
   const television = project.deviceType === "tv";
-  const tone = television ? "text-violet" : "text-mint";
+  const tone = television ? "text-violet-text" : "text-mint-text";
   const mark = television ? "bg-violet" : "bg-mint";
   const rule = television ? "border-violet" : "border-mint";
   const number = String(index).padStart(2, "0");
@@ -33,19 +33,19 @@ export function ProjectStage({ project, index, onOpen }: ProjectStageProps) {
         </p>
         <h3
           id={`stage-${project.slug}`}
-          className="mt-3 text-4xl font-light tracking-tight text-foreground sm:text-6xl"
+          className="mt-3 text-4xl font-medium tracking-tight text-foreground sm:text-6xl"
         >
           {project.name}
         </h3>
         {project.status ? (
           <p className="mt-3 font-mono text-xs text-text-muted">{project.status}</p>
         ) : null}
-        <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-text-muted sm:text-base">
+        <p className="mt-5 max-w-md text-sm font-medium leading-relaxed text-foreground sm:text-base">
           {project.summary}
         </p>
         <ul className="mt-6 space-y-2.5">
           {project.highlights.slice(0, 3).map((item) => (
-            <li key={item} className="flex gap-3 text-sm text-text-muted">
+            <li key={item} className="flex gap-3 text-sm font-medium text-foreground">
               <span aria-hidden className={`mt-2 h-1 w-1 shrink-0 rounded-full ${mark}`} />
               <span>{item}</span>
             </li>

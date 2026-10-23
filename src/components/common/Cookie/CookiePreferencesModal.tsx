@@ -135,7 +135,7 @@ export const CookiePreferencesModal = () => {
             </button>
           </header>
 
-          <p className="text-sm leading-relaxed text-foreground/60">
+          <p className="text-sm font-medium leading-relaxed text-foreground">
             Choose which categories of cookies we&apos;re allowed to use. You can
             change this any time. See our{" "}
             <Link
@@ -170,7 +170,7 @@ export const CookiePreferencesModal = () => {
                 >
                   <div className="flex min-w-0 flex-col gap-1">
                     <h3 className="text-sm font-medium leading-snug">{c.title}</h3>
-                    <p className="text-xs leading-relaxed text-foreground/60">
+                    <p className="text-xs font-medium leading-relaxed text-text-muted">
                       {c.body}
                     </p>
                   </div>

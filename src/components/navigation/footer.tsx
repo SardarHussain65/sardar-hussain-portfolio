@@ -17,12 +17,12 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-10 border-b border-border-subtle pb-12 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
-            <p className="font-mono text-xs uppercase tracking-widest text-mint">
+            <p className="font-mono text-xs uppercase tracking-widest text-mint-text">
               {site.availability}
             </p>
-            <p className="mt-4 text-3xl font-light tracking-tight sm:text-5xl">
+            <p className="mt-4 text-3xl font-medium tracking-tight sm:text-5xl">
               Build the next app
-              <span className="block text-mint">with a steady hand.</span>
+              <span className="block text-mint-text">with a steady hand.</span>
             </p>
           </div>
           <a
@@ -37,7 +37,7 @@ export function Footer() {
         <div className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <p className="text-sm font-medium">{site.name}</p>
-            <p className="mt-2 max-w-xs text-sm font-light leading-relaxed text-text-muted">
+            <p className="mt-2 max-w-xs text-sm font-medium leading-relaxed text-foreground">
               {site.title} at {site.company}. {site.location}.
             </p>
           </div>
@@ -51,7 +51,7 @@ export function Footer() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="text-sm text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                    className="text-sm text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint-text"
                   >
                     {item.label}
                   </a>
@@ -68,7 +68,7 @@ export function Footer() {
               <li>
                 <a
                   href={`mailto:${site.email}`}
-                  className="break-all text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                  className="break-all text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint-text"
                 >
                   {site.email}
                 </a>
@@ -78,7 +78,7 @@ export function Footer() {
                   href={site.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint-text"
                 >
                   {site.phoneDisplay}
                 </a>
@@ -88,7 +88,7 @@ export function Footer() {
                   href={site.resume}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                  className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint-text"
                 >
                   Download CV
                 </a>
@@ -107,7 +107,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint"
+                    className="text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint-text"
                   >
                     {item.label}
                   </a>

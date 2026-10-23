@@ -52,7 +52,7 @@ export function Navbar() {
             <a
               key={item.href}
               href={item.href}
-              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-zinc-300 transition-colors duration-[var(--duration-fast)] ease-entrance hover:bg-white/[0.06] hover:text-white"
+              className="rounded-full px-3.5 py-1.5 text-xs font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:bg-white/[0.06] hover:text-white"
             >
               {item.label}
             </a>
@@ -66,7 +66,7 @@ export function Navbar() {
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono text-zinc-400 hover:text-emerald-400 transition-colors"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium font-mono text-foreground hover:text-mint-text transition-colors"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>Available for Hire</span>
@@ -77,7 +77,7 @@ export function Navbar() {
             className="group relative hidden items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.05] px-4 py-1.5 text-xs font-medium text-white transition-all duration-[var(--duration-normal)] ease-entrance hover:border-emerald-400/40 hover:bg-white/[0.12] active:scale-95 sm:px-5 sm:py-2 sm:text-sm md:inline-flex"
           >
             <span>Get in Touch</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-zinc-400 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-foreground group-hover:text-mint-text group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
           <MobileMenu />
         </div>

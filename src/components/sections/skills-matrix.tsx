@@ -11,7 +11,7 @@ const READING = { tension: 220, friction: 26 } as const;
 
 /** Dark halo so type stays readable when a spiral passes behind it. */
 const overField =
-  "[text-shadow:0_1px_2px_rgba(3,7,18,0.95),0_0_16px_rgba(3,7,18,0.9)]";
+  "[text-shadow:0_1px_2px_rgba(3,7,18,0.98),0_0_18px_rgba(3,7,18,0.95)]";
 
 /**
  * Chapter index for the technical stack. One tier is open at a time.
@@ -70,22 +70,22 @@ export function SkillsMatrix() {
         />
         <div className="relative">
           <p
-            className={`mb-3 inline-flex rounded-full border border-border-subtle bg-background/80 px-3 py-1 font-mono text-xs text-mint ${overField}`}
+            className={`mb-3 inline-flex rounded-full border border-border-subtle bg-background/80 px-3 py-1 font-mono text-xs font-medium text-mint-text ${overField}`}
           >
             Architecture
           </p>
           <h2
             id="stack-heading"
-            className="text-3xl font-light tracking-tight text-foreground sm:text-5xl"
+            className="text-3xl font-medium tracking-tight text-foreground sm:text-5xl"
           >
             <span className={overField}>Engineering skills</span>
-            <span className="mt-1 block bg-gradient-to-r from-mint to-violet bg-clip-text font-normal text-transparent">
+            <span className="mt-1 block bg-gradient-to-r from-mint-text to-violet-text bg-clip-text font-medium text-transparent drop-shadow-[0_2px_12px_rgba(3,7,18,0.95)]">
               and technical stack
             </span>
           </h2>
         </div>
         <p
-          className={`relative max-w-sm text-sm font-light leading-relaxed text-foreground ${overField}`}
+          className={`relative max-w-sm text-sm font-medium leading-relaxed text-foreground ${overField}`}
         >
           Seven tiers, from the native gesture thread to the store release.
           Open a chapter to read how that part of the stack ships.
@@ -93,7 +93,10 @@ export function SkillsMatrix() {
       </header>
 
       <div className="mt-12 grid items-start gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
-        <nav aria-label="Skill tiers">
+        <nav
+          aria-label="Skill tiers"
+          className="rounded-2xl border border-border-subtle bg-background/80 p-2 backdrop-blur-md"
+        >
           <ol role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown}>
             {skillGroups.map((group, index) => {
               const isActive = index === activeIndex;
@@ -110,10 +113,10 @@ export function SkillsMatrix() {
                     aria-controls="stack-panel"
                     tabIndex={isActive ? 0 : -1}
                     onClick={() => select(index)}
-                    className={`relative flex w-full items-baseline gap-4 rounded-md py-3 pr-3 pl-5 text-left transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${overField} ${
+                    className={`relative flex w-full items-baseline gap-4 rounded-md py-3 pr-3 pl-5 text-left font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${
                       isActive
-                        ? "bg-background/80 text-foreground"
-                        : "text-foreground/90 hover:bg-background/70 hover:text-foreground"
+                        ? "bg-surface text-foreground"
+                        : "hover:bg-surface/80"
                     }`}
                   >
                     {isActive ? (
@@ -123,13 +126,13 @@ export function SkillsMatrix() {
                       />
                     ) : null}
                     <span
-                      className={`w-6 shrink-0 font-mono text-xs ${
-                        isActive ? "text-mint" : "text-text-muted"
+                      className={`w-6 shrink-0 font-mono text-xs font-medium ${
+                        isActive ? "text-mint-text" : "text-foreground"
                       }`}
                     >
                       {group.categoryNumber}
                     </span>
-                    <span className="text-sm font-light tracking-tight sm:text-base">
+                    <span className="text-sm font-medium tracking-tight sm:text-base">
                       {group.label}
                     </span>
                   </button>
@@ -181,26 +184,26 @@ function TierReading({ group }: TierReadingProps) {
     <div>
       <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
         <div className="lg:col-span-5">
-          <p className="font-mono text-4xl font-light text-mint sm:text-5xl">
+          <p className="font-mono text-4xl font-medium text-mint-text sm:text-5xl">
             {group.categoryNumber}
           </p>
-          <h3 className="mt-4 text-2xl font-light tracking-tight text-foreground sm:text-3xl">
+          <h3 className="mt-4 text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
             {group.label}
           </h3>
-          <p className="mt-2 text-sm font-light text-text-muted">{group.tagline}</p>
-          <p className="mt-6 font-mono text-xs text-mint">{group.architecture.metric}</p>
+          <p className="mt-2 text-sm font-medium text-foreground">{group.tagline}</p>
+          <p className="mt-6 font-mono text-xs font-medium text-mint-text">{group.architecture.metric}</p>
         </div>
 
         <div className="lg:col-span-7">
-          <h4 className="text-lg font-light text-foreground">{group.architecture.headline}</h4>
-          <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-text-muted">
+          <h4 className="text-lg font-medium text-foreground">{group.architecture.headline}</h4>
+          <p className="mt-3 max-w-xl text-sm font-medium leading-relaxed text-foreground">
             {group.architecture.summary}
           </p>
           <ul className="mt-6 space-y-3">
             {group.architecture.highlights.map((point) => (
               <li
                 key={point}
-                className="border-l-2 border-mint/40 pl-3 text-sm font-light leading-relaxed text-foreground/90"
+                className="border-l-2 border-mint-text/70 pl-3 text-sm font-medium leading-relaxed text-foreground"
               >
                 {point}
               </li>
@@ -211,16 +214,16 @@ function TierReading({ group }: TierReadingProps) {
       <div className="mt-8 border-t border-border-subtle pt-6">
         <ul className="flex flex-wrap gap-x-5 gap-y-3">
           {group.items.map((skill) => (
-            <li key={skill} className="inline-flex items-center gap-2 text-sm text-foreground/85">
+            <li key={skill} className="inline-flex items-center gap-2 text-sm font-medium text-foreground">
               <span aria-hidden className="inline-flex">
                 <TechIcon name={skill} className="h-4 w-4 shrink-0" />
               </span>
-              <span className="font-light">{skill}</span>
+              <span>{skill}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs font-light text-text-muted">
-          <span className="font-mono text-foreground/80">In production</span>
+        <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm font-medium text-foreground">
+          <span className="font-mono text-mint-text">In production</span>
           {group.architecture.shippedWith.map((name) => (
             <span key={name} className="whitespace-nowrap">
               {name}

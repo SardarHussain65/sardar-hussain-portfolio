@@ -22,10 +22,16 @@
   --raw-color-slate-900: #0b0f19;
   --raw-color-slate-800: #111827;
   --raw-color-violet: #8b5cf6;
-  --raw-color-violet-light: #a78bfa;
+  --raw-color-violet-light: #ddd6fe;
+  --raw-color-violet-ink: #5b21b6;
   --raw-color-mint: #10b981;
-  --raw-color-mint-light: #34d399;
-  --raw-color-text-muted: #94a3b8;
+  --raw-color-mint-light: #6ee7b7;
+  --raw-color-mint-ink: #047857;
+  /* Secondary copy has to stay readable on the night field and on night cards.
+     Slate-400 (#94a3b8) disappeared once the weight was light and a spiral
+     passed behind it. */
+  --raw-color-text-muted: #d8e2ef;
+  --raw-color-text-muted-ink: #243044;
   --raw-color-border-subtle: rgba(255, 255, 255, 0.08);
 
   --raw-duration-fast: 150ms;
@@ -42,6 +48,10 @@
   --surface-card: rgba(11, 15, 25, 0.75);
   --accent-violet: var(--raw-color-violet);
   --accent-mint: var(--raw-color-mint);
+  /* Accent used as type (gradient headlines, eyebrows). Brighter than the
+     fill accent so the glyphs hold up on the particle field. */
+  --accent-violet-text: var(--raw-color-violet-light);
+  --accent-mint-text: var(--raw-color-mint-light);
   --border-subtle: var(--raw-color-border-subtle);
   --text-muted: var(--raw-color-text-muted);
 
@@ -65,6 +75,8 @@
   --color-surface-card: var(--surface-card);
   --color-violet: var(--accent-violet);
   --color-mint: var(--accent-mint);
+  --color-violet-text: var(--accent-violet-text);
+  --color-mint-text: var(--accent-mint-text);
   --color-border-subtle: var(--border-subtle);
   --color-text-muted: var(--text-muted);
   --color-field: var(--field);
@@ -87,9 +99,11 @@
   --surface: #ffffff;
   --surface-card: rgba(255, 255, 255, 0.94);
   --border-subtle: rgba(15, 23, 42, 0.12);
-  --text-muted: #3e4c63;
+  --text-muted: var(--raw-color-text-muted-ink);
   --accent-mint: #047857;
   --accent-violet: #6d28d9;
+  --accent-mint-text: var(--raw-color-mint-ink);
+  --accent-violet-text: var(--raw-color-violet-ink);
   --menu-surface: #f3f6fb;
   --menu-foreground: #0b1220;
   color-scheme: light;
@@ -100,6 +114,10 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  /* Onest at 300, with grayscale smoothing, loses stems on this dark field. */
+  font-weight: 500;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
   min-height: 100dvh;
   width: 100%;
   overflow-x: hidden;
