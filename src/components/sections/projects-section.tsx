@@ -5,6 +5,7 @@ import { animated, useSpring } from "@react-spring/web";
 
 import { Inview } from "@/components/common/robot-inview";
 import { projects, type Project } from "@/data/projects";
+import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { useMotionOff } from "@/hooks/use-motion-off";
 
 import { ProjectCase } from "./projects/project-case";
@@ -21,11 +22,13 @@ function matches(project: Project, filter: string): boolean {
 
 export function ProjectsSection() {
   const motionOff = useMotionOff();
+  const lenis = useScroll((state) => state.lenis);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
   const [activeSlug, setActiveSlug] = useState(projects[0]?.slug ?? "");
   const [caseProject, setCaseProject] = useState<Project | null>(null);
   const generation = useRef(0);
   const entered = useRef(false);
+  const stageRef = useRef<HTMLDivElement>(null);
 
   const [swap, api] = useSpring(() => ({ opacity: 1, y: 0 }));
 
@@ -36,6 +39,18 @@ export function ProjectsSection() {
   const select = useCallback(
     (slug: string) => {
       if (slug === activeSlug) return;
+
+      if (stageRef.current) {
+        if (lenis) {
+          lenis.scrollTo(stageRef.current, { immediate: motionOff });
+        } else {
+          stageRef.current.scrollIntoView({
+            behavior: motionOff ? "instant" : "smooth",
+            block: "start",
+          });
+        }
+      }
+
       const id = ++generation.current;
       if (motionOff) {
         setActiveSlug(slug);
@@ -51,7 +66,7 @@ export function ProjectsSection() {
         },
       });
     },
-    [activeSlug, api, motionOff],
+    [activeSlug, api, lenis, motionOff],
   );
 
   useEffect(() => {
@@ -114,27 +129,28 @@ export function ProjectsSection() {
           })}
         </div>
 
-        {active ? (
-          <Inview
-            tag="div"
-            from={{ opacity: 0, y: 36 }}
-            to={{ opacity: 1, y: 0 }}
-            mode="once"
-            config={{ tension: 170, friction: 24 }}
-            className="mt-14"
-          >
-            <animated.div style={swap}>
-              <ProjectStage
-                key={active.slug}
-                project={active}
-                index={activeIndex}
-                onOpen={() => openCase(active)}
-              />
-            </animated.div>
-          </Inview>
-        ) : (
-          <p className="mt-14 font-mono text-sm text-text-muted">Nothing in this filter.</p>
-        )}
+        <div ref={stageRef} id="project-stage" className="mt-14 scroll-mt-24 sm:scroll-mt-28">
+          {active ? (
+            <Inview
+              tag="div"
+              from={{ opacity: 0, y: 36 }}
+              to={{ opacity: 1, y: 0 }}
+              mode="once"
+              config={{ tension: 170, friction: 24 }}
+            >
+              <animated.div style={swap}>
+                <ProjectStage
+                  key={active.slug}
+                  project={active}
+                  index={activeIndex}
+                  onOpen={() => openCase(active)}
+                />
+              </animated.div>
+            </Inview>
+          ) : (
+            <p className="font-mono text-sm text-text-muted">Nothing in this filter.</p>
+          )}
+        </div>
 
         <ProjectRail
           entries={filtered
