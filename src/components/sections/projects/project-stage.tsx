@@ -25,7 +25,7 @@ export function ProjectStage({ project, index, onOpen }: ProjectStageProps) {
     <article
       ref={frame}
       aria-labelledby={`stage-${project.slug}`}
-      className="relative grid items-center gap-6 sm:gap-10 lg:grid-cols-2 lg:gap-16"
+      className="relative grid items-center gap-10 lg:grid-cols-2 lg:gap-16"
     >
       <div>
         <p className={`font-mono text-xs uppercase tracking-widest ${tone}`}>
