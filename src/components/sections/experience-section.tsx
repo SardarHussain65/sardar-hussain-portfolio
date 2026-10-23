@@ -31,8 +31,15 @@ export function ExperienceSection() {
           const cards = cardRefs.current;
           const numCards = cards.length;
 
+          const stacking = window.matchMedia("(min-width: 768px)").matches;
+
           cards.forEach((card, i) => {
             if (!card) return;
+            if (!stacking) {
+              card.style.transform = "";
+              card.style.filter = "";
+              return;
+            }
             const nextCard = cards[i + 1];
             if (nextCard) {
               const nextRect = nextCard.getBoundingClientRect();
@@ -154,7 +161,7 @@ export function ExperienceSection() {
             From solo greenfield product architecture to core mobile engineering at
             Repla Technologies.
           </p>
-          <span className="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5 bg-emerald-950/40 px-2.5 py-0.5 rounded border border-emerald-500/20">
+          <span className="hidden items-center gap-1.5 rounded border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-0.5 font-mono text-[11px] text-emerald-400 md:inline-flex">
             <Layers className="w-3 h-3 text-emerald-400" />
             Scroll to stack career milestones
           </span>
@@ -164,7 +171,7 @@ export function ExperienceSection() {
       {/* ─── STICKY-STACKING CARDS CONTAINER ─── */}
       <div
         ref={containerRef}
-        className="cards-container relative mt-16 pb-36 space-y-16 sm:space-y-20"
+        className="cards-container relative mt-10 space-y-6 pb-12 sm:space-y-10 md:mt-16 md:space-y-16 md:pb-36"
       >
         {roles.map((role, index) => {
           const theme = getAccentTheme(role.accent);
@@ -180,7 +187,7 @@ export function ExperienceSection() {
                 top: `${stickyTop}px`,
                 zIndex: index + 10,
               }}
-              className={`night-panel card sticky w-full rounded-3xl border bg-[#070b16]/95 backdrop-blur-2xl p-6 sm:p-10 transition-all duration-300 origin-top shadow-[0_20px_50px_rgba(0,0,0,0.95)] ${theme.glow}`}
+              className={`night-panel card w-full rounded-3xl border bg-[#070b16]/95 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-2xl transition-all duration-300 origin-top sm:p-10 md:sticky ${theme.glow}`}
             >
               {/* Subtle Ambient Background Gradient */}
               <div

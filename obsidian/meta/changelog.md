@@ -20,6 +20,14 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 **Sharper ApnaUstad screens and portrait.** The case study was showing 720px empty-state captures. Those frames are now the 1080×2424 product shots: client home, worker earnings, role choice, and onboarding. The portrait uses the 1074×1600 original.
 
+**Phone layout.** Below the `md` breakpoint the header stays on one line
+(name, theme, menu) and clears the top safe area. The menu is a full-height
+panel (`h-dvh`, safe area, `--menu-surface` / `--menu-foreground`) that
+springs in, locks scroll, and returns focus to the button. Experience cards
+stack in normal flow instead of sticking and scaling. Section cards use
+tighter padding, and the hero role line and mode switcher wrap inside the
+screen.
+
 **Light-mode hero sits on the field colour.** The canvas is transparent and
 the particles are additive, so a paper page behind them washed the spirals
 out and hid the light hero type. The scene box is now `--field` in both

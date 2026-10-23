@@ -46,7 +46,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
 
         {/* Cinematic Headline */}
-        <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-light tracking-tight text-white max-w-5xl leading-[1.05] drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)]">
+        <h1 className="max-w-5xl text-balance text-4xl font-light leading-[1.1] tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] sm:text-6xl md:text-7xl lg:text-8xl">
           Crafting Production-Grade
           <span className="block font-normal text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-teal-200 to-cyan-300 drop-shadow-[0_0_35px_rgba(16,185,129,0.35)]">
             React Native Experiences.
@@ -54,9 +54,13 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </h1>
 
         {/* Role Typewriter / Tagline */}
-        <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/30 bg-[#070b14]/85 backdrop-blur-md font-mono text-xs text-purple-200 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>Mobile App Engineer · TV Systems · Full-Stack Builder</span>
+        <div className="mt-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-3xl border border-purple-500/30 bg-[#070b14]/85 px-4 py-2 text-center font-mono text-xs text-purple-200 shadow-[0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-md">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
+          <span className="whitespace-nowrap">Mobile App Engineer</span>
+          <span aria-hidden className="text-purple-300/50">·</span>
+          <span className="whitespace-nowrap">TV Systems</span>
+          <span aria-hidden className="text-purple-300/50">·</span>
+          <span className="whitespace-nowrap">Full-Stack Builder</span>
         </div>
 
         {/* Subtext */}
@@ -96,7 +100,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
 
         {/* Interactive 3D State Switcher */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-2 p-1.5 rounded-full border border-white/15 bg-[#070b14]/90 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+        <div className="mt-10 flex w-full max-w-lg flex-wrap items-center justify-center gap-2 rounded-3xl border border-white/15 bg-[#070b14]/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
           <button
             type="button"
             onClick={() => onModeChange("orb")}
@@ -162,7 +166,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
               </p>
             </div>
 
-            <div className={`flex items-center gap-2 text-xs font-mono text-zinc-100 ${overField}`}>
+            <div className={`flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-100 ${overField}`}>
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Open to High-Impact Contracts & Roles</span>
             </div>

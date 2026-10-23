@@ -47,6 +47,8 @@
   /* The particle field. Stays dark in both themes — additive particles only
      read on this colour. See ADR-0030. */
   --field: var(--raw-color-obsidian);
+  --menu-surface: var(--raw-color-obsidian);
+  --menu-foreground: var(--raw-color-silver);
 
   --duration-fast: var(--raw-duration-fast);
   --duration-normal: var(--raw-duration-normal);
@@ -65,6 +67,8 @@
   --color-border-subtle: var(--border-subtle);
   --color-text-muted: var(--text-muted);
   --color-field: var(--field);
+  --color-menu-surface: var(--menu-surface);
+  --color-menu-foreground: var(--menu-foreground);
   --font-sans: var(--font-onest);
 
   /* Leading floor for clipped TextEngine reveals */
@@ -84,6 +88,8 @@
   --text-muted: #3e4c63;
   --accent-mint: #047857;
   --accent-violet: #6d28d9;
+  --menu-surface: #f3f6fb;
+  --menu-foreground: #0b1220;
   color-scheme: light;
 }
 

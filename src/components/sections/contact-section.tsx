@@ -29,7 +29,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="relative py-28 px-4 sm:px-8 max-w-6xl mx-auto z-10">
-      <div className="night-panel relative p-8 sm:p-14 rounded-3xl border border-white/10 bg-[#040813]/90 backdrop-blur-2xl overflow-hidden shadow-[0_20px_80px_rgba(0,0,0,0.8)]">
+      <div className="night-panel relative overflow-hidden rounded-3xl border border-white/10 bg-[#040813]/90 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.8)] backdrop-blur-2xl sm:p-10 lg:p-14">
         {/* Glow Spheres */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-r from-emerald-500/15 via-violet-500/15 to-teal-500/15 rounded-full blur-[90px] pointer-events-none" />
 
@@ -57,9 +57,9 @@ export function ContactSection() {
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                   <Mail className="w-4 h-4" />
                 </div>
-                <div className="flex flex-col text-left">
+                <div className="flex min-w-0 flex-col text-left">
                   <span className="text-[10px] font-mono text-zinc-500 uppercase">Email</span>
-                  <span className="text-xs sm:text-sm font-mono text-zinc-200">{site.email}</span>
+                  <span className="break-all text-xs font-mono text-zinc-200 sm:text-sm">{site.email}</span>
                 </div>
               </a>
 
@@ -72,7 +72,7 @@ export function ContactSection() {
                 <div className="w-8 h-8 rounded-lg bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400">
                   <MessageCircle className="w-4 h-4" />
                 </div>
-                <div className="flex flex-col text-left">
+                <div className="flex min-w-0 flex-col text-left">
                   <span className="text-[10px] font-mono text-zinc-500 uppercase">WhatsApp</span>
                   <span className="text-xs sm:text-sm font-mono text-zinc-200">{site.phoneDisplay}</span>
                 </div>

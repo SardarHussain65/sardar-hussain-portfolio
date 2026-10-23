@@ -143,7 +143,8 @@ The control is `ThemeToggle` in the navbar.
 
 The hero and the navbar stay on the dark particle field in both themes. The
 scene box is `bg-field` (`--field` stays `#030712`) because the canvas is
-transparent and the particles are additive. The sheet under the hero uses
+transparent and the particles are additive. The phone menu has its own
+`--menu-surface` and `--menu-foreground`, set in both themes. The sheet under the hero uses
 `light:bg-background`. Cards that were painted with
 hardcoded night colours carry `night-panel`, which becomes paper when the
 theme is light. Photo captions inside those cards keep light type with
