@@ -19,11 +19,11 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col justify-between pt-28 sm:pt-36 pb-12 px-4 sm:px-8 max-w-7xl mx-auto z-10"
+      className="hero-day relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 pt-28 pb-12 sm:px-8 sm:pt-36"
     >
       {/* Top Profile Badge & Intro */}
       <div className="flex flex-col items-center text-center mt-2 sm:mt-6">
-        <div className="flex items-center gap-3.5 mb-6 px-4 py-2 rounded-full border border-white/10 bg-white/[0.04] backdrop-blur-md">
+        <div className="hero-chip mb-6 flex items-center gap-3.5 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 backdrop-blur-md">
           <div className="relative w-8 h-8 rounded-full overflow-hidden border border-emerald-400/50 shadow-[0_0_12px_rgba(16,185,129,0.3)]">
             <Image
               src="/portrait.jpg"
@@ -54,7 +54,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </h1>
 
         {/* Role Typewriter / Tagline */}
-        <div className="mt-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-3xl border border-purple-500/30 bg-[#070b14]/85 px-4 py-2 text-center font-mono text-xs text-purple-200 shadow-[0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-md">
+        <div className="hero-chip mt-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-3xl border border-purple-500/30 bg-[#070b14]/85 px-4 py-2 text-center font-mono text-xs text-purple-200 shadow-[0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-md">
           <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
           <span className="whitespace-nowrap">Mobile App Engineer</span>
           <span aria-hidden className="text-purple-300/50">·</span>
@@ -82,7 +82,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
             href={site.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/20 bg-[#070b14]/80 backdrop-blur-md text-white text-xs sm:text-sm font-medium hover:bg-white/15 hover:border-emerald-400/50 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.7)] active:scale-95"
+            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#070b14]/80 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:border-emerald-400/50 hover:bg-white/15 active:scale-95 sm:text-sm"
           >
             <FileDown className="w-4 h-4 text-emerald-400" />
             <span>Download CV</span>
@@ -92,7 +92,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
             href={site.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-white/15 bg-[#070b14]/80 backdrop-blur-md text-zinc-200 text-xs sm:text-sm font-medium hover:bg-white/15 hover:text-white transition-all shadow-[0_4px_20px_rgba(0,0,0,0.7)] active:scale-95"
+            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#070b14]/80 px-5 py-3 text-xs font-medium text-zinc-200 shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:bg-white/15 hover:text-white active:scale-95 sm:text-sm"
           >
             <MessageCircle className="w-4 h-4 text-emerald-400" />
             <span>WhatsApp</span>
@@ -100,7 +100,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </div>
 
         {/* Interactive 3D State Switcher */}
-        <div className="mt-10 flex w-full max-w-lg flex-wrap items-center justify-center gap-2 rounded-3xl border border-white/15 bg-[#070b14]/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
+        <div className="hero-chip mt-10 flex w-full max-w-lg flex-wrap items-center justify-center gap-2 rounded-3xl border border-white/15 bg-[#070b14]/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
           <button
             type="button"
             onClick={() => onModeChange("orb")}
@@ -145,33 +145,13 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
       {/* Center Spacer */}
       <div className="my-8 sm:my-14 pointer-events-none" />
 
-      {/* Bottom Area: Footnote Description + HUD Metrics Bar.
-          The canvas shield only darkens the headline, so this band gets its
-          own scrim. Labels stay light with a dark halo so the spirals cannot
-          wash them out. */}
+      {/* HUD metrics. The scrim keeps the numbers readable over the spirals. */}
       <div className="relative w-full">
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-x-4 -top-16 -bottom-12 bg-gradient-to-t from-[#030712]/70 via-[#030712]/40 to-transparent sm:-inset-x-8"
+          className="hero-scrim pointer-events-none absolute -inset-x-4 -top-16 -bottom-12 bg-gradient-to-t from-[#030712]/70 via-[#030712]/40 to-transparent sm:-inset-x-8"
         />
-        <div className="relative w-full space-y-8">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
-            <div className="max-w-md">
-              <p className={`text-xs uppercase font-mono tracking-wider text-emerald-300 mb-2 ${overField}`}>
-                [ REAL-TIME 3D CANVAS ] · [ KINETIC INTERACTION ]
-              </p>
-              <p className={`text-xs text-zinc-100 leading-relaxed font-light ${overField}`}>
-                Interactive WebGL particle field reacting dynamically to pointer velocity,
-                scroll acceleration, and touch physics in real time.
-              </p>
-            </div>
-
-            <div className={`flex flex-wrap items-center gap-2 text-xs font-mono text-zinc-100 ${overField}`}>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Open to High-Impact Contracts & Roles</span>
-            </div>
-          </div>
-
+        <div className="relative w-full">
           {/* HUD Metrics Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/20">
             <div className="border-l border-white/25 pl-4 py-1">

@@ -1,6 +1,6 @@
 ---
 tags: [frontend, design-system, stable]
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # Design System — Tailwind v4
@@ -141,11 +141,12 @@ Tier 2 colour tokens in `globals.css`. A boot script in the root layout
 restores the saved choice before paint (`src/components/theme/theme-script.ts`).
 The control is `ThemeToggle` in the navbar.
 
-The hero and the navbar stay on the dark particle field in both themes. The
-scene box is `bg-field` (`--field` stays `#030712`) because the canvas is
-transparent and the particles are additive. The phone menu has its own
-`--menu-surface` and `--menu-foreground`, set in both themes. The sheet under the hero uses
-`light:bg-background`. Cards that were painted with
+The hero and the navbar follow the theme (ADR-0031). In the dark theme the
+scene box is `bg-field` (`#030712`) and the particles add light. In the light
+theme `--field` is the day sky and the same particles draw as ink. `hero-day`
+and `nav-day` remap the hardcoded night type onto that sky. The phone menu has its own
+`--menu-surface` and `--menu-foreground`, set in both themes. The field keeps
+running under the sections, in both themes. Cards that were painted with
 hardcoded night colours carry `night-panel`, which becomes paper when the
 theme is light. Photo captions inside those cards keep light type with
 `data-keep-dark`.

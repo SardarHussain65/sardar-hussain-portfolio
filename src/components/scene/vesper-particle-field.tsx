@@ -330,6 +330,7 @@ export function VesperParticleField({
         `;
 
         const fragmentShader = `
+          uniform float uInk;
           varying vec3 vColor;
           varying float vAlpha;
 
@@ -340,8 +341,11 @@ export function VesperParticleField({
 
             float intensity = pow(1.0 - dist * 2.0, 1.7);
             float core = smoothstep(0.18, 0.0, dist);
-            vec3 finalColor = vColor + vec3(core * 0.85);
-            gl_FragColor = vec4(finalColor, intensity * vAlpha * 0.92);
+            vec3 glow = vColor + vec3(core * 0.85);
+            vec3 ink = mix(vec3(0.02, 0.08, 0.14), vColor, 0.62);
+            vec3 finalColor = mix(glow, ink, uInk);
+            float alpha = intensity * vAlpha * mix(0.92, 0.62, uInk);
+            gl_FragColor = vec4(finalColor, alpha);
           }
         `;
 
@@ -357,6 +361,7 @@ export function VesperParticleField({
             uShape: { value: pose.shapeFit },
             uNarrow: { value: pose.narrow ? 1 : 0 },
             uDensity: { value: 1 },
+            uInk: { value: 0 },
           },
           transparent: true,
           blending: THREE.AdditiveBlending,
@@ -365,6 +370,31 @@ export function VesperParticleField({
 
         const particles = new THREE.Points(geometry, material);
         scene.add(particles);
+
+        let day: boolean | null = null;
+        const applyDay = (next: boolean) => {
+          if (next === day) return;
+          day = next;
+          material.uniforms.uInk.value = next ? 1 : 0;
+          if (next) {
+            material.blending = THREE.CustomBlending;
+            material.blendSrc = THREE.SrcAlphaFactor;
+            material.blendDst = THREE.OneMinusSrcAlphaFactor;
+            material.blendEquation = THREE.AddEquation;
+          } else {
+            material.blending = THREE.AdditiveBlending;
+          }
+          material.needsUpdate = true;
+          scene.fog = new THREE.FogExp2(next ? 0xf4efe6 : 0x030712, next ? 0.03 : 0.045);
+        };
+        applyDay(document.documentElement.getAttribute("data-theme") === "light");
+        const themeObserver = new MutationObserver(() => {
+          applyDay(document.documentElement.getAttribute("data-theme") === "light");
+        });
+        themeObserver.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["data-theme"],
+        });
 
         const mouse = { current: new THREE.Vector2(0, 0), target: new THREE.Vector2(0, 0) };
         let phone = phoneTier();
@@ -504,6 +534,7 @@ export function VesperParticleField({
             finePointer.removeEventListener("change", bindPointer);
             if (listenPointer) window.removeEventListener("pointermove", onPointerMove);
             resizeObserver.disconnect();
+            themeObserver.disconnect();
             stopWatch();
             geometry.dispose();
             material.dispose();

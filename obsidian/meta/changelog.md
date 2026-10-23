@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # Changelog
@@ -15,6 +15,20 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-23
+
+**Hero caption removed.** The line under the hero that described the WebGL
+canvas, and the “Open to High-Impact Contracts & Roles” note beside it, are
+gone. The stat row stays.
+
+**Light mode shows on the hero.** The first screen stayed night-coloured after
+the theme switch, because the field and the type were locked dark. Light mode
+now uses a day sky, ink particles, dark hero type, and a paper navbar. The
+sky is a warm ivory (`#f4efe6`) so the white navbar and chips sit apart from
+the field. The same field stays visible under the later sections in light
+mode; an opaque paper sheet had been covering it. Reasoning:
+[[decisions-log]] ADR-0031.
 
 ## 2026-10-22
 

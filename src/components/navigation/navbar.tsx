@@ -20,10 +20,10 @@ export function Navbar() {
   return (
     <header className="pointer-events-none fixed top-0 right-0 left-0 z-50 flex justify-center px-4 pt-[max(1rem,env(safe-area-inset-top))] sm:pt-6">
       <nav
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-4 py-2.5 sm:px-6 rounded-full border transition-all duration-[var(--duration-normal)] ease-[var(--ease-entrance)] ${
+        className={`nav-day pointer-events-auto flex w-full max-w-5xl items-center justify-between rounded-full border px-4 py-2.5 transition-all duration-[var(--duration-normal)] ease-[var(--ease-entrance)] sm:px-6 ${
           scrolled
-            ? "border-white/15 bg-[#030712]/90 backdrop-blur-xl shadow-[0_12px_40px_rgba(0,0,0,0.7)] light:bg-[#030712]"
-            : "border-white/10 bg-[#030712]/55 backdrop-blur-md shadow-lg light:bg-[#030712]/95"
+            ? "border-white/15 bg-[#030712]/90 shadow-[0_12px_40px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+            : "border-white/10 bg-[#030712]/55 shadow-lg backdrop-blur-md"
         }`}
         aria-label="Main Navigation"
       >
@@ -47,7 +47,7 @@ export function Navbar() {
         </a>
 
         {/* Center Links */}
-        <div className="hidden items-center gap-1 rounded-full border border-white/5 bg-white/[0.03] px-3 py-1 md:flex">
+        <div className="nav-links hidden items-center gap-1 rounded-full border border-white/5 bg-white/[0.03] px-3 py-1 md:flex">
           {nav.map((item) => (
             <a
               key={item.href}

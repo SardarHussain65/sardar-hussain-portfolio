@@ -34,7 +34,7 @@ export function VesperLanding() {
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_46%_32%_at_50%_18%,rgba(3,7,18,0.84)_0%,rgba(3,7,18,0.22)_50%,transparent_72%)]"
+          className="hero-shield pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_46%_32%_at_50%_18%,rgba(3,7,18,0.84)_0%,rgba(3,7,18,0.22)_50%,transparent_72%)]"
         />
       </SceneViewport>
 
@@ -45,7 +45,7 @@ export function VesperLanding() {
           currentMode={currentMode}
           onModeChange={setCurrentMode}
         />
-        <div className="relative bg-transparent light:bg-background">
+        <div className="relative bg-transparent">
           <AboutSection />
           <ProjectsSection />
           <SkillsMatrix />

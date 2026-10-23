@@ -142,7 +142,7 @@ export function ExperienceSection() {
       <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-border-subtle">
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
+          className="field-wash pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
         />
         <div className="relative">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-mono text-mint mb-3">

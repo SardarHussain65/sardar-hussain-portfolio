@@ -1,6 +1,6 @@
 ---
 tags: [meta, decision]
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # Decisions Log (ADRs)
@@ -17,9 +17,33 @@ Template: [[templates/adr-note]].
 
 ---
 
+## ADR-0031 — Light mode gives the hero a day sky
+
+**Status:** Accepted · 2026-10-23
+
+**Context.** ADR-0030 kept the hero and the navbar on the dark field so the
+additive spirals would still glow. In light mode the first screen still looked
+like night, so the theme switch did not read.
+
+**Decision.** Supersedes the hero half of ADR-0030. `--field` becomes a pale
+sky in light mode. The particle shader draws ink (normal blending, no white
+core) while `data-theme="light"`, and additive glow otherwise. Hero type,
+chips, the bottom scrim, and the navbar switch to paper and dark ink. The
+field keeps showing under the later sections. The footer stays on
+`--background`.
+
+**Why.** Additive light cannot sit on a light ground. A day sky plus darker
+particles is what makes the same scene look like daytime.
+
+**Consequences.** Do not paint the hero with `night-panel`. New hero type that
+is hardcoded white needs the `hero-day` remap. The scene listens for
+`data-theme` and flips blending without rebuilding the buffer.
+
+---
+
 ## ADR-0030 — Light mode keeps the hero on the dark field
 
-**Status:** Accepted · 2026-10-22
+**Status:** Superseded by ADR-0031 · 2026-10-22
 
 **Context.** The page is a dark particle field with type laid over it. A
 visitor asked for a light mode. Flipping every `text-white` would make the

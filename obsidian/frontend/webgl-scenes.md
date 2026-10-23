@@ -1,6 +1,6 @@
 ---
 tags: [frontend, webgl, mobile, stable]
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 
 # WebGL scenes on real phones
@@ -183,10 +183,11 @@ is on screen. `useMotionOff()` skips the scene and shows the color wash. A
 failed WebGL build does not: the canvas stays mounted and `keepSceneAlive`
 may rebuild it. The old `blur-[150px]` orbs are radial gradients.
 
-The canvas clears to transparent and blends additively, so the scene box is
-painted `--field` (`#030712`) in both themes. In light mode the page behind
-that box is paper; without the field colour the spirals wash out and the
-hero type, which is light, disappears.
+The canvas clears to transparent. In the dark theme the points blend additively
+and the scene box is `--field` (`#030712`). In the light theme `--field` is the
+day sky (`#f4efe6`, a warm ivory so the white controls lift off it) and `uInk` switches the material to straight alpha so the
+spirals read as ink instead of washing out. The scene watches `data-theme` and
+flips that blend without rebuilding the buffer.
 
 ## Related
 

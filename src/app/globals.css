@@ -18,6 +18,7 @@
   --raw-color-neutral-900: #171717;
   --raw-color-neutral-950: #0a0a0a;
   --raw-color-obsidian: #030712;
+  --raw-color-day-field: #f4efe6;
   --raw-color-slate-900: #0b0f19;
   --raw-color-slate-800: #111827;
   --raw-color-violet: #8b5cf6;
@@ -77,9 +78,10 @@
   --ease-entrance: cubic-bezier(0.2, 0, 0, 1);
 }
 
-/* Light theme. The hero and the navbar stay on the dark field; everything
-   under the hero sits on these tokens. See ADR-0030. */
+/* Light theme. The hero sky uses --field; the sheet under it uses these
+   tokens. See ADR-0031. */
 [data-theme="light"] {
+  --field: var(--raw-color-day-field);
   --background: #f3f6fb;
   --foreground: #0b1220;
   --surface: #ffffff;
@@ -203,6 +205,126 @@ body {
   }
 
   /* Captions that sit on a photo keep light type. */
+  /* Day hero and navbar. Hardcoded night type sits on the pale field. */
+  [data-theme="light"] .hero-day .text-white,
+  [data-theme="light"] .hero-day .text-zinc-100,
+  [data-theme="light"] .hero-day .text-zinc-200,
+  [data-theme="light"] .nav-day .text-white,
+  [data-theme="light"] .nav-day .text-zinc-200,
+  [data-theme="light"] .nav-day .text-zinc-300 {
+    color: var(--foreground);
+    text-shadow: none;
+  }
+
+  [data-theme="light"] .hero-day .text-zinc-300,
+  [data-theme="light"] .hero-day .text-zinc-400,
+  [data-theme="light"] .nav-day .text-zinc-400 {
+    color: var(--text-muted);
+    text-shadow: none;
+  }
+
+  [data-theme="light"] .hero-day .text-emerald-300,
+  [data-theme="light"] .hero-day .text-emerald-400,
+  [data-theme="light"] .nav-day .text-emerald-300,
+  [data-theme="light"] .nav-day .text-emerald-400 {
+    color: var(--accent-mint);
+  }
+
+  [data-theme="light"] .hero-day .text-purple-200,
+  [data-theme="light"] .hero-day .text-purple-300 {
+    color: var(--accent-violet);
+  }
+
+  [data-theme="light"] .hero-day .text-teal-200,
+  [data-theme="light"] .hero-day .text-teal-300 {
+    color: #0f766e;
+  }
+
+  [data-theme="light"] .hero-day .bg-clip-text {
+    background-image: linear-gradient(90deg, #047857, #0f766e 55%, #0e7490);
+  }
+
+  [data-theme="light"] .hero-day [class*="drop-shadow"],
+  [data-theme="light"] .hero-day h1,
+  [data-theme="light"] .hero-day h1 * {
+    filter: none;
+  }
+
+  [data-theme="light"] .hero-chip {
+    background-color: rgb(255 255 255 / 0.88);
+    border-color: var(--border-subtle);
+    color: var(--foreground);
+    box-shadow: 0 8px 24px rgb(15 23 42 / 0.06);
+  }
+
+  [data-theme="light"] .hero-day .bg-white\/15 {
+    background-color: rgb(4 120 87 / 0.12);
+  }
+
+  [data-theme="light"] .hero-day [class*="border-white"] {
+    border-color: var(--border-subtle);
+  }
+
+  [data-theme="light"] .hero-scrim {
+    background-image: linear-gradient(
+      to top,
+      rgb(244 239 230 / 0.94),
+      rgb(244 239 230 / 0.5),
+      transparent
+    );
+  }
+
+  [data-theme="light"] .hero-shield {
+    background-image: radial-gradient(
+      ellipse 50% 36% at 50% 18%,
+      rgb(244 239 230 / 0.94) 0%,
+      rgb(244 239 230 / 0.4) 46%,
+      transparent 72%
+    );
+  }
+
+  [data-theme="light"] .nav-day {
+    background-color: rgb(255 255 255 / 0.9);
+    border-color: var(--border-subtle);
+    box-shadow: 0 10px 30px rgb(15 23 42 / 0.08);
+    color: var(--foreground);
+  }
+
+  [data-theme="light"] .nav-day [class*="border-white"] {
+    border-color: var(--border-subtle);
+  }
+
+  [data-theme="light"] .nav-links {
+    background-color: rgb(15 23 42 / 0.04);
+    border-color: var(--border-subtle);
+  }
+
+  [data-theme="light"] .nav-links a:hover {
+    background-color: rgb(15 23 42 / 0.06);
+    color: var(--foreground);
+  }
+
+  [data-theme="light"] .nav-day .hover\:text-white:hover,
+  [data-theme="light"] .hero-day .hover\:text-white:hover {
+    color: var(--foreground);
+  }
+
+  /* Heading wash stays see-through so the day spirals show, as they do at night. */
+  [data-theme="light"] .field-wash {
+    background-image: linear-gradient(
+      180deg,
+      transparent,
+      rgb(244 239 230 / 0.42) 18%,
+      rgb(244 239 230 / 0.42) 78%,
+      transparent
+    );
+  }
+
+  [data-theme="light"] #stack [class*="text-shadow"],
+  [data-theme="light"] #experience h2 {
+    text-shadow: none;
+  }
+
   [data-theme="light"] .night-panel [data-keep-dark] .text-white {
     color: #fff;
   }

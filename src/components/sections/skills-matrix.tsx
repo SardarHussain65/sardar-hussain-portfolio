@@ -66,7 +66,7 @@ export function SkillsMatrix() {
       <header className="relative flex flex-col justify-between gap-6 border-b border-border-subtle pb-12 md:flex-row md:items-end">
         <div
           aria-hidden
-          className="pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
+          className="field-wash pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
         />
         <div className="relative">
           <p
