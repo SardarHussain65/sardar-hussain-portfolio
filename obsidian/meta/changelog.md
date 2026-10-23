@@ -18,6 +18,8 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ## 2026-10-23
 
+**Projects on a phone.** The featured build and the rows under “The rest of the set” waited on a scroll-in spring that starts fully transparent. On a phone that spring often never finished, so the section kept a blank panel the height of the hidden project. Those blocks now paint immediately, the section padding is tighter on a small screen, and the solid surface behind the section is gone so the particle field shows through.
+
 **Hero caption removed.** The line under the hero that described the WebGL
 canvas, and the “Open to High-Impact Contracts & Roles” note beside it, are
 gone. The stat row stays.

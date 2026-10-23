@@ -5,7 +5,6 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { Hover } from "@/components/common/robot-hover";
-import { Inview } from "@/components/common/robot-inview";
 import type { Project } from "@/data/projects";
 
 interface RailEntry {
@@ -18,22 +17,14 @@ interface ProjectRailProps {
   onSelect: (slug: string) => void;
 }
 
-function RailRow({ entry, onSelect, delay }: { entry: RailEntry; onSelect: (slug: string) => void; delay: number }) {
+function RailRow({ entry, onSelect }: { entry: RailEntry; onSelect: (slug: string) => void }) {
   const row = useRef<HTMLButtonElement>(null);
   const { project, index } = entry;
   const shot = project.images[0];
   const television = project.deviceType === "tv";
 
   return (
-    <Inview
-      tag="li"
-      from={{ opacity: 0, y: 22 }}
-      to={{ opacity: 1, y: 0 }}
-      mode="once"
-      delayIn={delay}
-      config={{ tension: 220, friction: 26 }}
-      className="border-b border-border-subtle"
-    >
+    <li className="border-b border-border-subtle">
       <button
         ref={row}
         type="button"
@@ -76,30 +67,25 @@ function RailRow({ entry, onSelect, delay }: { entry: RailEntry; onSelect: (slug
           <span className="w-12" />
         )}
       </button>
-    </Inview>
+    </li>
   );
 }
 
 export function ProjectRail({ entries, onSelect }: ProjectRailProps) {
   if (entries.length === 0) {
     return (
-      <p className="mt-16 border-t border-border-subtle pt-8 font-mono text-xs text-text-muted">
+      <p className="mt-10 border-t border-border-subtle pt-6 font-mono text-xs text-text-muted sm:mt-16 sm:pt-8">
         Nothing else matches this filter.
       </p>
     );
   }
 
   return (
-    <div className="mt-16">
+    <div className="mt-10 sm:mt-16">
       <p className="font-mono text-xs uppercase tracking-widest text-text-muted">The rest of the set</p>
       <ol aria-label="Other projects" className="mt-4 border-t border-border-subtle">
-        {entries.map((entry, position) => (
-          <RailRow
-            key={entry.project.slug}
-            entry={entry}
-            onSelect={onSelect}
-            delay={position * 55}
-          />
+        {entries.map((entry) => (
+          <RailRow key={entry.project.slug} entry={entry} onSelect={onSelect} />
         ))}
       </ol>
     </div>

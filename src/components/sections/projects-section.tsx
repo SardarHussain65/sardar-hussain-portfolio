@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
 
-import { Inview } from "@/components/common/robot-inview";
 import { projects, type Project } from "@/data/projects";
 import { useMotionOff } from "@/hooks/use-motion-off";
 
@@ -79,10 +78,9 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="relative z-10 py-28">
-      <div aria-hidden className="absolute inset-0 bg-surface" />
+    <section id="projects" aria-labelledby="projects-heading" className="relative z-10 py-16 sm:py-28">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
-        <div className="flex flex-col gap-8 border-b border-border-subtle pb-8 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-5 border-b border-border-subtle pb-6 sm:gap-8 sm:pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-mint">Selected work</p>
             <h2 id="projects-heading" className="mt-3 text-4xl font-light tracking-tight text-foreground sm:text-6xl">
@@ -115,25 +113,16 @@ export function ProjectsSection() {
         </div>
 
         {active ? (
-          <Inview
-            tag="div"
-            from={{ opacity: 0, y: 36 }}
-            to={{ opacity: 1, y: 0 }}
-            mode="once"
-            config={{ tension: 170, friction: 24 }}
-            className="mt-14"
-          >
-            <animated.div style={swap}>
-              <ProjectStage
-                key={active.slug}
-                project={active}
-                index={activeIndex}
-                onOpen={() => openCase(active)}
-              />
-            </animated.div>
-          </Inview>
+          <animated.div style={swap} className="mt-8 sm:mt-14">
+            <ProjectStage
+              key={active.slug}
+              project={active}
+              index={activeIndex}
+              onOpen={() => openCase(active)}
+            />
+          </animated.div>
         ) : (
-          <p className="mt-14 font-mono text-sm text-text-muted">Nothing in this filter.</p>
+          <p className="mt-8 font-mono text-sm text-text-muted sm:mt-14">Nothing in this filter.</p>
         )}
 
         <ProjectRail
