@@ -22,6 +22,9 @@ export type Project = {
   status?: string;
   interactive?: "booking" | "tracks";
   deviceType?: "mobile" | "tv";
+  category?: "mobile" | "tv" | "fullstack";
+  liveUrl?: string;
+  storeUrl?: string;
 };
 
 export const projects: Project[] = [
@@ -61,6 +64,8 @@ export const projects: Project[] = [
     accent: "emerald",
     status: "Production · Solo Full-Stack",
     interactive: "booking",
+    category: "fullstack",
+    liveUrl: "https://apnaustad.pk",
   },
   {
     slug: "ayy",
@@ -95,6 +100,7 @@ export const projects: Project[] = [
     featured: true,
     accent: "cyan",
     status: "Production · Repla Technologies",
+    category: "mobile",
   },
   {
     slug: "duplex",
@@ -131,6 +137,7 @@ export const projects: Project[] = [
     accent: "ios",
     status: "Production · All Smart TV Platforms",
     deviceType: "tv",
+    category: "tv",
     interactive: "tracks",
   },
   {
@@ -157,6 +164,8 @@ export const projects: Project[] = [
     featured: true,
     accent: "emerald",
     status: "Live on Google Play · 5.0 ★",
+    category: "mobile",
+    storeUrl: "https://play.google.com/store/apps/details?id=com.hamdania.app",
   },
   {
     slug: "vena",
@@ -181,6 +190,7 @@ export const projects: Project[] = [
     featured: false,
     accent: "ios",
     status: "AI Healthcare",
+    category: "mobile",
   },
   {
     slug: "qbox",
@@ -204,5 +214,6 @@ export const projects: Project[] = [
     featured: false,
     accent: "cyan",
     status: "IoT & Logistics",
+    category: "mobile",
   },
 ];

@@ -54,14 +54,40 @@ export function ProjectStage({ project, index, onOpen }: ProjectStageProps) {
         <p className="mt-6 font-mono text-xs leading-relaxed text-text-muted">
           {project.tags.join("  ·  ")}
         </p>
-        <button
-          type="button"
-          onClick={onOpen}
-          className={`mt-8 inline-flex items-center gap-2 border-b pb-1 text-sm text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint ${rule}`}
-        >
-          Open the case
-          <ArrowUpRight className="h-4 w-4" aria-hidden />
-        </button>
+        <div className="mt-8 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={onOpen}
+            className={`inline-flex items-center gap-2 border-b pb-1 text-sm font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance hover:text-mint focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint ${rule}`}
+          >
+            Read Case Study
+            <ArrowUpRight className="h-4 w-4" aria-hidden />
+          </button>
+
+          {project.storeUrl ? (
+            <a
+              href={project.storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1.5 text-xs font-mono font-medium text-mint-text transition-colors hover:bg-emerald-500/20"
+            >
+              <span>Google Play (5.0 ★)</span>
+              <ArrowUpRight className="h-3 w-3" />
+            </a>
+          ) : null}
+
+          {project.liveUrl ? (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-xs font-mono font-medium text-foreground transition-colors hover:bg-white/[0.08] hover:text-white"
+            >
+              <span>Live Platform</span>
+              <ArrowUpRight className="h-3 w-3" />
+            </a>
+          ) : null}
+        </div>
       </div>
 
       <ScreenFan

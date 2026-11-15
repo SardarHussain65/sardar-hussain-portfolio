@@ -3,10 +3,11 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X, ArrowUpRight } from "lucide-react";
 import { animated, useTransition } from "@react-spring/web";
 
 import { useScrollLock } from "@/hooks/use-scroll-lock";
+import { site } from "@/data/site";
 import type { Project } from "@/data/projects";
 
 interface ProjectCaseProps {
@@ -162,6 +163,48 @@ export function ProjectCase({ project, onClose }: ProjectCaseProps) {
             <p className="mt-8 border-t border-border-subtle pt-6 font-mono text-xs leading-relaxed text-text-muted">
               {item.tags.join("  ·  ")}
             </p>
+
+            {/* Action Bar */}
+            <div className="mt-8 flex flex-wrap items-center gap-3 border-t border-border-subtle pt-6">
+              {item.storeUrl ? (
+                <a
+                  href={item.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-mint px-5 py-2.5 text-xs font-semibold text-background transition-opacity hover:opacity-90"
+                >
+                  <span>View on Google Play</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              ) : null}
+              {item.liveUrl ? (
+                <a
+                  href={item.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-mint px-5 py-2.5 text-xs font-semibold text-background transition-opacity hover:opacity-90"
+                >
+                  <span>Visit Live Platform</span>
+                  <ArrowUpRight className="h-3.5 w-3.5" />
+                </a>
+              ) : null}
+              <a
+                href={site.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-surface px-4 py-2.5 text-xs font-mono text-foreground hover:border-mint transition-colors"
+              >
+                <span>GitHub Profile</span>
+                <ArrowUpRight className="h-3.5 w-3.5 text-text-muted" />
+              </a>
+              <button
+                type="button"
+                onClick={onClose}
+                className="ml-auto inline-flex items-center rounded-full border border-border-subtle px-4 py-2.5 text-xs font-medium text-text-muted hover:text-foreground transition-colors"
+              >
+                Close
+              </button>
+            </div>
           </animated.div>
         </animated.div>
       ) : null,

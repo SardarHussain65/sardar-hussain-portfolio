@@ -1,89 +1,32 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { animated, useSpring } from "@react-spring/web";
-
+import { useCallback, useState } from "react";
 import { Inview } from "@/components/common/robot-inview";
 import { projects, type Project } from "@/data/projects";
-import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
-import { useMotionOff } from "@/hooks/use-motion-off";
-
 import { ProjectCase } from "./projects/project-case";
-import { ProjectRail } from "./projects/project-rail";
 import { ProjectStage } from "./projects/project-stage";
 
-const FILTERS = ["All", "Smart TV", "React Native", "Mapbox", "Stripe", "PostgreSQL", "HLS"] as const;
+const FILTERS = ["All", "Mobile Apps", "Smart TV", "Full-Stack"] as const;
 
-function matches(project: Project, filter: string): boolean {
+function matches(project: Project, filter: (typeof FILTERS)[number]): boolean {
   if (filter === "All") return true;
-  const needle = filter.toLowerCase();
-  return project.tags.some((tag) => tag.toLowerCase().includes(needle));
+  if (filter === "Mobile Apps") return project.deviceType !== "tv";
+  if (filter === "Smart TV") return project.deviceType === "tv" || project.tags.includes("Smart TV");
+  if (filter === "Full-Stack") {
+    return (
+      project.category === "fullstack" ||
+      project.role.toLowerCase().includes("full-stack") ||
+      project.tags.includes("PostgreSQL")
+    );
+  }
+  return true;
 }
 
 export function ProjectsSection() {
-  const motionOff = useMotionOff();
-  const lenis = useScroll((state) => state.lenis);
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
-  const [activeSlug, setActiveSlug] = useState(projects[0]?.slug ?? "");
   const [caseProject, setCaseProject] = useState<Project | null>(null);
-  const generation = useRef(0);
-  const entered = useRef(false);
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  const [swap, api] = useSpring(() => ({ opacity: 1, y: 0 }));
 
   const filtered = projects.filter((project) => matches(project, filter));
-  const active = projects.find((project) => project.slug === activeSlug) ?? projects[0] ?? null;
-  const activeIndex = active ? projects.findIndex((project) => project.slug === active.slug) + 1 : 0;
-
-  const select = useCallback(
-    (slug: string) => {
-      if (slug === activeSlug) return;
-
-      if (stageRef.current) {
-        if (lenis) {
-          lenis.scrollTo(stageRef.current, { immediate: motionOff });
-        } else {
-          stageRef.current.scrollIntoView({
-            behavior: motionOff ? "instant" : "smooth",
-            block: "start",
-          });
-        }
-      }
-
-      const id = ++generation.current;
-      if (motionOff) {
-        setActiveSlug(slug);
-        return;
-      }
-      api.start({
-        opacity: 0,
-        y: 18,
-        config: { tension: 360, friction: 34 },
-        onRest: (result) => {
-          if (!result.finished || generation.current !== id) return;
-          setActiveSlug(slug);
-        },
-      });
-    },
-    [activeSlug, api, lenis, motionOff],
-  );
-
-  useEffect(() => {
-    if (!entered.current) {
-      entered.current = true;
-      return;
-    }
-    if (motionOff) return;
-    api.start({ opacity: 1, y: 0, config: { tension: 210, friction: 24 } });
-  }, [activeSlug, api, motionOff]);
-
-  const chooseFilter = (next: (typeof FILTERS)[number]) => {
-    setFilter(next);
-    const pool = projects.filter((project) => matches(project, next));
-    if (pool.length === 0) return;
-    if (!pool.some((project) => project.slug === activeSlug)) select(pool[0].slug);
-  };
 
   const openCase = useCallback((project: Project) => {
     setCaseProject(project);
@@ -97,70 +40,70 @@ export function ProjectsSection() {
     <section id="projects" aria-labelledby="projects-heading" className="relative z-10 py-28">
       <div aria-hidden className="absolute inset-0 bg-surface" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
-        <div className="flex flex-col gap-8 border-b border-border-subtle pb-8 md:flex-row md:items-end md:justify-between">
+        {/* Header */}
+        <div className="flex flex-col gap-6 border-b border-border-subtle pb-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">Selected work</p>
-            <h2 id="projects-heading" className="mt-3 text-4xl font-medium tracking-tight text-foreground sm:text-6xl">
-              Shipped work,
-              <span className="block text-mint-text">on stage</span>
+            <p className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">
+              Selected Portfolio
+            </p>
+            <h2 id="projects-heading" className="mt-3 text-3xl font-medium tracking-tight text-foreground sm:text-5xl">
+              Production Work &
+              <span className="block text-mint-text">Shipped Systems</span>
             </h2>
           </div>
-          <p className="max-w-sm text-sm font-medium leading-relaxed text-foreground">
-            Production systems, one at a time. Pick a row and that build takes the stage.
+          <p className="max-w-md text-sm font-medium leading-relaxed text-foreground">
+            Explore live mobile apps, high-framerate Smart TV clients, and full-stack platforms built for real-world production.
           </p>
         </div>
 
-        <div role="group" aria-label="Filter projects" className="mt-6 flex flex-wrap gap-x-5 gap-y-3">
+        {/* Filter Pills */}
+        <div role="group" aria-label="Filter projects" className="mt-8 flex flex-wrap gap-2.5">
           {FILTERS.map((item) => {
             const selected = filter === item;
+            const count = projects.filter((p) => matches(p, item)).length;
             return (
               <button
                 key={item}
                 type="button"
                 aria-pressed={selected}
-                onClick={() => chooseFilter(item)}
-                className={`border-b pb-1 font-mono text-xs uppercase tracking-wider transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-mint ${
-                  selected ? "border-mint text-foreground" : "border-transparent font-medium text-foreground hover:text-mint-text"
+                onClick={() => setFilter(item)}
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 font-mono text-xs font-medium transition-all duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${
+                  selected
+                    ? "border border-mint bg-mint/10 text-mint-text shadow-[0_0_16px_rgba(16,185,129,0.15)]"
+                    : "border border-border-subtle bg-surface text-foreground hover:border-border hover:bg-surface/80"
                 }`}
               >
-                {item}
+                <span>{item}</span>
+                <span className="text-[10px] text-text-muted">({count})</span>
               </button>
             );
           })}
         </div>
 
-        <div ref={stageRef} id="project-stage" className="mt-14 scroll-mt-24 sm:scroll-mt-28">
-          {active ? (
+        {/* All Filtered Projects in Sequence */}
+        <div className="mt-14 space-y-20 sm:space-y-28">
+          {filtered.map((project, idx) => (
             <Inview
+              key={project.slug}
               tag="div"
-              from={{ opacity: 0, y: 36 }}
+              from={{ opacity: 0, y: 32 }}
               to={{ opacity: 1, y: 0 }}
               mode="once"
-              config={{ tension: 170, friction: 24 }}
+              config={{ tension: 180, friction: 24 }}
+              className={idx > 0 ? "pt-16 border-t border-border-subtle sm:pt-24" : ""}
             >
-              <animated.div style={swap}>
-                <ProjectStage
-                  key={active.slug}
-                  project={active}
-                  index={activeIndex}
-                  onOpen={() => openCase(active)}
-                />
-              </animated.div>
+              <ProjectStage
+                project={project}
+                index={idx + 1}
+                onOpen={() => openCase(project)}
+              />
             </Inview>
-          ) : (
-            <p className="font-mono text-sm text-text-muted">Nothing in this filter.</p>
-          )}
-        </div>
+          ))}
 
-        <ProjectRail
-          entries={filtered
-            .filter((project) => project.slug !== active?.slug)
-            .map((project) => ({
-              project,
-              index: projects.findIndex((item) => item.slug === project.slug) + 1,
-            }))}
-          onSelect={select}
-        />
+          {filtered.length === 0 ? (
+            <p className="font-mono text-sm text-text-muted">No projects found in this category.</p>
+          ) : null}
+        </div>
       </div>
 
       <ProjectCase project={caseProject} onClose={closeCase} />

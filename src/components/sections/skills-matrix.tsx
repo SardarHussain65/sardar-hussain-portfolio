@@ -72,36 +72,64 @@ export function SkillsMatrix() {
           <p
             className={`mb-3 inline-flex rounded-full border border-border-subtle bg-background/80 px-3 py-1 font-mono text-xs font-medium text-mint-text ${overField}`}
           >
-            Architecture
+            Technical Stack
           </p>
           <h2
             id="stack-heading"
             className="text-3xl font-medium tracking-tight text-foreground sm:text-5xl"
           >
-            <span className={overField}>Engineering skills</span>
+            <span className={overField}>Engineering Stack</span>
             <span className="mt-1 block bg-gradient-to-r from-mint-text to-violet-text bg-clip-text font-medium text-transparent drop-shadow-[0_2px_12px_rgba(3,7,18,0.95)]">
-              and technical stack
+              & Core Architecture
             </span>
           </h2>
         </div>
         <p
           className={`relative max-w-sm text-sm font-medium leading-relaxed text-foreground ${overField}`}
         >
-          Seven tiers, from the native gesture thread to the store release.
-          Open a chapter to read how that part of the stack ships.
+          Seven architectural tiers, from the 60fps native gesture thread to automated store releases. Select any category to inspect implementation details.
         </p>
       </header>
 
-      <div className="mt-12 grid items-start gap-10 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-16">
+      {/* Quick Core Stack Snapshot */}
+      <div className="mt-8 flex flex-wrap items-center gap-2 rounded-2xl border border-border-subtle bg-surface/50 p-4">
+        <span className="font-mono text-xs font-semibold uppercase tracking-wider text-mint-text mr-2">
+          Core Daily Drivers:
+        </span>
+        {[
+          "React Native",
+          "Expo",
+          "TypeScript",
+          "Roku BrightScript",
+          "HLS Video",
+          "Mapbox",
+          "Socket.IO",
+          "Stripe",
+          "Node.js",
+          "PostgreSQL",
+          "MMKV",
+          "EAS Build",
+        ].map((item) => (
+          <span
+            key={item}
+            className="inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-surface px-3 py-1 text-xs font-mono font-medium text-foreground"
+          >
+            <TechIcon name={item} className="h-3.5 w-3.5" />
+            <span>{item}</span>
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-10 grid items-start gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-14">
         <nav
           aria-label="Skill tiers"
           className="rounded-2xl border border-border-subtle bg-background/80 p-2 backdrop-blur-md"
         >
-          <ol role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown}>
+          <ol role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown} className="flex flex-row overflow-x-auto gap-1 lg:flex-col lg:overflow-x-visible pb-2 lg:pb-0">
             {skillGroups.map((group, index) => {
               const isActive = index === activeIndex;
               return (
-                <li key={group.id}>
+                <li key={group.id} className="shrink-0 lg:shrink">
                   <button
                     ref={(node) => {
                       buttonRefs.current[index] = node;
@@ -113,9 +141,9 @@ export function SkillsMatrix() {
                     aria-controls="stack-panel"
                     tabIndex={isActive ? 0 : -1}
                     onClick={() => select(index)}
-                    className={`relative flex w-full items-baseline gap-4 rounded-md py-3 pr-3 pl-5 text-left font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${
+                    className={`relative flex w-full items-baseline gap-3 rounded-lg py-2.5 px-4 text-left font-medium text-foreground transition-colors duration-[var(--duration-fast)] ease-entrance focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint whitespace-nowrap lg:whitespace-normal ${
                       isActive
-                        ? "bg-surface text-foreground"
+                        ? "bg-surface text-foreground shadow-sm"
                         : "hover:bg-surface/80"
                     }`}
                   >

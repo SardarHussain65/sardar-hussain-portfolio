@@ -69,76 +69,43 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
         </p>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3.5">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#projects"
-            className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-emerald-400 text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-emerald-300 transition-all duration-[var(--duration-fast)] shadow-[0_0_28px_rgba(16,185,129,0.4)] active:scale-95"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-400 text-zinc-950 font-semibold text-xs sm:text-sm hover:bg-emerald-300 transition-all duration-[var(--duration-fast)] shadow-[0_0_24px_rgba(16,185,129,0.4)] active:scale-95"
           >
-            <span>View Flagship Projects</span>
-            <span className="text-zinc-950 font-bold">✳</span>
+            <span>Explore Projects</span>
+            <ArrowUpRight className="w-4 h-4 text-zinc-950 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+          </a>
+
+          <a
+            href={site.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#070b14]/85 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:border-emerald-400/50 hover:bg-white/15 active:scale-95 sm:text-sm"
+          >
+            <svg className="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
+            <span>GitHub</span>
           </a>
 
           <a
             href={site.resume}
             target="_blank"
             rel="noopener noreferrer"
-            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#070b14]/80 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:border-emerald-400/50 hover:bg-white/15 active:scale-95 sm:text-sm"
+            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#070b14]/85 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:border-emerald-400/50 hover:bg-white/15 active:scale-95 sm:text-sm"
           >
             <FileDown className="w-4 h-4 text-emerald-400" />
-            <span>Download CV</span>
+            <span>Resume</span>
           </a>
 
           <a
-            href={site.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#070b14]/80 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:bg-white/15 active:scale-95 sm:text-sm"
+            href="#contact"
+            className="hero-chip inline-flex items-center gap-2 rounded-full border border-white/15 bg-[#070b14]/85 px-5 py-3 text-xs font-medium text-white shadow-[0_4px_20px_rgba(0,0,0,0.7)] backdrop-blur-md transition-all hover:bg-white/15 active:scale-95 sm:text-sm"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-400" />
-            <span>WhatsApp</span>
+            <span>Contact</span>
           </a>
-        </div>
-
-        {/* Interactive 3D State Switcher */}
-        <div className="hero-chip mt-10 flex w-full max-w-lg flex-wrap items-center justify-center gap-2 rounded-3xl border border-white/15 bg-[#070b14]/90 p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
-          <button
-            type="button"
-            onClick={() => onModeChange("orb")}
-            className={`flex items-center gap-2 px-4 py-1.5 text-xs font-mono rounded-full transition-all duration-[var(--duration-fast)] ${
-              currentMode === "orb"
-                ? "bg-white/15 text-emerald-300 border border-emerald-500/40 shadow-[0_0_15px_rgba(16,185,129,0.2)]"
-                : "font-medium text-foreground hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            01 · Orb Wave
-          </button>
-
-          <button
-            type="button"
-            onClick={() => onModeChange("galaxy")}
-            className={`flex items-center gap-2 px-4 py-1.5 text-xs font-mono rounded-full transition-all duration-[var(--duration-fast)] ${
-              currentMode === "galaxy"
-                ? "bg-white/15 text-teal-300 border border-teal-500/40 shadow-[0_0_15px_rgba(6,182,212,0.2)]"
-                : "font-medium text-foreground hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-            02 · Twin Cosmic Spirals
-          </button>
-
-          <button
-            type="button"
-            onClick={() => onModeChange("brain")}
-            className={`flex items-center gap-2 px-4 py-1.5 text-xs font-mono rounded-full transition-all duration-[var(--duration-fast)] ${
-              currentMode === "brain"
-                ? "bg-white/15 text-purple-300 border border-purple-500/40 shadow-[0_0_15px_rgba(139,92,246,0.2)]"
-                : "font-medium text-foreground hover:bg-white/5 hover:text-white"
-            }`}
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-            03 · Neural Mesh
-          </button>
         </div>
       </div>
 

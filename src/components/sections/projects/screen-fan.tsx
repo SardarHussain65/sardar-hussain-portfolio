@@ -81,7 +81,6 @@ export function ScreenFan({ shots, projectName, wide, trigger, onOpen }: ScreenF
                 src={shot.src}
                 alt=""
                 fill
-                loading="eager"
                 sizes={wide ? "(max-width: 640px) 144px, 208px" : "(max-width: 640px) 96px, 128px"}
                 className="object-cover object-top"
               />
