@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { roles, credentials, ExperienceRole } from "@/data/experience";
 import { TechIcon } from "@/components/icons/tech-icons";
 import {
@@ -11,78 +11,12 @@ import {
   Sparkles,
   Rocket,
   ShieldCheck,
-  Layers,
   ArrowUpRight,
   GraduationCap,
   Award,
 } from "lucide-react";
 
 export function ExperienceSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  // Smooth depth scaling on scroll matching the Webflow sticky-stacking cards design
-  useEffect(() => {
-    let ticking = false;
-
-    const handleScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          const cards = cardRefs.current;
-          const numCards = cards.length;
-
-          const stacking = window.matchMedia("(min-width: 768px)").matches;
-
-          cards.forEach((card, i) => {
-            if (!card) return;
-            if (!stacking) {
-              card.style.transform = "";
-              card.style.filter = "";
-              return;
-            }
-            const nextCard = cards[i + 1];
-            if (nextCard) {
-              const nextRect = nextCard.getBoundingClientRect();
-              const nextStickyTop = 80 + (i + 1) * 32;
-
-              const distance = nextRect.top - nextStickyTop;
-              const maxDist = window.innerHeight * 0.6;
-
-              if (distance < maxDist && distance > 0) {
-                const progress = 1 - distance / maxDist;
-                const scale = 1 - progress * 0.05;
-                const brightness = 1 - progress * 0.15;
-                card.style.transform = `scale(${scale})`;
-                card.style.filter = `brightness(${brightness})`;
-              } else if (distance <= 0) {
-                const depthIndex = numCards - 1 - i;
-                const finalScale = Math.max(0.88, 1 - depthIndex * 0.03);
-                card.style.transform = `scale(${finalScale})`;
-                card.style.filter = `brightness(${Math.max(0.7, 1 - depthIndex * 0.08)})`;
-              } else {
-                card.style.transform = "scale(1)";
-                card.style.filter = "brightness(1)";
-              }
-            } else {
-              card.style.transform = "scale(1)";
-              card.style.filter = "brightness(1)";
-            }
-          });
-
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   const getAccentTheme = (accent: ExperienceRole["accent"]) => {
     switch (accent) {
       case "emerald":
@@ -164,10 +98,7 @@ export function ExperienceSection() {
       </div>
 
       {/* ─── STICKY-STACKING CARDS CONTAINER ─── */}
-      <div
-        ref={containerRef}
-        className="cards-container relative mt-10 space-y-6 pb-12 sm:space-y-10 md:mt-16 md:space-y-16 md:pb-36"
-      >
+      <div className="cards-container relative mt-10 space-y-6 pb-12 sm:space-y-10 md:mt-16 md:space-y-16 md:pb-36">
         {roles.map((role, index) => {
           const theme = getAccentTheme(role.accent);
           const stickyTop = 80 + index * 32;
@@ -175,14 +106,11 @@ export function ExperienceSection() {
           return (
             <div
               key={role.id}
-              ref={(el) => {
-                cardRefs.current[index] = el;
-              }}
               style={{
                 top: `${stickyTop}px`,
                 zIndex: index + 10,
               }}
-              className={`night-panel card w-full rounded-3xl border bg-[#070b16]/95 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-2xl transition-all duration-300 origin-top sm:p-10 md:sticky ${theme.glow}`}
+              className={`night-panel card w-full rounded-3xl border bg-[#070b16]/95 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-2xl origin-top transition-colors duration-[var(--duration-fast)] ease-entrance sm:p-10 md:sticky ${theme.glow}`}
             >
               {/* Subtle Ambient Background Gradient */}
               <div
