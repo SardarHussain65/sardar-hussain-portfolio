@@ -44,15 +44,15 @@ export function ProjectsSection() {
         <div className="flex flex-col gap-6 border-b border-border-subtle pb-8 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">
-              Selected Portfolio
+              PORTFOLIO
             </p>
             <h2 id="projects-heading" className="mt-3 text-3xl font-medium tracking-tight text-foreground sm:text-5xl">
-              Production Work &
-              <span className="block text-mint-text">Shipped Systems</span>
+              Featured Projects
+              <span className="block text-mint-text">& Shipped Apps</span>
             </h2>
           </div>
           <p className="max-w-md text-sm font-medium leading-relaxed text-foreground">
-            Explore live mobile apps, high-framerate Smart TV clients, and full-stack platforms built for real-world production.
+            Explore live mobile apps, Smart TV streaming platforms, and full-stack systems I have built and shipped.
           </p>
         </div>
 

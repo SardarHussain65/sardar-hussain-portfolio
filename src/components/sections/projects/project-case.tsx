@@ -113,18 +113,18 @@ export function ProjectCase({ project, onClose }: ProjectCaseProps) {
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <section className="rounded-xl border border-border-subtle p-5">
-                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-violet-text">The constraint</h4>
+                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-violet-text">The Challenge</h4>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-foreground">{item.problem}</p>
               </section>
               <section className="rounded-xl border border-border-subtle p-5">
-                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">What shipped</h4>
+                <h4 className="font-mono text-xs font-medium uppercase tracking-widest text-mint-text">How I Solved It</h4>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-foreground">{item.solution}</p>
               </section>
             </div>
 
             {item.images.length > 0 ? (
               <section className="mt-8">
-                <h4 className="font-mono text-xs uppercase tracking-widest text-text-muted">Screens</h4>
+                <h4 className="font-mono text-xs uppercase tracking-widest text-text-muted">Screenshots</h4>
                 <ul className="mt-4 flex gap-4 overflow-x-auto pb-2">
                   {item.images.map((shot) => (
                     <li key={shot.src} className={item.deviceType === "tv" ? "w-72 shrink-0" : "w-40 shrink-0"}>
@@ -149,7 +149,7 @@ export function ProjectCase({ project, onClose }: ProjectCaseProps) {
             ) : null}
 
             <section className="mt-8">
-              <h4 className="font-mono text-xs uppercase tracking-widest text-text-muted">On the record</h4>
+              <h4 className="font-mono text-xs uppercase tracking-widest text-text-muted">Key Achievements & Highlights</h4>
               <ul className="mt-4 space-y-2">
                 {item.highlights.map((itemText) => (
                   <li key={itemText} className="flex gap-3 text-sm font-medium text-foreground">

@@ -1,32 +1,32 @@
 export const platforms = [
   {
-    name: "iOS & Android",
+    name: "iOS & Android Apps",
     detail:
-      "React Native products with the gesture thread on the native side, store signing, and both phone roles in one codebase.",
+      "React Native mobile applications with smooth 60fps animations, native module integration, and publishing to Google Play and Apple App Store.",
   },
   {
-    name: "Smart TV",
+    name: "Smart TV Streaming",
     detail:
-      "Roku BrightScript, LG webOS, Android TV, and Samsung Tizen — D-pad focus and HLS playback for a ten-foot screen.",
+      "Custom video streaming applications for Roku, Android TV, Samsung Tizen, and LG webOS with simple TV remote control navigation.",
   },
   {
-    name: "The system behind the app",
+    name: "Full-Stack Web & Backend",
     detail:
-      "Node, PostgreSQL, Socket.IO, and a React admin desk when one person owns the product end to end.",
+      "Complete backend systems with Node.js, PostgreSQL databases, real-time WebSockets, and clean web admin portals.",
   },
 ] as const;
 
 export const engagements = [
   {
-    name: "Full-time",
-    detail: "A mobile seat on a product team that already has a roadmap.",
+    name: "Full-Time Role",
+    detail: "Joining your team as a dedicated mobile app developer to build, scale, and maintain your products.",
   },
   {
-    name: "Contract",
-    detail: "A scoped build: maps, payments, live tracking, video, or a TV client.",
+    name: "Project Contract",
+    detail: "Building a specific app or feature: live maps, Stripe payments, video streaming, or a Smart TV client.",
   },
   {
-    name: "Consulting",
-    detail: "A frame-rate, architecture, or release review before the next store cut.",
+    name: "Consulting & Code Review",
+    detail: "Reviewing your app for speed, fixing stutter or memory leaks, and preparing your code for store submission.",
   },
 ] as const;

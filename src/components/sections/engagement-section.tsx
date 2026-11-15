@@ -8,20 +8,20 @@ export function EngagementSection() {
       className="relative z-10 mx-auto max-w-7xl px-4 py-28 sm:px-8"
     >
       <div className="max-w-2xl">
-        <p className="font-mono text-xs uppercase tracking-widest text-mint-text">How the work lands</p>
+        <p className="font-mono text-xs uppercase tracking-widest text-mint-text">WORK WITH ME</p>
         <h2
           id="work-with-me-heading"
           className="mt-3 text-3xl font-medium tracking-tight text-foreground sm:text-5xl"
         >
-          Platforms, and the way
-          <span className="block text-mint-text">a build gets hired.</span>
+          Platforms I Build For,
+          <span className="block text-mint-text">& Ways to Work Together</span>
         </h2>
       </div>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-2">
         <div>
           <h3 className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
-            Where it ships
+            What I Build
           </h3>
           <ul className="mt-5 space-y-4">
             {platforms.map((item) => (
@@ -40,7 +40,7 @@ export function EngagementSection() {
 
         <div>
           <h3 className="font-mono text-[11px] uppercase tracking-widest text-text-muted">
-            Ways to work together
+            Flexible Ways to Hire Me
           </h3>
           <ol className="mt-5 space-y-4">
             {engagements.map((item, index) => (

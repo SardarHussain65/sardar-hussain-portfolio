@@ -72,29 +72,29 @@ export function SkillsMatrix() {
           <p
             className={`mb-3 inline-flex rounded-full border border-border-subtle bg-background/80 px-3 py-1 font-mono text-xs font-medium text-mint-text ${overField}`}
           >
-            Technical Stack
+            SKILLS & TOOLS
           </p>
           <h2
             id="stack-heading"
             className="text-3xl font-medium tracking-tight text-foreground sm:text-5xl"
           >
-            <span className={overField}>Engineering Stack</span>
+            <span className={overField}>Technical Skills</span>
             <span className="mt-1 block bg-gradient-to-r from-mint-text to-violet-text bg-clip-text font-medium text-transparent drop-shadow-[0_2px_12px_rgba(3,7,18,0.95)]">
-              & Core Architecture
+              & Core Technologies
             </span>
           </h2>
         </div>
         <p
           className={`relative max-w-sm text-sm font-medium leading-relaxed text-foreground ${overField}`}
         >
-          Seven architectural tiers, from the 60fps native gesture thread to automated store releases. Select any category to inspect implementation details.
+          Tools and technologies I use to build mobile apps, TV streaming engines, and scalable backends. Click any category to see what I build with it.
         </p>
       </header>
 
       {/* Quick Core Stack Snapshot */}
       <div className="mt-8 flex flex-wrap items-center gap-2 rounded-2xl border border-border-subtle bg-surface/50 p-4">
         <span className="font-mono text-xs font-semibold uppercase tracking-wider text-mint-text mr-2">
-          Core Daily Drivers:
+          Daily Tools:
         </span>
         {[
           "React Native",
@@ -251,7 +251,7 @@ function TierReading({ group }: TierReadingProps) {
           ))}
         </ul>
         <p className="mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-sm font-medium text-foreground">
-          <span className="font-mono text-mint-text">In production</span>
+          <span className="font-mono text-mint-text">Used in:</span>
           {group.architecture.shippedWith.map((name) => (
             <span key={name} className="whitespace-nowrap">
               {name}

@@ -147,24 +147,19 @@ export function ExperienceSection() {
         <div className="relative">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-medium font-mono text-mint-text mb-3">
             <Briefcase className="w-3.5 h-3.5 text-teal-300" />
-            <span>CAREER TRAJECTORY & IMPACT</span>
+            <span>WORK HISTORY</span>
           </div>
           <h2 className="text-3xl font-medium tracking-tight text-foreground [text-shadow:0_2px_12px_rgba(3,7,18,0.55)] sm:text-5xl">
-            Work Experience &
+            Work Experience
             <span className="block font-normal text-foreground">
-              Shipped Engagements
+              & Key Projects
             </span>
           </h2>
         </div>
         <div className="relative flex flex-col items-start md:items-end gap-2 text-left md:text-right">
           <p className="max-w-md text-sm font-medium leading-relaxed text-foreground">
-            From solo greenfield product architecture to core mobile engineering at
-            Repla Technologies.
+            From independent full-stack products to core mobile app engineering at Repla Technologies.
           </p>
-          <span className="hidden items-center gap-1.5 rounded border border-emerald-500/20 bg-emerald-950/40 px-2.5 py-0.5 font-mono text-[11px] text-emerald-400 md:inline-flex">
-            <Layers className="w-3 h-3 text-emerald-400" />
-            Scroll to stack career milestones
-          </span>
         </div>
       </div>
 

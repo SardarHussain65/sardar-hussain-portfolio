@@ -35,18 +35,17 @@ export const siteConfig = {
   /**
    * The home page's `<title>`: the brand + what it is, ≤ 60 characters
    */
-  title: "Sardar Hussain — Senior Mobile App & React Native Engineer",
+  title: "Sardar Hussain — React Native & Mobile App Developer",
   /** 120–160 characters, from the site's own copy (the hero's lead line). */
-  description: "Crafting production-grade React Native & Smart TV experiences. Mapbox routing, HLS video pipelines, Stripe payments, and full-stack platforms.",
+  description: "Experienced React Native and Smart TV developer building fast, production-ready apps for iOS, Android, Roku, and modern full-stack platforms.",
   /** 5–8 phrases from the copy. */
   keywords: [
     "Sardar Hussain",
-    "React Native Engineer",
+    "React Native Developer",
     "Mobile App Developer",
     "Smart TV Developer",
-    "Roku BrightScript",
-    "HLS Video Streaming",
-    "Full Stack Mobile"
+    "Roku Developer",
+    "Full Stack Mobile Developer"
   ],
   /**
    * Public origin, no trailing slash.

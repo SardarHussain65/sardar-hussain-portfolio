@@ -45,22 +45,24 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
           </div>
         </div>
 
-        {/* Cinematic Headline */}
+        {/* Clear, Friendly Headline */}
         <h1 className="max-w-5xl text-balance text-4xl font-medium leading-[1.1] tracking-tight text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.95)] sm:text-6xl md:text-7xl lg:text-8xl">
-          Crafting Production-Grade
+          Building Fast, Reliable
           <span className="block bg-gradient-to-r from-mint-text via-mint-text to-violet-text bg-clip-text font-medium text-transparent drop-shadow-[0_2px_12px_rgba(3,7,18,0.95)]">
-            React Native Experiences.
+            Mobile & Smart TV Apps.
           </span>
         </h1>
 
-        {/* Role Typewriter / Tagline */}
-        <div className="hero-chip mt-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-3xl border border-purple-500/30 bg-[#070b14]/85 px-4 py-2 text-center font-mono text-xs font-medium text-foreground shadow-[0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-md">
+        {/* Role Tagline */}
+        <div className="hero-chip mt-4 inline-flex max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 rounded-3xl border border-purple-500/30 bg-[#070b14]/85 px-4 py-2 text-center font-mono text-xs font-medium text-foreground shadow-[0_0_20px_rgba(139,92,246,0.15)] backdrop-blur-md">
           <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="whitespace-nowrap">Mobile App Engineer</span>
+          <span className="whitespace-nowrap">React Native</span>
           <span aria-hidden className="text-purple-300/50">·</span>
-          <span className="whitespace-nowrap">TV Systems</span>
+          <span className="whitespace-nowrap">iOS & Android</span>
           <span aria-hidden className="text-purple-300/50">·</span>
-          <span className="whitespace-nowrap">Full-Stack Builder</span>
+          <span className="whitespace-nowrap">Smart TV Apps</span>
+          <span aria-hidden className="text-purple-300/50">·</span>
+          <span className="whitespace-nowrap">Full-Stack Systems</span>
         </div>
 
         {/* Subtext */}
@@ -119,14 +121,14 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
           className="hero-scrim pointer-events-none absolute -inset-x-4 -top-16 -bottom-12 bg-gradient-to-t from-field via-field/80 to-transparent sm:-inset-x-8"
         />
         <div className="relative w-full">
-          {/* HUD Metrics Bar */}
+          {/* Stats Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-white/20">
             <div className="border-l border-white/25 pl-4 py-1">
               <p className="text-2xl font-medium tracking-tight text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.95)] sm:text-3xl">
-                ~2+ yrs
+                2+ yrs
               </p>
               <p className={`mt-0.5 font-mono text-xs font-medium uppercase tracking-wider text-white ${overField}`}>
-                Production Experience
+                Hands-on Experience
               </p>
             </div>
 
@@ -135,7 +137,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
                 6+
               </p>
               <p className={`mt-0.5 font-mono text-xs font-medium uppercase tracking-wider text-white ${overField}`}>
-                Shipped Production Apps
+                Shipped Mobile Apps
               </p>
             </div>
 
@@ -144,7 +146,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
                 60 FPS
               </p>
               <p className={`mt-0.5 font-mono text-xs font-medium uppercase tracking-wider text-white ${overField}`}>
-                Gesture Fluidity
+                Smooth App Fluidity
               </p>
             </div>
 

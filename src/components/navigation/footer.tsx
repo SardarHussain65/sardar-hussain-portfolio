@@ -21,15 +21,15 @@ export function Footer() {
               {site.availability}
             </p>
             <p className="mt-4 text-3xl font-medium tracking-tight sm:text-5xl">
-              Build the next app
-              <span className="block text-mint-text">with a steady hand.</span>
+              Ready to build your next app?
+              <span className="block text-mint-text">Let&apos;s make it happen.</span>
             </p>
           </div>
           <a
             href="#contact"
             className="inline-flex w-fit items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-opacity duration-[var(--duration-fast)] ease-entrance hover:opacity-80"
           >
-            Start a conversation
+            Get in Touch
             <ArrowUpRight className="h-4 w-4" />
           </a>
         </div>

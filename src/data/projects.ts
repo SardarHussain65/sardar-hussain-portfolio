@@ -31,12 +31,12 @@ export const projects: Project[] = [
   {
     slug: "apnaustad",
     name: "ApnaUstad",
-    role: "Solo full-stack architect",
-    summary: "Home services marketplace connecting clients with skilled professionals, built & shipped alone.",
+    role: "Solo Full-Stack Developer",
+    summary: "On-demand home services marketplace connecting customers with local service pros, built completely from scratch.",
     problem:
-      "Clients and workers needed one product for discovery, booking, live tracking, and admin oversight — without two apps drifting apart.",
+      "Customers needed an easy way to book local service pros (plumbers, electricians), track them in real time, and pay securely, while workers needed an app to manage jobs and view earnings.",
     solution:
-      "A single React Native codebase switches navigation by role. The Express API owns auth, matching, earnings, and a booking state machine. PostgreSQL holds users, categories, bookings, reviews, payments, and push tokens. A React admin panel covers verification, disputes, and revenue.",
+      "I designed and built the entire system: a single React Native mobile app with two modes (Customer & Worker), a Node.js/PostgreSQL backend API, live GPS tracking with Socket.IO, and a web admin dashboard for managing bookings and payouts.",
     tags: [
       "React Native",
       "Node.js",
@@ -48,10 +48,10 @@ export const projects: Project[] = [
       "Resend",
     ],
     highlights: [
-      "Dual-role navigation (Client & Worker) in one codebase",
-      "Live GPS tracking over Socket.IO during active jobs",
-      "Full web admin portal for disputes & escrow revenue",
-      "OTP domain verification via Resend with secure JWT storage",
+      "One mobile app supporting both customers and service pros",
+      "Live GPS tracking to see worker location in real time",
+      "Web admin dashboard for managing bookings and revenue",
+      "Secure passwordless login with email OTP and tokens",
     ],
     images: [
       { src: "/portfolio/apnaustad-client.png", alt: "ApnaUstad client home with service categories", width: 1080, height: 2424, label: "Client home" },
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     accent: "emerald",
-    status: "Production · Solo Full-Stack",
+    status: "Live Project · Built Solo",
     interactive: "booking",
     category: "fullstack",
     liveUrl: "https://apnaustad.pk",
@@ -70,12 +70,12 @@ export const projects: Project[] = [
   {
     slug: "ayy",
     name: "Ayy Ride",
-    role: "Repla Technologies · Ride-Hailing",
-    summary: "High-concurrency passenger and driver mobility platform with real-time Mapbox navigation.",
+    role: "Lead Mobile Developer · Repla Technologies",
+    summary: "Ride-hailing app for passengers and drivers with real-time map navigation and instant ride booking.",
     problem:
-      "Google Maps could not handle the customized pricing polylines, sub-second vehicle animations, and multi-tier fleet fares at scale.",
+      "Standard map options were sluggish at showing moving cars smoothly, calculating custom route fares, and keeping drivers and riders updated in real time.",
     solution:
-      "Engineered Mapbox vector layers with real-time turn-by-turn driver tracking over Socket.IO. Embedded Stripe PaymentSheet with 3D Secure fallback and automated background driver dispatch.",
+      "Integrated Mapbox maps with live car tracking over Socket.IO, creating smooth car movement along roads, automated driver dispatch, and secure credit/debit card payments via Stripe.",
     tags: [
       "React Native",
       "Mapbox",
@@ -86,10 +86,10 @@ export const projects: Project[] = [
       "Expo Push",
     ],
     highlights: [
-      "Dual-sided passenger and driver apps with custom Mapbox tiles",
-      "Sub-second driver coordinates smoothing with bearing interpolation",
-      "Stripe PaymentSheet integration with multi-currency checkout",
-      "Background location sync with battery-optimized throttling",
+      "Separate passenger and driver mobile apps with interactive maps",
+      "Smooth moving car animation that turns naturally along streets",
+      "In-app credit and debit card payments powered by Stripe",
+      "Battery-optimized background GPS tracking for drivers",
     ],
     images: [
       { src: "/portfolio/Ayy.png", alt: "Ayy Sign-in & Authentication", width: 221, height: 477, label: "Onboarding" },
@@ -99,18 +99,18 @@ export const projects: Project[] = [
     ],
     featured: true,
     accent: "cyan",
-    status: "Production · Repla Technologies",
+    status: "Production App · Ride Hailing",
     category: "mobile",
   },
   {
     slug: "duplex",
     name: "Duplex TV",
-    role: "Repla Technologies · Smart TV Engineer",
-    summary: "Cross-platform Smart TV streaming engine engineered for Android TV, Samsung Tizen, LG webOS, and Roku.",
+    role: "Smart TV Engineer · Repla Technologies",
+    summary: "High-performance Smart TV video streaming app built for Roku, Android TV, Samsung Tizen, and LG webOS.",
     problem:
-      "Television operating systems run on constrained low-memory chipsets with disparate environments (Roku BrightScript, LG webOS, Samsung Tizen, Android TV). Delivering high-framerate HLS video, live EPG navigation, and multi-track audio without frame drops required platform-specific architecture.",
+      "Smart TVs have very limited memory and slow processors compared to smartphones. Delivering fast, buffer-free HD video playback with responsive remote control navigation was a major challenge.",
     solution:
-      "Architected specialized Smart TV clients across all ecosystems: native Roku BrightScript channel with SceneGraph, high-performance webOS & Tizen apps with virtualized D-pad focus management, and Android TV engine. Features sub-second HLS stream buffering, multi-language audio/subtitle switcher, and persistent MMKV caching.",
+      "Engineered dedicated TV apps optimized for every TV platform: a native Roku channel using BrightScript, web apps for Samsung/LG TVs, and an Android TV engine. Included fast stream loading, multi-language audio, and intuitive remote control (D-pad) navigation.",
     tags: [
       "Smart TV",
       "Android TV",
@@ -122,10 +122,10 @@ export const projects: Project[] = [
       "Spatial Navigation",
     ],
     highlights: [
-      "Engineered for all major TV platforms: Android TV, Samsung Tizen, LG webOS & Roku",
-      "Native Roku BrightScript SceneGraph channel with high-speed remote response",
-      "Sub-second HLS video playback pipeline with adaptive bitrate scaling",
-      "Virtualized 10-foot UI with remote control D-pad spatial focus navigation",
+      "Runs smoothly across Roku, Android TV, Samsung, and LG TVs",
+      "Native Roku channel with instant remote control response",
+      "Fast HD video playback with automatic quality adjustment",
+      "Clean TV interface designed for remotes from the couch",
     ],
     images: [
       { src: "/portfolio/Duplex_Live_TV.png", alt: "Duplex Smart TV Live Guide & EPG", width: 908, height: 634, label: "Live TV Guide" },
@@ -135,7 +135,7 @@ export const projects: Project[] = [
     ],
     featured: true,
     accent: "ios",
-    status: "Production · All Smart TV Platforms",
+    status: "Production App · All TV Platforms",
     deviceType: "tv",
     category: "tv",
     interactive: "tracks",
@@ -143,18 +143,18 @@ export const projects: Project[] = [
   {
     slug: "hamdania",
     name: "Mashrab-e-Hamdania",
-    role: "Major Contributor · Islamic Platform",
-    summary: "Spiritual companion app with audio streaming, rated 5.0 on Google Play with 1,500+ searchable titles.",
+    role: "Mobile Developer · Google Play 5.0 ★",
+    summary: "Spiritual companion and audio streaming app, rated 5.0 stars on Google Play with over 1,500 searchable texts.",
     problem:
-      "Daily practice, fiqh, religious texts, and high-quality audio recitation required a fast, offline-first digital repository with instant Arabic/Urdu search.",
+      "Community members needed a dependable app to read sacred texts, listen to recitations, and quickly search through thousands of titles without needing an internet connection.",
     solution:
-      "Built a modular React Native application with background audio streaming, bookmarks, and full-text index across 1,586 titles. Shipped version 1.0.2 to Google Play Store with 100% 5-star ratings.",
+      "Built a fast React Native mobile app with offline-first search across 1,586 titles, background audio playback with lock-screen controls, and prayer notifications. Shipped to Google Play Store with a 100% 5-star rating.",
     tags: ["React Native", "Expo", "Search Index", "Google Play", "Audio Streaming"],
     highlights: [
-      "Live on Google Play with 5.0 rating (v1.0.2)",
-      "High-speed offline-first search indexing 1,586 titles",
-      "Background audio player with lock-screen media controls",
-      "Eight dedicated spiritual practice areas with prayer notifications",
+      "Live on Google Play with a 5.0-star rating",
+      "Fast offline search across 1,586 titles without internet",
+      "Audio player keeps playing even when the phone screen is locked",
+      "Daily prayer notifications, bookmarks, and recitation audio",
     ],
     images: [
       { src: "/portfolio/Hamdaniya.png", alt: "Hamdaniya Splash & Calligraphy", width: 472, height: 1056, label: "Opening" },
@@ -170,17 +170,17 @@ export const projects: Project[] = [
   {
     slug: "vena",
     name: "Vena AI",
-    role: "Healthcare Product",
-    summary: "AI-powered healthcare triage and clinic discovery engine with localized dialect intelligence.",
+    role: "Mobile Developer · Healthcare",
+    summary: "Healthcare assistant app that helps patients check symptoms and find nearby clinics.",
     problem:
-      "Patients in Saudi Arabia needed instant symptom consultation in regional Arabic dialects paired with geo-located specialist clinic appointments.",
+      "Patients needed a simple, comfortable way to describe their symptoms in everyday Arabic and find qualified doctors and clinics nearby.",
     solution:
-      "Integrated location-aware clinic discovery with priced medical services and conversational AI triage tailored to Saudi regional terminology and medical context.",
+      "Built an AI-guided consultation chat combined with map-based clinic discovery, transparent service pricing, and direct appointment booking.",
     tags: ["React Native", "AI Care Chat", "Clinic Discovery", "Geo-Location"],
     highlights: [
-      "Conversational AI assistant with photo analysis guidance",
-      "Dynamic clinic radius filtering with real-time appointment pricing",
-      "Patient reviews, doctor credentials, and direct consultation booking",
+      "Friendly AI chat assistant guiding patients through their symptoms",
+      "Finds nearby clinics with transparent pricing and doctor profiles",
+      "Direct appointment booking with patient reviews",
     ],
     images: [
       { src: "/portfolio/vena.png", alt: "Vena AI Onboarding & Triage", width: 259, height: 566, label: "AI Consultation" },
@@ -195,17 +195,17 @@ export const projects: Project[] = [
   {
     slug: "qbox",
     name: "QBox Smart Locker",
-    role: "Repla Technologies · IoT & Logistics",
-    summary: "Contactless smart locker drop-off and pickup app with hardware role-based authorization.",
+    role: "Mobile Developer · IoT & Logistics",
+    summary: "Contactless smart locker app for dropping off and picking up parcels using QR codes.",
     problem:
-      "Secure parcel delivery required instant locker bay unlocking via QR codes with strict isolation between couriers, property managers, and tenants.",
+      "Delivering packages securely required an instant way to unlock locker doors without keys, while keeping delivery drivers, building managers, and residents organized.",
     solution:
-      "Engineered React Native IoT client with QR scanner, phone/email OTP verification, and Zustand state store syncing property tickets and maintenance logs via REST.",
+      "Built a React Native app with a fast QR code scanner, OTP verification, and distinct modes for couriers, property managers, and apartment residents.",
     tags: ["React Native", "Zustand", "IoT Scanner", "Role-Based Access"],
     highlights: [
-      "QR code and OTP smart locker parcel handoff flow",
-      "Role-based views for property managers, couriers, and tenants",
-      "Offline-resilient package drop-off verification receipts",
+      "Scan a QR code to unlock the locker and drop off or pick up packages",
+      "Separate simple views for couriers, managers, and residents",
+      "Digital receipts and instant pickup notifications for residents",
     ],
     images: [
       { src: "/portfolio/Smart Locker.jpeg", alt: "QBox Locker Welcome Screen", width: 720, height: 1640, label: "Smart Locker" },

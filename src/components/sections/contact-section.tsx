@@ -60,16 +60,15 @@ export function ContactSection() {
           {/* Left Column: Direct Contact Info */}
           <div className="lg:col-span-5">
             <span className="inline-block text-xs font-mono uppercase tracking-widest text-mint-text mb-3">
-              [ DIRECT CONTACT ]
+              GET IN TOUCH
             </span>
 
             <h2 className="text-3xl sm:text-4xl font-medium text-white tracking-tight leading-tight">
-              Let&apos;s build high-impact mobile experiences together.
+              Let&apos;s build your next mobile app together.
             </h2>
 
             <p className="mt-4 text-sm text-foreground font-medium leading-relaxed">
-              Available for full-time senior mobile roles, contract engagements, and
-              consulting on React Native, Smart TV, or full-stack platforms.
+              Available for full-time developer roles, contract projects, and Smart TV or mobile app consulting.
             </p>
 
             <div className="mt-8 space-y-3">
