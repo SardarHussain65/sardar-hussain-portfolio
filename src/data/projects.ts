@@ -65,7 +65,7 @@ export const projects: Project[] = [
     status: "Live Project · Built Solo",
     interactive: "booking",
     category: "fullstack",
-    liveUrl: "https://apnaustad.pk",
+    liveUrl: "https://apnaustad.app/",
   },
   {
     slug: "ayy",

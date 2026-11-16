@@ -1,6 +1,7 @@
 export interface ExperienceRole {
   id: string;
   org: string;
+  url?: string;
   title: string;
   place: string;
   dates: string;
@@ -51,6 +52,7 @@ export const roles: ExperienceRole[] = [
   {
     id: "apnaustad",
     org: "ApnaUstad",
+    url: "https://apnaustad.app/",
     title: "Solo Full-Stack Developer",
     place: "Independent Project",
     dates: "2024 — Present",

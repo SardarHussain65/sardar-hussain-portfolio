@@ -150,9 +150,21 @@ export function ExperienceSection() {
                     {role.title}
                   </h3>
                   <span className="text-text-muted font-mono text-sm sm:text-base">@</span>
-                  <span className={`text-lg sm:text-xl lg:text-2xl font-normal ${theme.accentText}`}>
-                    {role.org}
-                  </span>
+                  {role.url ? (
+                    <a
+                      href={role.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-lg sm:text-xl lg:text-2xl font-normal ${theme.accentText} inline-flex items-center gap-1 hover:underline underline-offset-4 transition-colors`}
+                    >
+                      <span>{role.org}</span>
+                      <ArrowUpRight className="w-4 h-4 opacity-75" />
+                    </a>
+                  ) : (
+                    <span className={`text-lg sm:text-xl lg:text-2xl font-normal ${theme.accentText}`}>
+                      {role.org}
+                    </span>
+                  )}
                 </div>
 
                 {/* Row 3: Impact metric & badge tagline */}
@@ -243,9 +255,21 @@ export function ExperienceSection() {
                   {/* Verification Indicator */}
                   <div className="mt-3 sm:mt-6 pt-2.5 sm:pt-4 border-t border-white/5 flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-text-muted">
                     <span>Role Milestone 0{index + 1}</span>
-                    <span className="text-emerald-400 flex items-center gap-1">
-                      Verified Engagement <ArrowUpRight className="w-3 h-3" />
-                    </span>
+                    {role.url ? (
+                      <a
+                        href={role.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors hover:underline"
+                      >
+                        <span>Visit Platform</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    ) : (
+                      <span className="text-emerald-400 flex items-center gap-1">
+                        Verified Engagement <ArrowUpRight className="w-3 h-3" />
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
