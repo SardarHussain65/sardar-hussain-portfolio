@@ -18,7 +18,7 @@
   --raw-color-neutral-900: #171717;
   --raw-color-neutral-950: #0a0a0a;
   --raw-color-obsidian: #030712;
-  --raw-color-day-field: #f4efe6;
+  --raw-color-day-field: #f8fafc;
   --raw-color-slate-900: #0b0f19;
   --raw-color-slate-800: #111827;
   --raw-color-violet: #8b5cf6;
@@ -61,6 +61,21 @@
   --menu-surface: var(--raw-color-obsidian);
   --menu-foreground: var(--raw-color-silver);
 
+  --grid-line-color: rgba(255, 255, 255, 0.08);
+  --grid-dot-color: rgba(255, 255, 255, 0.16);
+  --center-shield: radial-gradient(
+    ellipse 62% 48% at 50% 28%,
+    rgba(3, 7, 18, 0.95) 0%,
+    rgba(3, 7, 18, 0.55) 48%,
+    transparent 76%
+  );
+  --bottom-blend: linear-gradient(
+    to top,
+    rgba(3, 7, 18, 1),
+    rgba(3, 7, 18, 0.8) 50%,
+    transparent
+  );
+
   --duration-fast: var(--raw-duration-fast);
   --duration-normal: var(--raw-duration-normal);
 }
@@ -94,19 +109,59 @@
    tokens. See ADR-0031. */
 [data-theme="light"] {
   --field: var(--raw-color-day-field);
-  --background: #f3f6fb;
+  --background: #f8fafc;
   --foreground: #0b1220;
   --surface: #ffffff;
-  --surface-card: rgba(255, 255, 255, 0.94);
-  --border-subtle: rgba(15, 23, 42, 0.12);
+  --surface-card: rgba(255, 255, 255, 0.96);
+  --border-subtle: rgba(15, 23, 42, 0.1);
   --text-muted: var(--raw-color-text-muted-ink);
   --accent-mint: #047857;
   --accent-violet: #6d28d9;
   --accent-mint-text: var(--raw-color-mint-ink);
   --accent-violet-text: var(--raw-color-violet-ink);
-  --menu-surface: #f3f6fb;
+  --menu-surface: #ffffff;
   --menu-foreground: #0b1220;
+
+  --grid-line-color: rgba(15, 23, 42, 0.095);
+  --grid-dot-color: rgba(15, 23, 42, 0.14);
+  --center-shield: radial-gradient(
+    ellipse 54% 40% at 50% 22%,
+    rgba(255, 255, 255, 0.94) 0%,
+    rgba(241, 245, 249, 0.55) 48%,
+    transparent 78%
+  );
+  --bottom-blend: linear-gradient(
+    to top,
+    rgba(248, 250, 252, 1),
+    rgba(248, 250, 252, 0.8) 50%,
+    transparent
+  );
+
   color-scheme: light;
+}
+
+/* Background switching:
+   - Desktop Dark Mode (width >= 768px): 3D Cosmic Galaxy Particle Field
+   - Mobile Dark Mode (width < 768px): Clean Blueprint Grid & Constellation
+   - Light Mode (all widths): Clean Blueprint Grid & Constellation */
+.night-bg-field {
+  display: none !important;
+}
+@media (min-width: 768px) {
+  :root:not([data-theme="light"]) .night-bg-field {
+    display: block !important;
+  }
+}
+
+.blueprint-bg-field,
+.day-bg-field {
+  display: block !important;
+}
+@media (min-width: 768px) {
+  :root:not([data-theme="light"]) .blueprint-bg-field,
+  :root:not([data-theme="light"]) .day-bg-field {
+    display: none !important;
+  }
 }
 
 @custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
@@ -286,8 +341,8 @@ body {
   [data-theme="light"] .hero-scrim {
     background-image: linear-gradient(
       to top,
-      rgb(244 239 230 / 0.94),
-      rgb(244 239 230 / 0.5),
+      rgb(248 250 252 / 0.96),
+      rgb(248 250 252 / 0.6),
       transparent
     );
   }
@@ -295,8 +350,8 @@ body {
   [data-theme="light"] .hero-shield {
     background-image: radial-gradient(
       ellipse 50% 36% at 50% 18%,
-      rgb(244 239 230 / 0.94) 0%,
-      rgb(244 239 230 / 0.4) 46%,
+      rgb(248 250 252 / 0.94) 0%,
+      rgb(248 250 252 / 0.4) 46%,
       transparent 72%
     );
   }
@@ -327,13 +382,13 @@ body {
     color: var(--foreground);
   }
 
-  /* Heading wash stays see-through so the day spirals show, as they do at night. */
+  /* Heading wash stays clean on light field */
   [data-theme="light"] .field-wash {
     background-image: linear-gradient(
       180deg,
       transparent,
-      rgb(244 239 230 / 0.42) 18%,
-      rgb(244 239 230 / 0.42) 78%,
+      rgb(248 250 252 / 0.5) 18%,
+      rgb(248 250 252 / 0.5) 78%,
       transparent
     );
   }

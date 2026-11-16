@@ -15,6 +15,7 @@ import {
   VesperParticleField,
   ParticleMode,
 } from "@/components/scene/vesper-particle-field";
+import { LightModeBackground } from "@/components/scene/light-mode-background";
 
 export function VesperLanding() {
   const [currentMode, setCurrentMode] = useState<ParticleMode>("galaxy");
@@ -23,19 +24,25 @@ export function VesperLanding() {
     <div className="relative w-full min-h-screen bg-background text-foreground selection:bg-emerald-500/30 selection:text-emerald-200">
       {/* Living field. SceneViewport ignores the iOS toolbar so the buffer is not rebuilt on every scroll. */}
       <SceneViewport className="z-0 overflow-hidden pointer-events-none bg-field">
-        <VesperParticleField currentMode={currentMode} className="h-full w-full" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-[18%] -left-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.16),transparent_68%)]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute top-[18%] -right-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.18),transparent_68%)]"
-        />
-        <div
-          aria-hidden
-          className="hero-shield pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_62%_48%_at_50%_28%,rgba(3,7,18,0.92)_0%,rgba(3,7,18,0.55)_48%,transparent_76%)]"
-        />
+        {/* Dark Mode: WebGL Cosmic Galaxy Particle Field & Glows */}
+        <div aria-hidden className="night-bg-field absolute inset-0">
+          <VesperParticleField currentMode={currentMode} className="h-full w-full" />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-[18%] -left-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(16,185,129,0.16),transparent_68%)]"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute top-[18%] -right-24 h-[28rem] w-[28rem] rounded-full bg-[radial-gradient(circle,rgba(139,92,246,0.18),transparent_68%)]"
+          />
+          <div
+            aria-hidden
+            className="hero-shield pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_62%_48%_at_50%_28%,rgba(3,7,18,0.92)_0%,rgba(3,7,18,0.55)_48%,transparent_76%)]"
+          />
+        </div>
+
+        {/* Light Mode: Modern Engineering Blueprint Grid & Luminous Auroras */}
+        <LightModeBackground />
       </SceneViewport>
 
       {/* ─── SARDAR HUSSAIN PORTFOLIO LAYOUT & SECTIONS ─── */}

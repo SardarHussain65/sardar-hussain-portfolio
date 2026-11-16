@@ -375,6 +375,7 @@ export function VesperParticleField({
         const applyDay = (next: boolean) => {
           if (next === day) return;
           day = next;
+          particles.visible = !next;
           material.uniforms.uInk.value = next ? 1 : 0;
           if (next) {
             material.blending = THREE.CustomBlending;
@@ -385,7 +386,7 @@ export function VesperParticleField({
             material.blending = THREE.AdditiveBlending;
           }
           material.needsUpdate = true;
-          scene.fog = new THREE.FogExp2(next ? 0xf4efe6 : 0x030712, next ? 0.03 : 0.045);
+          scene.fog = new THREE.FogExp2(next ? 0xf8fafc : 0x030712, next ? 0.03 : 0.045);
         };
         applyDay(document.documentElement.getAttribute("data-theme") === "light");
         const themeObserver = new MutationObserver(() => {
@@ -513,7 +514,9 @@ export function VesperParticleField({
           camera.position.z = restZ;
           camera.lookAt(0, lookY, 0);
 
-          const draw = phone || gate.shouldDraw(dt);
+          const isWide = typeof window !== "undefined" ? window.innerWidth >= 768 : true;
+          const shouldDraw3D = !day && isWide;
+          const draw = (phone || gate.shouldDraw(dt)) && shouldDraw3D;
           if (draw) {
             renderer.render(scene, camera);
             frames += 1;
