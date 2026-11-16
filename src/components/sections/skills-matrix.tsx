@@ -175,7 +175,7 @@ export function SkillsMatrix() {
           role="tabpanel"
           aria-labelledby={`stack-tab-${active.id}`}
           aria-live="polite"
-          className="relative rounded-2xl border border-border-subtle bg-surface/90 p-6 backdrop-blur-xl sm:p-10"
+          className="relative rounded-xl sm:rounded-2xl border border-border-subtle bg-surface/90 p-4 sm:p-10 backdrop-blur-xl"
         >
           {readings((style, index) => {
             const group = skillGroups[index];
@@ -190,7 +190,7 @@ export function SkillsMatrix() {
                 className={
                   current
                     ? "relative"
-                    : "pointer-events-none absolute inset-x-6 top-6 sm:inset-x-10 sm:top-10"
+                    : "pointer-events-none absolute inset-x-4 top-4 sm:inset-x-10 sm:top-10"
                 }
               >
                 <TierReading group={group} />

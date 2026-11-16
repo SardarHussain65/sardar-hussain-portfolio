@@ -51,19 +51,19 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-28 px-4 sm:px-8 max-w-6xl mx-auto z-10">
-      <div className="night-panel relative overflow-hidden rounded-3xl border border-white/10 bg-[#040813]/90 p-5 shadow-[0_20px_80px_rgba(0,0,0,0.8)] backdrop-blur-2xl sm:p-10 lg:p-14">
+    <section id="contact" className="relative py-16 sm:py-28 px-4 sm:px-8 max-w-6xl mx-auto z-10">
+      <div className="night-panel relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/10 bg-[#040813]/90 p-4 sm:p-10 lg:p-14 shadow-[0_20px_80px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
         {/* Glow Spheres */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-gradient-to-r from-emerald-500/15 via-violet-500/15 to-teal-500/15 rounded-full blur-[90px] pointer-events-none" />
 
-        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-start">
           {/* Left Column: Direct Contact Info */}
           <div className="lg:col-span-5">
-            <span className="inline-block text-xs font-mono uppercase tracking-widest text-mint-text mb-3">
+            <span className="inline-block text-xs font-mono uppercase tracking-widest text-mint-text mb-2.5 sm:mb-3">
               GET IN TOUCH
             </span>
 
-            <h2 className="text-3xl sm:text-4xl font-medium text-white tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl font-medium text-white tracking-tight leading-tight">
               Let&apos;s build your next mobile app together.
             </h2>
 
