@@ -19,7 +19,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
   return (
     <section
       id="home"
-      className="hero-day relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col justify-between px-4 pt-28 pb-12 sm:px-8 sm:pt-36"
+      className="hero-day relative z-10 mx-auto flex min-h-screen max-w-7xl max-w-full flex-col justify-between px-4 pt-28 pb-12 sm:px-8 sm:pt-36 overflow-x-clip"
     >
       {/* Top Profile Badge & Intro */}
       <div className="flex flex-col items-center text-center mt-2 sm:mt-6">
@@ -118,7 +118,7 @@ export function HeroSection({ currentMode, onModeChange }: HeroSectionProps) {
       <div className="relative w-full">
         <div
           aria-hidden
-          className="hero-scrim pointer-events-none absolute -inset-x-4 -top-16 -bottom-12 bg-gradient-to-t from-field via-field/80 to-transparent sm:-inset-x-8"
+          className="hero-scrim pointer-events-none absolute inset-x-0 -top-16 -bottom-12 bg-gradient-to-t from-field via-field/80 to-transparent"
         />
         <div className="relative w-full">
           {/* Stats Bar */}

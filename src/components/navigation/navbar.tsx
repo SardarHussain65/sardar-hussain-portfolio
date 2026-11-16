@@ -30,9 +30,9 @@ export function Navbar() {
         {/* Brand Logo */}
         <a
           href="#home"
-          className="flex items-center gap-2.5 text-white group cursor-pointer"
+          className="flex items-center gap-2 sm:gap-2.5 text-white group cursor-pointer shrink-0 min-w-0"
         >
-          <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/[0.06] border border-white/10 text-emerald-400 group-hover:text-purple-400 group-hover:rotate-45 transition-transform duration-[var(--duration-normal)]">
+          <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/[0.06] border border-white/10 text-emerald-400 group-hover:text-purple-400 group-hover:rotate-45 transition-transform duration-[var(--duration-normal)] shrink-0">
             <svg
               className="w-4 h-4 fill-current"
               viewBox="0 0 24 24"
@@ -41,7 +41,7 @@ export function Navbar() {
               <path d="M12 2L13.8 8.2L20 10L13.8 11.8L12 18L10.2 11.8L4 10L10.2 8.2L12 2Z" />
             </svg>
           </span>
-          <span className="whitespace-nowrap text-sm font-semibold tracking-tight text-white transition-colors duration-[var(--duration-fast)] ease-entrance group-hover:text-emerald-300">
+          <span className="truncate max-w-[140px] sm:max-w-none text-sm font-semibold tracking-tight text-white transition-colors duration-[var(--duration-fast)] ease-entrance group-hover:text-emerald-300">
             {site.name}
           </span>
         </a>
@@ -60,7 +60,7 @@ export function Navbar() {
         </div>
 
         {/* Right CTA */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           {/* GitHub Quick Link */}
           <a
             href={site.github}

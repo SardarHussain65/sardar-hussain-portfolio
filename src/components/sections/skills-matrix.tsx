@@ -61,12 +61,12 @@ export function SkillsMatrix() {
     <section
       id="stack"
       aria-labelledby="stack-heading"
-      className="relative z-10 mx-auto max-w-7xl px-4 py-28 sm:px-8"
+      className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:py-28 sm:px-8 overflow-x-clip"
     >
-      <header className="relative flex flex-col justify-between gap-6 border-b border-border-subtle pb-12 md:flex-row md:items-end">
+      <header className="relative flex flex-col justify-between gap-6 border-b border-border-subtle pb-8 sm:pb-12 md:flex-row md:items-end">
         <div
           aria-hidden
-          className="field-wash pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
+          className="field-wash pointer-events-none absolute inset-x-0 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)]"
         />
         <div className="relative">
           <p
@@ -120,12 +120,12 @@ export function SkillsMatrix() {
         ))}
       </div>
 
-      <div className="mt-10 grid items-start gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-14">
+      <div className="mt-8 sm:mt-10 grid min-w-0 max-w-full items-start gap-6 sm:gap-8 lg:grid-cols-[18rem_minmax(0,1fr)] lg:gap-14">
         <nav
           aria-label="Skill tiers"
-          className="rounded-2xl border border-border-subtle bg-background/80 p-2 backdrop-blur-md"
+          className="min-w-0 max-w-full overflow-hidden rounded-xl sm:rounded-2xl border border-border-subtle bg-background/80 p-1.5 sm:p-2 backdrop-blur-md"
         >
-          <ol role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown} className="flex flex-row overflow-x-auto gap-1 lg:flex-col lg:overflow-x-visible pb-2 lg:pb-0">
+          <ol role="tablist" aria-orientation="vertical" onKeyDown={onKeyDown} className="flex flex-row overflow-x-auto gap-1 w-full min-w-0 max-w-full lg:flex-col lg:overflow-x-visible pb-1.5 lg:pb-0">
             {skillGroups.map((group, index) => {
               const isActive = index === activeIndex;
               return (

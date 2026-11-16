@@ -37,7 +37,7 @@ export function ProjectsSection() {
   }, []);
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="relative z-10 py-28">
+    <section id="projects" aria-labelledby="projects-heading" className="relative z-10 py-20 sm:py-28 overflow-x-clip max-w-full">
       <div aria-hidden className="absolute inset-0 bg-surface" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-8">
         {/* Header */}

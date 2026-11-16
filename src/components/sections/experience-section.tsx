@@ -71,12 +71,12 @@ export function ExperienceSection() {
   };
 
   return (
-    <section id="experience" className="relative py-28 px-4 sm:px-8 max-w-7xl mx-auto z-10">
+    <section id="experience" className="relative py-20 sm:py-28 px-4 sm:px-8 max-w-7xl max-w-full mx-auto z-10 overflow-x-clip">
       {/* Section Header */}
-      <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-14 border-b border-border-subtle">
+      <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 sm:pb-14 border-b border-border-subtle">
         <div
           aria-hidden
-          className="field-wash pointer-events-none absolute -inset-x-4 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)] sm:-inset-x-8"
+          className="field-wash pointer-events-none absolute inset-x-0 -top-10 -bottom-4 bg-[linear-gradient(180deg,transparent,var(--background)_18%,var(--background)_78%,transparent)]"
         />
         <div className="relative">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-subtle bg-background/80 text-xs font-medium font-mono text-mint-text mb-3">

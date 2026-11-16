@@ -21,7 +21,7 @@ export function VesperLanding() {
   const [currentMode, setCurrentMode] = useState<ParticleMode>("galaxy");
 
   return (
-    <div className="relative w-full min-h-screen bg-background text-foreground selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="relative w-full max-w-full min-h-screen overflow-x-clip bg-background text-foreground selection:bg-emerald-500/30 selection:text-emerald-200">
       {/* Living field. SceneViewport ignores the iOS toolbar so the buffer is not rebuilt on every scroll. */}
       <SceneViewport className="z-0 overflow-hidden pointer-events-none bg-field">
         {/* Dark Mode: WebGL Cosmic Galaxy Particle Field & Glows */}
@@ -46,7 +46,7 @@ export function VesperLanding() {
       </SceneViewport>
 
       {/* ─── SARDAR HUSSAIN PORTFOLIO LAYOUT & SECTIONS ─── */}
-      <div className="relative z-10">
+      <div className="relative z-10 w-full max-w-full overflow-x-clip">
         <Navbar />
         <HeroSection
           currentMode={currentMode}
